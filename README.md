@@ -3,6 +3,7 @@ JavaFX app for library management, Class CS92, Open University of Ho Chi Minh ci
 Developer:
   + Nguyễn Công Tâm
   + Lưu Gia Huy
+ 
 Tester:
   + Lê Đặng Thành Đạt
   + Đặng Lê Đăng Khoa
