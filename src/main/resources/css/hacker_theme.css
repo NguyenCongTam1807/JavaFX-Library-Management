@@ -1,0 +1,37 @@
+* {
+    /*color definition*/
+    -fx-black : #111111;
+    -fx-dark : #222222;
+    -fx-white: #ffffff;
+    -fx-green: #12fb08;
+    -fx-green-dark: #10910c;
+    -fx-red: #cc0000;
+}
+* {
+    /*color style definition*/
+    -fx-bg : -fx-black;
+    -fx-bg2 : -fx-dark;
+    -fx-bg3: -fx-green;
+    -fx-text: -fx-green;
+    -fx-text3 : -fx-black;
+    -fx-error: -fx-red;
+    -fx-border: -fx-green;
+    -fx-others: -fx-white;
+}
+* {
+    -fx-text-fill: -fx-text;
+    -fx-font-family: "Consolas";
+}
+
+.root{
+    -fx-background-color: -fx-bg;
+}
+JFXTextField, JFXPasswordField {
+    -fx-font-size: 16;
+
+}
+
+JFXButton {
+    -fx-font-size: 16;
+}
+
