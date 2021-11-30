@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<VBox xmlns="https://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" stylesheets="@../css/hacker_theme.css"
+      fx:controller="ui.signup.SignUpController" prefHeight="153.0" prefWidth="404.0" spacing="10.0" >
+    <children>
+        <JFXTextField fx:id="name" labelFloat="true" promptText="Name">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="20.0" />
+            </VBox.margin>
+        </JFXTextField>
+        <JFXTextField fx:id="id" labelFloat="true" layoutX="20.0" layoutY="30.0" promptText="Member ID">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="20.0" />
+            </VBox.margin>
+        </JFXTextField>
+        <JFXTextField fx:id="mobile" labelFloat="true" layoutX="20.0" layoutY="30.0" promptText="Mobile">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="20.0" />
+            </VBox.margin>
+        </JFXTextField>
+        <JFXTextField fx:id="email" labelFloat="true" layoutX="10.0" layoutY="62.0" promptText="Email">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="20.0" />
+            </VBox.margin>
+        </JFXTextField>
+        <HBox alignment="CENTER" prefHeight="47.0" prefWidth="404.0" spacing="30.0">
+            <children>
+                <JFXButton fx:id="saveButton"  prefHeight="66.0" prefWidth="100.0" text="Save" /><!--onAction="#addMember"-->
+                <JFXButton fx:id="cancelButton" layoutX="10.0" layoutY="10.0"  prefHeight="66.0" prefWidth="100.0" text="Cancel" /><!--onAction="#cancel"-->
+            </children>
+            <VBox.margin>
+                <Insets top="20.0" />
+            </VBox.margin>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+    </padding>
+</VBox>
