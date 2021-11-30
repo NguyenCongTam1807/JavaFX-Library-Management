@@ -6,6 +6,8 @@
     -fx-green: #12fb08;
     -fx-green-dark: #10910c;
     -fx-red: #cc0000;
+    -fx-start-margin: 0;
+    -fx-end-margin: 0;
 }
 * {
     /*color style definition*/
@@ -18,20 +20,33 @@
     -fx-border: -fx-green;
     -fx-others: -fx-white;
 }
-* {
-    -fx-text-fill: -fx-text;
+*{
     -fx-font-family: "Consolas";
 }
 
 .root{
     -fx-background-color: -fx-bg;
 }
-JFXTextField, JFXPasswordField {
-    -fx-font-size: 16;
-
+Label.top {
+    -fx-text-fill: -fx-text;
+    -fx-font-size: 32;
+    -fx-alignment: CENTER;
 }
 
-JFXButton {
+.others {
+    -fx-text-fill: -fx-others;
+}
+.error {
+    -fx-text-fill:-fx-red;
+    -fx-font-size: 12;
+}
+JFXToggleButton {
+    -jfx-disable-visual-focus: true;
+    -fx-font-size:10;
+}
+JFXTextField, JFXPasswordField, JFXButton {
+    -fx-text-fill: -fx-text;
     -fx-font-size: 16;
 }
+
 

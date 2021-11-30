@@ -24,11 +24,11 @@
             <version>5.8.1</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.kordamp.ikonli</groupId>
             <artifactId>ikonli-javafx</artifactId>
             <version>12.2.0</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.kordamp.ikonli</groupId>
             <artifactId>ikonli-antdesignicons-pack</artifactId>
@@ -36,7 +36,7 @@
         </dependency>
         <dependency>
             <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-materialdesign-pack</artifactId>
+            <artifactId>ikonli-boxicons-pack</artifactId>
             <version>12.2.0</version>
         </dependency>
         <dependency>
@@ -46,7 +46,7 @@
         </dependency>
         <dependency>
             <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-core</artifactId>
+            <artifactId>ikonli-coreui-pack</artifactId>
             <version>12.2.0</version>
         </dependency>
     </dependencies>

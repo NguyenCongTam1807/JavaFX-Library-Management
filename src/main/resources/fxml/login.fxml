@@ -2,26 +2,78 @@
 
 <?import com.jfoenix.controls.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.*?>
 
-<VBox id="VBox" fx:id="mainContainer" alignment="CENTER" prefHeight="245.0" prefWidth="400.0" styleClass="custom-pane" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.login.LoginController">
+<VBox id="VBox" fx:id="vbox" alignment="CENTER" prefHeight="386.0" prefWidth="400.0" styleClass="custom-pane" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.login.LoginController">
     <children>
-        <JFXTextField fx:id="username" focusColor="#12fb08" labelFloat="true" prefHeight="33.0" prefWidth="318.0" promptText="Username" unFocusColor="#065103">
+      <Label prefHeight="50.0" prefWidth="400.0" scaleShape="false" styleClass="top" text="FUTURE LIBRARY">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <effect>
+            <Glow level="0.9" />
+         </effect>
+      </Label>
+        <FontIcon iconColor="#12fb08" iconLiteral="bxs-book-bookmark" iconSize="40">
+         <effect>
+            <Glow level="0.6" />
+         </effect></FontIcon>
+        <JFXToggleButton fx:id="toggle" alignment="CENTER_RIGHT" onAction="#toggleHandler" prefWidth="400.0" size="7.0" text="Login as&#10;Student" textAlignment="CENTER" textFill="#12fb08" unToggleColor="#12fb08" unToggleLineColor="#10910c">
+         <effect>
+            <Glow level="0.75" />
+         </effect>
+         <VBox.margin>
+            <Insets left="260.0" />
+         </VBox.margin></JFXToggleButton>
+        <JFXTextField fx:id="txtId" focusColor="#12fb08" labelFloat="true" prefHeight="33.0" prefWidth="318.0" promptText="Username" unFocusColor="#065103">
             <VBox.margin>
-                <Insets left="70.0" right="70.0" top="20.0" />
+                <Insets left="70.0" right="70.0" />
             </VBox.margin>
+         <effect>
+            <Glow level="0.9" />
+         </effect>
         </JFXTextField>
-        <JFXPasswordField fx:id="password" focusColor="#12fb08" labelFloat="true" onAction="#loginHandler" prefHeight="34.0" prefWidth="200.0" promptText="Password" unFocusColor="#065103">
+        <JFXPasswordField fx:id="txtPw" focusColor="#12fb08" labelFloat="true" onAction="#loginHandler" prefHeight="34.0" prefWidth="200.0" promptText="Password" unFocusColor="#065103">
             <VBox.margin>
                 <Insets left="70.0" right="70.0" top="20.0" />
             </VBox.margin>
+         <effect>
+            <Glow level="0.9" />
+         </effect>
         </JFXPasswordField>
-        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="400.0" spacing="30.0">
-            <JFXButton onAction="#loginHandler" prefHeight="40.0" prefWidth="90.0" styleClass="login-button" text="Login" />
-            <JFXButton onAction="#cancelHandler" prefHeight="40.0" prefWidth="90.0" styleClass="login-button" text="Cancel" />
+        <Label fx:id="lblError" prefHeight="30.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="Library Manager">
+            <VBox.margin>
+                <Insets left="70.0" right="70.0" />
+            </VBox.margin>
+         <effect>
+            <Glow level="0.9" />
+         </effect>
+        </Label>
+        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="398.0" spacing="40.0">
+            <JFXButton fx:id="btnLogin" onAction="#loginHandler" prefHeight="40.0" prefWidth="90.0" styleClass="login-button" text="Login">
+            <effect>
+               <Glow level="1.0" />
+            </effect></JFXButton>
+            <JFXButton fx:id="btnSignUp" onAction="#signUpHandler" prefHeight="40.0" prefWidth="90.0" styleClass="login-button" text="Sign up">
+            <effect>
+               <Glow level="1.0" />
+            </effect></JFXButton>
+         <effect>
+            <Glow level="0.9" />
+         </effect>
         </HBox>
-        <!--<FontAwesomeIconView glyphName="LOCK" layoutX="200.0" layoutY="79.0" size="55" />
-        <FontAwesomeIconView glyphName="USER" layoutX="64.0" layoutY="149.0" size="25" />
-        <FontAwesomeIconView glyphName="KEY" layoutX="64.0" layoutY="224.0" size="25" />-->
+      <Label  alignment="CENTER_RIGHT" prefHeight="14.0" prefWidth="400.0" styleClass="others" text="ver 1.0">
+         <effect>
+            <Glow level="0.9" />
+         </effect>
+         <VBox.margin>
+            <Insets right="10.0" />
+         </VBox.margin></Label>
     </children>
+   <effect>
+      <Glow level="0.0" />
+   </effect>
 </VBox>
