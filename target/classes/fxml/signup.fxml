@@ -9,6 +9,9 @@
 <?import javafx.geometry.Insets?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <VBox xmlns="https://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" stylesheets="@../css/hacker_theme.css"
       fx:controller="ui.signup.SignUpController" prefHeight="153.0" prefWidth="404.0" spacing="10.0" >
     <children>
@@ -18,6 +21,26 @@
             </VBox.margin>
         </JFXTextField>
         <JFXTextField fx:id="id" labelFloat="true" layoutX="20.0" layoutY="30.0" promptText="Member ID">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="20.0" />
+            </VBox.margin>
+        </JFXTextField>
+        <JFXPasswordField fx:id="password" labelFloat="true" layoutX="20.0" layoutY="30.0" promptText="Enter Password">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="20.0" />
+            </VBox.margin>
+        </JFXPasswordField>
+        <JFXPasswordField fx:id="repassword" labelFloat="true" layoutX="20.0" layoutY="30.0" promptText="Re-Enter Password">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="20.0" />
+            </VBox.margin>
+        </JFXPasswordField>
+        <JFXDatePicker fx:id="birthday" layoutX="20" layoutY="  120.0" prefWidth="300" promptText="Enter your birthday">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="20.0" />
+            </VBox.margin>
+        </JFXDatePicker>
+        <JFXTextField fx:id="student_id" layoutX="20" layoutY="30.0" promptText="Enter student id">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="20.0" />
             </VBox.margin>
@@ -32,9 +55,15 @@
                 <Insets left="10.0" right="10.0" top="20.0" />
             </VBox.margin>
         </JFXTextField>
+        <JFXCheckBox id="check_terms" >
+                I agree to the terms of service
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="20.0" />
+            </VBox.margin>
+        </JFXCheckBox>
         <HBox alignment="CENTER" prefHeight="47.0" prefWidth="404.0" spacing="30.0">
             <children>
-                <JFXButton fx:id="saveButton"  prefHeight="66.0" prefWidth="100.0" text="Save" /><!--onAction="#addMember"-->
+                <JFXButton fx:id="saveButton"  prefHeight="66.0" prefWidth="100.0" text="Register" /><!--onAction="#addMember"-->
                 <JFXButton fx:id="cancelButton" layoutX="10.0" layoutY="10.0"  prefHeight="66.0" prefWidth="100.0" text="Cancel" /><!--onAction="#cancel"-->
             </children>
             <VBox.margin>
