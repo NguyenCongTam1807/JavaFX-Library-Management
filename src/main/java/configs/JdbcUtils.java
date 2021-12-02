@@ -14,6 +14,6 @@ public class JdbcUtils {
     }
     public static Connection getConn() throws SQLException {
         return DriverManager.getConnection("jdbc:mysql://localhost/librarydb",
-                "root", "nazigermany");
+                "root", "12345678");
     }
 }
