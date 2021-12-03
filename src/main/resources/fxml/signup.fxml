@@ -12,6 +12,7 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXCheckBox?>
+
 <VBox xmlns="https://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" stylesheets="@../css/hacker_theme.css"
       fx:controller="ui.signup.SignUpController" prefHeight="153.0" prefWidth="404.0" spacing="10.0" >
     <children>
