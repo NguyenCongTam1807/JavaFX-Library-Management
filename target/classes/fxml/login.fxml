@@ -71,7 +71,8 @@
          </effect>
          <VBox.margin>
             <Insets right="10.0" />
-         </VBox.margin></Label>
+         </VBox.margin>
+      </Label>
     </children>
    <effect>
       <Glow level="0.0" />

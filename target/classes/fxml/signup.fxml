@@ -2,6 +2,8 @@
 
 <?import com.jfoenix.controls.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
 <VBox prefHeight="153.0" prefWidth="404.0" spacing="10.0" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.signup.SignUpController">
@@ -11,50 +13,103 @@
                 <Insets left="10.0" right="10.0" top="20.0" />
             </VBox.margin>
         </JFXTextField>
-        <JFXTextField fx:id="Id" labelFloat="true" layoutX="20.0" layoutY="30.0" onKeyTyped="#checkId" onMouseExited="#checkId" promptText="Account ID">
+        <JFXTextField fx:id="Id" labelFloat="true" layoutX="20.0" layoutY="30.0" onKeyTyped="#checkId" promptText="Account ID">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="20.0" />
             </VBox.margin>
         </JFXTextField>
-        <JFXPasswordField fx:id="password" labelFloat="true" layoutX="20.0" layoutY="30.0" promptText="Enter Password">
+        <Label fx:id="lblErrorId" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" top="20.0" />
+                <Insets left="10.0" right="10.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </Label>
+        <JFXPasswordField fx:id="txtPw" labelFloat="true" layoutX="20.0" layoutY="30.0" onKeyTyped="#checkPw" promptText="Enter Password">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" />
             </VBox.margin>
         </JFXPasswordField>
-        <JFXPasswordField fx:id="repassword" labelFloat="true" layoutX="20.0" layoutY="30.0" promptText="Re-Enter Password">
+        <Label fx:id="lblErrorPw" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" top="20.0" />
+                <Insets left="10.0" right="10.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </Label>
+        <JFXPasswordField fx:id="repassword" labelFloat="true" layoutX="20.0" layoutY="30.0" onKeyTyped="#checkRePw" promptText="Re-Enter Password">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" />
             </VBox.margin>
         </JFXPasswordField>
+        <Label fx:id="lblErrorRePw" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </Label>
         <JFXDatePicker fx:id="birthday" layoutX="20" layoutY="  120.0" prefWidth="300" promptText="Enter your birthday">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" top="20.0" />
+                <Insets left="10.0" right="10.0" top="5.0" />
             </VBox.margin>
         </JFXDatePicker>
-        <JFXTextField fx:id="student_id" layoutX="20" layoutY="30.0" promptText="Enter student id">
+        <JFXTextField fx:id="student_id" labelFloat="true" layoutX="20" layoutY="30.0" onKeyTyped="#checkStudentId" promptText="Enter student id">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" top="20.0" />
+                <Insets left="10.0" right="10.0" top="15.0" />
             </VBox.margin>
         </JFXTextField>
-        <JFXTextField fx:id="mobile" labelFloat="true" layoutX="20.0" layoutY="30.0" promptText="Mobile">
+        <Label fx:id="lblErrorStId" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" top="20.0" />
+                <Insets left="10.0" right="10.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </Label>
+        <HBox prefHeight="100.0" prefWidth="200.0">
+            <children>
+                <JFXTextField editable="false" text="+84" />
+                <JFXTextField fx:id="mobile" labelFloat="true" layoutX="20.0" layoutY="30.0" onKeyTyped="#checkMobile" prefHeight="30.0" prefWidth="365.0" promptText="Mobile" />
+            </children>
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="5.0" />
+            </VBox.margin>
+        </HBox>
+
+        <Label fx:id="lblErrorMb" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </Label>
+        <JFXTextField fx:id="email" labelFloat="true" layoutX="10.0" layoutY="62.0" onKeyTyped="#checkEmail" promptText="Email">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="5.0" />
             </VBox.margin>
         </JFXTextField>
-        <JFXTextField fx:id="email" labelFloat="true" layoutX="10.0" layoutY="62.0" promptText="Email">
+        <Label fx:id="lblErrorEmail" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" top="20.0" />
+                <Insets left="10.0" right="10.0" />
             </VBox.margin>
-        </JFXTextField>
-        <JFXCheckBox id="check_terms">
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </Label>
+        <JFXCheckBox fx:id="check_terms" onAction="#checkTerms">
                 I agree to the terms of service
             <VBox.margin>
-                <Insets left="10.0" right="10.0" top="20.0" />
+                <Insets left="10.0" right="10.0" top="5.0" />
             </VBox.margin>
         </JFXCheckBox>
         <HBox alignment="CENTER" prefHeight="47.0" prefWidth="404.0" spacing="30.0">
             <children>
-                <JFXButton fx:id="saveButton" prefHeight="66.0" prefWidth="100.0" text="Register" /><!--onAction="#addMember"-->
+                <JFXButton fx:id="saveButton" disable="true" onAction="#signup" prefHeight="66.0" prefWidth="100.0" text="Register" /><!--onAction="#addMember"-->
                 <JFXButton fx:id="cancelButton" layoutX="10.0" layoutY="10.0" prefHeight="66.0" prefWidth="100.0" text="Cancel" /><!--onAction="#cancel"-->
             </children>
             <VBox.margin>

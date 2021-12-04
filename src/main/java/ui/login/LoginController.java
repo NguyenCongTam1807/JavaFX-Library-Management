@@ -32,10 +32,7 @@ public class LoginController implements Serializable {
     public void loginHandler() {
         String id = txtId.getText().toString();
         String pw = txtPw.getText().toString();
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.show();
 
-        //chỗ này sao ko bị mà bên đó bị
         if (true)
                 ;
     }

@@ -7,6 +7,7 @@ module JavaFX.Library.Manager {
     requires org.kordamp.ikonli.fontawesome;
 
     opens ui.login;
+    opens ui.signup;
     exports ui.signup;
     exports ui.addbook;
 }
