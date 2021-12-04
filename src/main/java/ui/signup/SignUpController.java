@@ -3,6 +3,7 @@ package ui.signup;
 import java.util.regex.*;
 
 import com.jfoenix.controls.*;
+import configs.Bundle;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -110,13 +111,13 @@ public class SignUpController implements Serializable {
         String txt= Id.getText();
         int check=checkUsername(txt);
         if (check==1){
-            lblErrorId.setText("Spaces are not allowed, please re-enter username!");
+            lblErrorId.setText(Bundle.getString("invalid.accountId.space"));
         }
         else if (check==2){
-            lblErrorId.setText(" Special character are not allowed, please re-enter username!");
+            lblErrorId.setText(Bundle.getString("invalid.accountId.character"));
         }
         else if (check==3){
-            lblErrorId.setText(" Username is too long, please re-enter username!");
+            lblErrorId.setText(Bundle.getString("invalid.accountId.long"));
         }
         else {
             lblErrorId.setText("");
@@ -127,7 +128,7 @@ public class SignUpController implements Serializable {
         String s=txtPw.getText();
         if (!checkPassword(s)){
             lblErrorPw.setWrapText(true);
-            lblErrorPw.setText("Password must have at least 8 characters, including\n uppercase characters, special characters and numbers!");
+            lblErrorPw.setText(Bundle.getString("invalid.password"));
         }
         else {
             lblErrorPw.setText("");
@@ -138,7 +139,7 @@ public class SignUpController implements Serializable {
         String password=txtPw.getText();
         String repas=repassword.getText();
         if (password.indexOf(repas) == -1 || password.length()!=repas.length()){
-            lblErrorRePw.setText("The password is not the same");
+            lblErrorRePw.setText(Bundle.getString("invalid.rePassword"));
         }
         else {
             lblErrorRePw.setText("");
@@ -148,7 +149,7 @@ public class SignUpController implements Serializable {
     public void checkStudentId(){
         String stdid=student_id.getText();
         if (validStudentId(stdid)==false){
-            lblErrorStId.setText("Student Id must have 10 numeric character !");
+            lblErrorStId.setText(Bundle.getString("invalid.studentId"));
         }
         else {
             lblErrorStId.setText("");
@@ -159,7 +160,7 @@ public class SignUpController implements Serializable {
     public void checkMobile(){
         String mb=mobile.getText();
         if (validMobile(mb)==false && mb!=""){
-            lblErrorMb.setText("Mobile must have 9 numeric character!");
+            lblErrorMb.setText(Bundle.getString("invalid.mobile"));
         }
         else {
             lblErrorMb.setText("");
@@ -178,7 +179,7 @@ public class SignUpController implements Serializable {
     public void checkEmail(){
         String validEmail=email.getText();
         if (!validEmail(validEmail)){
-            lblErrorEmail.setText("Invalid email format !");
+            lblErrorEmail.setText(Bundle.getString("invalid.email"));
         }
         else {
             lblErrorEmail.setText("");
@@ -190,8 +191,8 @@ public class SignUpController implements Serializable {
         //Dang suy nghi phuong phap toi uu de check
         if (validSignUp){
             Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText("You have successfully registered!");
-            alert.setContentText("You can login to your account");
+            alert.setHeaderText(Bundle.getString("signup.success.title"));
+            alert.setContentText(Bundle.getString("signup.success.content"));
             alert.show();
             //do sothing
             Stage stage = (Stage) saveButton.getScene().getWindow();
@@ -200,8 +201,8 @@ public class SignUpController implements Serializable {
         }
         else {
             Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Error");
-            alert.setContentText("Please check registration information again");
+            alert.setHeaderText(Bundle.getString("signup.fail.title"));
+            alert.setContentText(Bundle.getString("signup.fail.content"));
             alert.show();
         }
     }
