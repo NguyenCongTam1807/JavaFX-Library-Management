@@ -6,7 +6,7 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="153.0" prefWidth="404.0" spacing="10.0" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.signup.SignUpController">
+<VBox focusTraversable="true" prefHeight="153.0" prefWidth="404.0" spacing="10.0" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.signup.SignUpController" >
     <children>
         <JFXTextField fx:id="name" labelFloat="true" promptText="Name">
             <VBox.margin>
@@ -18,7 +18,7 @@
                 <Insets left="10.0" right="10.0" top="20.0" />
             </VBox.margin>
         </JFXTextField>
-        <Label fx:id="lblErrorId" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
+        <Label fx:id="lblErrorId" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" />
             </VBox.margin>
@@ -31,7 +31,7 @@
                 <Insets left="10.0" right="10.0" />
             </VBox.margin>
         </JFXPasswordField>
-        <Label  fx:id="lblErrorPw" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
+        <Label fx:id="lblErrorPw" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" />
             </VBox.margin>
@@ -44,7 +44,7 @@
                 <Insets left="10.0" right="10.0" />
             </VBox.margin>
         </JFXPasswordField>
-        <Label fx:id="lblErrorRePw" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
+        <Label fx:id="lblErrorRePw" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" />
             </VBox.margin>
@@ -52,7 +52,7 @@
                 <Glow level="0.9" />
             </effect>
         </Label>
-        <JFXDatePicker fx:id="birthday" layoutX="20" layoutY="  120.0" prefWidth="300" promptText="Enter your birthday">
+        <JFXDatePicker fx:id="birthday" layoutX="20" layoutY="  120.0" prefHeight="28.0" prefWidth="403.0" promptText="Enter your birthday">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="5.0" />
             </VBox.margin>
@@ -62,7 +62,7 @@
                 <Insets left="10.0" right="10.0" top="15.0" />
             </VBox.margin>
         </JFXTextField>
-        <Label fx:id="lblErrorStId" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
+        <Label fx:id="lblErrorStId" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" />
             </VBox.margin>
@@ -70,9 +70,9 @@
                 <Glow level="0.9" />
             </effect>
         </Label>
-        <HBox prefHeight="100.0" prefWidth="200.0">
+        <HBox layoutX="20.0" layoutY="30.0" prefHeight="100.0" prefWidth="200.0">
             <children>
-                <JFXTextField editable="false" text="+84" />
+                <JFXTextField editable="false" labelFloat="true" layoutX="20" layoutY="30" prefHeight="30.0" text="+84" />
                 <JFXTextField fx:id="mobile" labelFloat="true" layoutX="20.0" layoutY="30.0" onKeyTyped="#checkMobile" prefHeight="30.0" prefWidth="365.0" promptText="Mobile" />
             </children>
             <VBox.margin>
@@ -80,7 +80,7 @@
             </VBox.margin>
         </HBox>
 
-        <Label fx:id="lblErrorMb" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
+        <Label fx:id="lblErrorMb" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;&#10;">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" />
             </VBox.margin>
@@ -93,7 +93,7 @@
                 <Insets left="10.0" right="10.0" top="5.0" />
             </VBox.margin>
         </JFXTextField>
-        <Label fx:id="lblErrorEmail" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
+        <Label fx:id="lblErrorEmail" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;&#10;">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" />
             </VBox.margin>

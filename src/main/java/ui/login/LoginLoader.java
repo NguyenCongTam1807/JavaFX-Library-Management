@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.util.Optional;
 
@@ -19,6 +20,8 @@ public class LoginLoader extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
         primaryStage.setTitle("Library Manager");
         primaryStage.setScene(new Scene(root));
+        primaryStage.setResizable(false);
+        //primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
 
         primaryStage.setOnCloseRequest((e) -> {

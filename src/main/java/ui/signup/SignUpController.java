@@ -126,8 +126,7 @@ public class SignUpController implements Serializable {
     @FXML
     public void checkPw(){
         String s=txtPw.getText();
-        if (!checkPassword(s)){
-            lblErrorPw.setWrapText(true);
+        if (!checkPassword(s) && s!=""){
             lblErrorPw.setText(Bundle.getString("invalid.password"));
         }
         else {
@@ -148,7 +147,7 @@ public class SignUpController implements Serializable {
     @FXML
     public void checkStudentId(){
         String stdid=student_id.getText();
-        if (validStudentId(stdid)==false){
+        if (validStudentId(stdid)==false && stdid!=""){
             lblErrorStId.setText(Bundle.getString("invalid.studentId"));
         }
         else {
@@ -178,7 +177,7 @@ public class SignUpController implements Serializable {
     @FXML
     public void checkEmail(){
         String validEmail=email.getText();
-        if (!validEmail(validEmail)){
+        if (!validEmail(validEmail)&& validEmail!=""){
             lblErrorEmail.setText(Bundle.getString("invalid.email"));
         }
         else {

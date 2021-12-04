@@ -46,6 +46,7 @@ public class LoginController implements Serializable {
             stage.setScene(new Scene(root));
             Stage primaryStage = (Stage) btnSignUp.getScene().getWindow();
             stage.initOwner(primaryStage);
+            stage.setResizable(false);
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
             /**Set new scene in the same window**/
