@@ -15,11 +15,7 @@ import javafx.stage.Stage;
 import java.io.Serializable;
 
 public class SignUpController implements Serializable {
-    /*@FXML private JFXToggleButton toggle;
-    @FXML private Label lblError;
-    @FXML private JFXTextField txtId;
-    @FXML private JFXPasswordField txtPw;
-    @FXML private JFXButton btnLogin, btnSignUp;*/
+
     @FXML private JFXButton saveButton;
     @FXML private Label lblErrorId;
     @FXML private Label lblErrorPw;
