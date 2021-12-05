@@ -5,21 +5,20 @@ import java.util.ResourceBundle;
 import java.util.regex.*;
 
 import com.jfoenix.controls.*;
-import configs.AlertUtils;
-import configs.Bundle;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import utils.AlertUtils;
+import utils.Bundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.event.ActionEvent;
-import  javafx.fxml.LoadException;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.Serializable;
 
 
-public class SignUpController implements Serializable{
+public class SignUpController implements Serializable, Initializable {
 
     @FXML private JFXButton saveButton;
     @FXML private Label lblErrorName;
@@ -32,14 +31,17 @@ public class SignUpController implements Serializable{
     @FXML private JFXTextField Id;
     @FXML private JFXPasswordField txtPw;
     @FXML private JFXPasswordField repassword;
-    @FXML private JFXTextField student_id;
+    @FXML private JFXTextField studentId;
     @FXML private JFXTextField mobile;
-    @FXML private JFXCheckBox check_terms;
+    @FXML private JFXCheckBox checkTerms;
     @FXML private JFXTextField email;
     @FXML private JFXTextField name;
     @FXML private JFXDatePicker birthday;
 
     private static boolean validSignUp=false;
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
     private int checkUsername(String s){
         Pattern p = Pattern.compile("[^A-Za-z0-9]");
         Matcher m = p.matcher(s);
@@ -100,8 +102,6 @@ public class SignUpController implements Serializable{
 
         return false;
     }
-    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
-            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     public static boolean validEmail(String emailStr) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
@@ -162,9 +162,11 @@ public class SignUpController implements Serializable{
         String s=txtPw.getText();
         if (!checkPassword(s) && s!=""){
             lblErrorPw.setText(Bundle.getString("invalid.password"));
+            lblErrorPw.setMinHeight(30);
         }
         else {
             lblErrorPw.setText("");
+            lblErrorPw.setMinHeight(Region.USE_COMPUTED_SIZE);
         }
     }
     @FXML
@@ -180,7 +182,7 @@ public class SignUpController implements Serializable{
     }
     @FXML
     public void checkStudentId(){
-        String stdid=student_id.getText();
+        String stdid= studentId.getText();
         if (validStudentId(stdid)==false && stdid!=""){
             lblErrorStId.setText(Bundle.getString("invalid.studentId"));
         }
@@ -199,15 +201,7 @@ public class SignUpController implements Serializable{
             lblErrorMb.setText("");
         }
     }
-    @FXML
-    public void checkTerms(){
-        if (check_terms.isSelected()==true){
-            saveButton.setDisable(false);
-        }
-        else {
-            saveButton.setDisable(true);
-        }
-    }
+
     @FXML
     public void checkEmail(){
         String validEmail=email.getText();
@@ -230,11 +224,30 @@ public class SignUpController implements Serializable{
             // do what you have to do
             stage.close();
         } else {
-            //AlertUtils.showErrorAlert("signup.fail.title","signup.fail.content");
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(Bundle.getString("signup.fail.title"));
-            alert.setContentText(Bundle.getString("signup.fail.content"));
-            alert.show();
+            AlertUtils.showErrorAlert("signup.fail.title","signup.fail.content");
         }
+    }
+
+    public void clearAllFields() {
+        name.setText("");
+        Id.setText("");
+        txtPw.setText("");
+        repassword.setText("");
+        birthday.setValue(null);
+        studentId.setText("");
+        mobile.setText("");
+        email.setText("");
+        checkTerms.setSelected(false);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        checkTerms.selectedProperty().addListener((observableValue, oldValue, newValue)
+                -> saveButton.setDisable(!newValue));
+
+        name.textProperty().addListener((observableValue, oldString, newString) -> {
+            if (newString.equals(""))
+                lblErrorName.setText("");
+        });
     }
 }

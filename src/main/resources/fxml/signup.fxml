@@ -8,7 +8,7 @@
 
 <VBox focusTraversable="true" prefHeight="153.0" prefWidth="404.0" spacing="10.0" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.signup.SignUpController">
     <children>
-        <JFXTextField fx:id="name" focusColor="#12fb08" onKeyTyped="#checkName" labelFloat="true" promptText="Name" unFocusColor="#065103">
+        <JFXTextField fx:id="name" focusColor="#12fb08" labelFloat="true" onKeyTyped="#checkName" promptText="Full Name" unFocusColor="#065103">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="20.0" />
             </VBox.margin>
@@ -18,15 +18,15 @@
         </JFXTextField>
         <Label fx:id="lblErrorName" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" />
+                <Insets left="10.0" right="10.0" top="-5.0" />
             </VBox.margin>
             <effect>
                 <Glow level="0.9" />
             </effect>
         </Label>
-        <JFXTextField fx:id="Id" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" onKeyTyped="#checkId" promptText="Account ID" unFocusColor="#065103">
+        <JFXTextField fx:id="Id" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" onKeyTyped="#checkId" promptText="Username" unFocusColor="#065103">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" top="20.0" />
+                <Insets left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
          <effect>
             <Glow level="0.9" />
@@ -34,23 +34,23 @@
         </JFXTextField>
         <Label fx:id="lblErrorId" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" />
+                <Insets left="10.0" right="10.0" top="-5.0" />
             </VBox.margin>
             <effect>
                 <Glow level="0.9" />
             </effect>
         </Label>
-        <JFXPasswordField fx:id="txtPw" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" onKeyTyped="#checkPw" promptText="Enter Password" unFocusColor="#065103">
+        <JFXPasswordField fx:id="txtPw" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" onKeyTyped="#checkPw" promptText="Password" unFocusColor="#065103">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" />
+                <Insets left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
          <effect>
             <Glow level="0.9" />
          </effect>
         </JFXPasswordField>
-        <Label fx:id="lblErrorPw" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
+        <Label fx:id="lblErrorPw" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="354.0" scaleShape="false" styleClass="error" textFill="WHITE">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" />
+                <Insets left="10.0" right="10.0" top="-5.0" />
             </VBox.margin>
             <effect>
                 <Glow level="0.9" />
@@ -58,7 +58,7 @@
         </Label>
         <JFXPasswordField fx:id="repassword" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" onKeyTyped="#checkRePw" promptText="Re-Enter Password" unFocusColor="#065103">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" />
+                <Insets left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
          <effect>
             <Glow level="0.9" />
@@ -66,7 +66,7 @@
         </JFXPasswordField>
         <Label fx:id="lblErrorRePw" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" />
+                <Insets left="10.0" right="10.0" top="-2.0" />
             </VBox.margin>
             <effect>
                 <Glow level="0.9" />
@@ -74,13 +74,13 @@
         </Label>
         <JFXDatePicker fx:id="birthday" defaultColor="#12fb08" editable="false" layoutX="20" layoutY="  120.0" prefHeight="28.0" prefWidth="403.0" promptText="Select your birthday">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" top="5.0" />
+                <Insets left="10.0" right="10.0" />
             </VBox.margin>
          <effect>
             <Glow level="0.9" />
          </effect>
         </JFXDatePicker>
-        <JFXTextField fx:id="student_id" focusColor="#12fb08" labelFloat="true" layoutX="20" layoutY="30.0" onKeyTyped="#checkStudentId" promptText="Enter student id" unFocusColor="#065103">
+        <JFXTextField fx:id="studentId" focusColor="#12fb08" labelFloat="true" layoutX="20" layoutY="30.0" onKeyTyped="#checkStudentId" promptText="Enter student id" unFocusColor="#065103">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="15.0" />
             </VBox.margin>
@@ -90,7 +90,7 @@
         </JFXTextField>
         <Label fx:id="lblErrorStId" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" />
+                <Insets left="10.0" right="10.0" top="-5.0" />
             </VBox.margin>
             <effect>
                 <Glow level="0.9" />
@@ -101,11 +101,17 @@
                 <JFXTextField editable="false" focusColor="#12fb08" labelFloat="true" layoutX="20" layoutY="30" prefHeight="30.0" text="+84" unFocusColor="#065103">
                <effect>
                   <Glow level="0.9" />
-               </effect></JFXTextField>
+               </effect>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin></JFXTextField>
                 <JFXTextField fx:id="mobile" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" onKeyTyped="#checkMobile" prefHeight="30.0" prefWidth="365.0" promptText="Mobile" unFocusColor="#065103">
                <effect>
                   <Glow level="0.9" />
-               </effect></JFXTextField>
+               </effect>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin></JFXTextField>
             </children>
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="5.0" />
@@ -114,7 +120,7 @@
 
         <Label fx:id="lblErrorMb" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;&#10;">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" />
+                <Insets left="10.0" right="10.0" top="-5.0" />
             </VBox.margin>
             <effect>
                 <Glow level="0.9" />
@@ -122,7 +128,7 @@
         </Label>
         <JFXTextField fx:id="email" focusColor="#12fb08" labelFloat="true" layoutX="10.0" layoutY="62.0" onKeyTyped="#checkEmail" promptText="Email" unFocusColor="#065103">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" top="5.0" />
+                <Insets left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
          <effect>
             <Glow level="0.9" />
@@ -130,16 +136,16 @@
         </JFXTextField>
         <Label fx:id="lblErrorEmail" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;&#10;">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" />
+                <Insets left="10.0" right="10.0" top="-5.0" />
             </VBox.margin>
             <effect>
                 <Glow level="0.9" />
             </effect>
         </Label>
-        <JFXCheckBox fx:id="check_terms" checkedColor="#12fb08" onAction="#checkTerms" styleClass="normal">
+        <JFXCheckBox fx:id="checkTerms" checkedColor="#12fb08"  styleClass="normal"><!--onAction="#checkTerms"-->
                 I agree to the terms of service
             <VBox.margin>
-                <Insets left="10.0" right="10.0" top="5.0" />
+                <Insets left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
          <effect>
             <Glow level="0.9" />
@@ -151,10 +157,10 @@
                <effect>
                   <Glow level="0.9" />
                </effect></JFXButton><!--onAction="#addMember"-->
-                <JFXButton fx:id="cancelButton" layoutX="10.0" layoutY="10.0" prefHeight="66.0" prefWidth="100.0" text="Clear">
+                <JFXButton fx:id="cancelButton" layoutX="10.0" layoutY="10.0" onAction="#clearAllFields" prefHeight="66.0" prefWidth="100.0" text="Clear">
                <effect>
                   <Glow level="0.9" />
-               </effect></JFXButton><!--onAction="#cancel"-->
+               </effect></JFXButton>
             </children>
             <VBox.margin>
                 <Insets top="20.0" />

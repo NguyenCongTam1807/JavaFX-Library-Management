@@ -1,7 +1,6 @@
 package ui.login;
 
-import configs.AlertUtils;
-import configs.Bundle;
+import utils.AlertUtils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

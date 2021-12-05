@@ -1,5 +1,6 @@
 * {
     /*color definition*/
+    -fx-voidblack:#000000;
     -fx-black : #111111;
     -fx-dark : #222222;
     -fx-gray: #5a5a5a;
@@ -16,7 +17,7 @@
     -fx-bg2 : -fx-dark;
     -fx-bg3: -fx-green;
     -fx-text: -fx-green;
-    -fx-text3 : -fx-black;
+    -fx-text3 : -fx-voidblack;
     -fx-prompt: -fx-gray;
     -fx-unfocus: -fx-green-dark;
     -fx-error: -fx-red;
@@ -46,6 +47,9 @@ Label.top {
 .normal {
     -fx-text-fill:-fx-text;
 }
+FontIcon {
+    -fx-icon-color:-fx-text;
+}
 JFXToggleButton {
     -jfx-disable-visual-focus: true;
     -fx-font-size:10;
@@ -61,6 +65,28 @@ JFXDatePicker {
     -jfx-unfocus-color: -fx-unfocus;
     -fx-prompt-text-fill: -fx-prompt;
     -fx-text-fill: -fx-text;
+}
+.jfx-check-box {
+    -jfx-checked-color: -fx-bg3;
+
+}
+
+.jfx-check-box:selected .mark, .jfx-check-box .mark{
+    -fx-border-color: -fx-text3;
+}
+.today {
+    -fx-border-color: -fx-bg;
+    -fx-border-radius: 40;
+    -fx-font-weight: bold;
+    -fx-font-size: 16;
+}
+/*.date-picker-popup {
+    -fx-background-color: -fx-bg2;
+    -fx-text-fill: -fx-others;
+}*/
+.date-picker-popup > .month-year-pane {
+    -fx-background-color: -fx-bg;
+    -fx-text-fill: -fx-others;
 }
 
 
