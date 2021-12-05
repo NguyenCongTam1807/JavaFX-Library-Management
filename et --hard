@@ -1,0 +1,23 @@
+[33mcfd20c6[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m HEAD@{0}: commit (merge): remove files to solve merge conflicts
+[33m09c7d0c[m HEAD@{1}: reset: moving to HEAD
+[33m09c7d0c[m HEAD@{2}: reset: moving to HEAD
+[33m09c7d0c[m HEAD@{3}: commit: light UI
+[33m5feb391[m HEAD@{4}: commit: changed signup UI
+[33m02c4c41[m HEAD@{5}: commit: polish signup UI
+[33m6675de7[m HEAD@{6}: pull origin master: Fast-forward
+[33mff5fc13[m HEAD@{7}: reset: moving to HEAD
+[33mff5fc13[m HEAD@{8}: commit: Don't know what happened
+[33m4f7855c[m HEAD@{9}: commit (merge): resolve conflict
+[33m52e307e[m HEAD@{10}: reset: moving to HEAD
+[33m52e307e[m HEAD@{11}: commit: modify libraries
+[33m5ac6927[m HEAD@{12}: pull origin master: Merge made by the 'recursive' strategy.
+[33m675786a[m HEAD@{13}: merge origin/master: Merge made by the 'recursive' strategy.
+[33m0393cc0[m HEAD@{14}: commit: User service
+[33m9c4b2ae[m HEAD@{15}: commit: change mysql password
+[33m6cfcd64[m HEAD@{16}: commit: Add service classes
+[33mcade182[m HEAD@{17}: commit: Add service classes
+[33m62912c3[m HEAD@{18}: commit: Add services
+[33m803817e[m HEAD@{19}: commit: Second commit
+[33m28b01b9[m HEAD@{20}: commit: Second commit
+[33me70a8a0[m HEAD@{21}: pull origin master: Fast-forward
+[33meb3ca73[m HEAD@{22}: commit (initial): Initial commit
