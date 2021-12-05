@@ -20,6 +20,7 @@ import java.io.Serializable;
 public class SignUpController implements Serializable, Initializable {
 
     @FXML private JFXButton saveButton;
+    @FXML private Label lblErrorName;
     @FXML private Label lblErrorId;
     @FXML private Label lblErrorPw;
     @FXML private Label lblErrorRePw;
@@ -103,6 +104,38 @@ public class SignUpController implements Serializable, Initializable {
     public static boolean validEmail(String emailStr) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
         return matcher.find();
+    }
+    public static String upperCaseFirstLetter(String s) {
+        String firstLetter = s.substring(0,1);
+        String secondLetter = s.substring(1,s.length());
+        firstLetter.toUpperCase();
+        secondLetter.toLowerCase();
+        return firstLetter+secondLetter;
+    }
+    public static String styleString(String s){
+        String ch[]=s.split("\\s");
+        s="";
+        for (String i:ch){
+            s+=upperCaseFirstLetter(i)+" ";
+        }
+        return s;
+    }
+    public static boolean validName(String Name){
+        Pattern digit = Pattern.compile("[0-9]");
+        Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
+        Matcher hasDigit = digit.matcher(Name);
+        Matcher hasSpecial = special.matcher(Name);
+        return hasDigit.find() && hasSpecial.find();
+    }
+
+    @FXML
+    public  void checkName(){
+        String Name=name.getText();
+        if (!validName(Name) && Name!=""){
+            lblErrorName.setText(Bundle.getString("invalid.name"));
+        }
+        else lblErrorName.setText("");
+            //name.setText(styleString(Name));
     }
 
     @FXML

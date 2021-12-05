@@ -8,7 +8,7 @@
 
 <VBox focusTraversable="true" prefHeight="153.0" prefWidth="404.0" spacing="10.0" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.signup.SignUpController">
     <children>
-        <JFXTextField fx:id="name" focusColor="#12fb08" labelFloat="true" promptText="Name" unFocusColor="#065103">
+        <JFXTextField fx:id="name" focusColor="#12fb08" onKeyTyped="#checkName" labelFloat="true" promptText="Name" unFocusColor="#065103">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="20.0" />
             </VBox.margin>
@@ -16,6 +16,14 @@
             <Glow level="0.9" />
          </effect>
         </JFXTextField>
+        <Label fx:id="lblErrorName" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </Label>
         <JFXTextField fx:id="Id" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" onKeyTyped="#checkId" promptText="Account ID" unFocusColor="#065103">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="20.0" />
@@ -143,7 +151,7 @@
                <effect>
                   <Glow level="0.9" />
                </effect></JFXButton><!--onAction="#addMember"-->
-                <JFXButton fx:id="cancelButton" layoutX="10.0" layoutY="10.0" prefHeight="66.0" prefWidth="100.0" text="Cancel">
+                <JFXButton fx:id="cancelButton" layoutX="10.0" layoutY="10.0" prefHeight="66.0" prefWidth="100.0" text="Clear">
                <effect>
                   <Glow level="0.9" />
                </effect></JFXButton><!--onAction="#cancel"-->
