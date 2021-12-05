@@ -6,11 +6,11 @@ import javafx.scene.control.ButtonType;
 import java.util.Optional;
 
 public class AlertUtils {
-    public static boolean showOnCloseAlert(String title, String content) {
+    public static boolean showConfirmAlert(String titleResource, String contentResource) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(title);
+        alert.setTitle(Bundle.getString(titleResource));
         alert.setHeaderText(null);
-        alert.setContentText(content);
+        alert.setContentText(Bundle.getString(contentResource));
         Optional<ButtonType> result = alert.showAndWait();
         return result.get() == ButtonType.OK;
     }

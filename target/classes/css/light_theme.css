@@ -1,0 +1,66 @@
+* {
+    /*color definition*/
+    -fx-black : #111111;
+    -fx-dark : #222222;
+    -fx-gray: #5a5a5a;
+    -fx-white: #ffffff;
+    -fx-green: #12fb08;
+    -fx-green-dark: #10910c;
+    -fx-red: #cc0000;
+    -fx-start-margin: 0;
+    -fx-end-margin: 0;
+}
+* {
+    /*color style definition*/
+    -fx-bg : -fx-white;
+    -fx-bg2 : -fx-white;
+    -fx-bg3: -fx-white;
+    -fx-text: -fx-black;
+    -fx-text3 : -fx-black;
+    -fx-prompt: -fx-gray;
+    -fx-unfocus: -fx-gray;
+    -fx-error: -fx-red;
+    -fx-border: -fx-green;
+    -fx-others: -fx-black;
+}
+*{
+    -fx-font-family: "Consolas";
+}
+
+.root{
+    -fx-background-color: -fx-bg;
+}
+Label.top {
+    -fx-text-fill: -fx-text;
+    -fx-font-size: 32;
+    -fx-alignment: CENTER;
+}
+
+.info {
+    -fx-text-fill: -fx-others;
+}
+.error {
+    -fx-text-fill:-fx-error;
+    -fx-font-size: 12;
+}
+.normal {
+    -fx-text-fill:-fx-text;
+}
+JFXToggleButton {
+    -jfx-disable-visual-focus: true;
+    -fx-font-size:10;
+}
+JFXTextField, JFXPasswordField, JFXButton {
+    -fx-text-fill: -fx-text;
+    -fx-font-size: 16;
+}
+JFXDatePicker {
+    -fx-font-size:16;
+}
+.jfx-date-picker .text-field{
+    -jfx-unfocus-color: -fx-unfocus;
+    -fx-prompt-text-fill: -fx-prompt;
+    -fx-text-fill: -fx-text;
+}
+
+
