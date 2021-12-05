@@ -19,11 +19,11 @@
       </Label>
         <FontIcon iconColor="#12fb08" iconLiteral="bxs-book-bookmark" iconSize="40">
          <effect>
-            <Glow level="0.6" />
+            <Glow level="0.67" />
          </effect></FontIcon>
         <JFXToggleButton fx:id="toggle" alignment="CENTER_RIGHT" onAction="#toggleHandler" prefWidth="400.0" size="7.0" text="Login as&#10;Student" textAlignment="CENTER" textFill="#12fb08" unToggleColor="#12fb08" unToggleLineColor="#10910c">
          <effect>
-            <Glow level="0.75" />
+            <Glow level="0.67" />
          </effect>
          <VBox.margin>
             <Insets left="260.0" />
@@ -55,17 +55,17 @@
         <HBox alignment="CENTER" prefHeight="80.0" prefWidth="398.0" spacing="40.0">
             <JFXButton fx:id="btnLogin" onAction="#loginHandler" prefHeight="40.0" prefWidth="90.0" styleClass="login-button" text="Login">
             <effect>
-               <Glow level="1.0" />
+               <Glow level="0.9" />
             </effect></JFXButton>
             <JFXButton fx:id="btnSignUp" onAction="#signUpHandler" prefHeight="40.0" prefWidth="90.0" styleClass="login-button" text="Sign up">
             <effect>
-               <Glow level="1.0" />
+               <Glow level="0.9" />
             </effect></JFXButton>
          <effect>
             <Glow level="0.9" />
          </effect>
         </HBox>
-      <Label  alignment="CENTER_RIGHT" prefHeight="14.0" prefWidth="400.0" styleClass="others" text="ver 1.0">
+      <Label alignment="CENTER_RIGHT" prefHeight="14.0" prefWidth="400.0" styleClass="info" text="ver 1.0">
          <effect>
             <Glow level="0.9" />
          </effect>

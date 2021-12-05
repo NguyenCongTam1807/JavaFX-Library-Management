@@ -1,9 +1,12 @@
 package ui.signup;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.regex.*;
 
 import com.jfoenix.controls.*;
 import configs.Bundle;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -14,7 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.Serializable;
 
-public class SignUpController implements Serializable {
+public class SignUpController implements Serializable, Initializable {
 
     @FXML private JFXButton saveButton;
     @FXML private Label lblErrorId;
@@ -209,5 +212,10 @@ public class SignUpController implements Serializable {
     public boolean validate() {
 
         return true;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        //birthday.setCo
     }
 }
