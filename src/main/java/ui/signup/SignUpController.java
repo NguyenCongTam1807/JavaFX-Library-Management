@@ -1,10 +1,13 @@
 package ui.signup;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import java.util.regex.*;
 
 import com.jfoenix.controls.*;
+import pojo.User;
+import services.UserService;
 import utils.AlertUtils;
 import utils.Bundle;
 import javafx.beans.value.ChangeListener;
@@ -217,7 +220,14 @@ public class SignUpController implements Serializable, Initializable {
     @FXML
     public void signup() {
         //Dang suy nghi phuong phap toi uu de check
-        if (validSignUp) {
+        //if (validSignUp)
+        //Cái này để test hàm Insert User vào database
+        if(true)
+        {
+            User user = new User(Id.getText(),txtPw.getText(),1,name.getText(),java.sql.Date.valueOf(birthday.getValue()),
+                    mobile.getText(),email.getText(),studentId.getText());
+            UserService userService = new UserService();
+            userService.addUser(user);
             AlertUtils.showConfirmAlert("signup.success.title","signup.success.content");
             //do sothing
             Stage stage = (Stage) saveButton.getScene().getWindow();

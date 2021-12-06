@@ -1,12 +1,26 @@
 package pojo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class User {
-    private int id,phoneNumber;
-    private String accountId,password,name,email,studentId;
-    private boolean status;
+    private int id,status;
+    private String accountId,password,name,email,studentId,phoneNumber;
     private Date birthday;
+
+    public User() { }
+
+    //User's id field is set as auto-incremental in the database so it doesn't need to be included in the constructor
+    public User(String accountId, String password, int status, String name,
+                Date birthday, String phoneNumber, String email, String studentId) {
+        this.accountId = accountId;
+        this.password = password;
+        this.status = status;
+        this.name = name;
+        this.birthday = birthday;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.studentId = studentId;
+    }
 
     public int getId() {
         return id;
@@ -16,11 +30,9 @@ public class User {
         this.id = id;
     }
 
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
+    public String getPhoneNumber() { return phoneNumber; }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -64,11 +76,11 @@ public class User {
         this.studentId = studentId;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
