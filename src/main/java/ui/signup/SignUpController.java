@@ -7,6 +7,9 @@ import java.util.regex.*;
 
 import com.jfoenix.controls.*;
 import javafx.beans.InvalidationListener;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Labeled;
+import javafx.scene.layout.VBox;
 import pojo.User;
 import services.UserService;
 import utils.AlertUtils;
@@ -20,6 +23,8 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.Serializable;
+
+import static javafx.scene.input.KeyCode.V;
 
 
 public class SignUpController implements Serializable, Initializable {
@@ -133,65 +138,15 @@ public class SignUpController implements Serializable, Initializable {
         Matcher hasSpecial = special.matcher(Name);
         return hasDigit.find() && hasSpecial.find();
     }
-
-
-    @FXML
-    public void checkId() {
-        String txt= Id.getText();
-        int check=checkUsername(txt);
-        if (check==1){
-            lblErrorId.setText(Bundle.getString("invalid.accountId.space"));
-        }
-        else if (check==2){
-            lblErrorId.setText(Bundle.getString("invalid.accountId.character"));
-        }
-        else if (check==3){
-            lblErrorId.setText(Bundle.getString("invalid.accountId.long"));
-        }
-        else {
-            lblErrorId.setText("");
-        }
-    }
-    @FXML
-    public void checkPw(){
-
-    }
-    @FXML
-    public void checkRePw(){
-
-    }
-    @FXML
-    public void checkStudentId(){
-        String stdid= studentId.getText();
-        if (validStudentId(stdid)==false && stdid!=""){
-            lblErrorStId.setText(Bundle.getString("invalid.studentId"));
-        }
-        else {
-            lblErrorStId.setText("");
-        }
-    }
-
-    @FXML
-    public void checkMobile(){
-        String mb=mobile.getText();
-        if (validMobile(mb)==false && mb!=""){
-            lblErrorMb.setText(Bundle.getString("invalid.mobile"));
-        }
-        else {
-            lblErrorMb.setText("");
-        }
-    }
-
-    @FXML
-    public void checkEmail(){
-        String validEmail=email.getText();
-        if (!validEmail(validEmail) && validEmail!=""){
-            lblErrorEmail.setText(Bundle.getString("invalid.email"));
-        }
-        else {
-            lblErrorEmail.setText("");
-        }
-
+    String str = "";
+    public boolean validSignUp(){
+        str="";
+        VBox vbox = new VBox();
+        vbox.getChildren().stream().map(Label.class::cast).map(Label::getText).forEach(text-> str.concat(text));
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText(str);
+        alert.show();
+        return str.equals("");
     }
 
     @FXML
@@ -199,12 +154,12 @@ public class SignUpController implements Serializable, Initializable {
         //Dang suy nghi phuong phap toi uu de check
         //if (validSignUp)
         //Cái này để test hàm Insert User vào database
-        if(true)
+        if(validSignUp())
         {
-            User user = new User(Id.getText(),txtPw.getText(),1,name.getText(),java.sql.Date.valueOf(birthday.getValue()),
+            /*User user = new User(Id.getText(),txtPw.getText(),1,name.getText(),java.sql.Date.valueOf(birthday.getValue()),
                     mobile.getText(),email.getText(),studentId.getText());
             UserService userService = new UserService();
-            userService.addUser(user);
+            userService.addUser(user);*/
             AlertUtils.showConfirmAlert("signup.success.title","signup.success.content");
             //do sothing
             Stage stage = (Stage) saveButton.getScene().getWindow();
@@ -239,11 +194,11 @@ public class SignUpController implements Serializable, Initializable {
         name.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                String Name=name.getText();
+               /* String Name=name.getText();
                 if (!validName(Name) && Name!=""){
                     lblErrorName.setText(Bundle.getString("invalid.name"));
                 }
-                else lblErrorName.setText("");
+                else lblErrorName.setText(Bundle.getString("invalid.input.null"));*/
             }
         });
         txtPw.textProperty().addListener(new ChangeListener<String>() {
@@ -253,6 +208,12 @@ public class SignUpController implements Serializable, Initializable {
                 if (!checkPassword(pw) && pw!=""){
                     lblErrorPw.setText(Bundle.getString("invalid.password"));
                     lblErrorPw.setMinHeight(30);
+                }
+                else
+                if (txtPw.getText()=="")
+                {
+                    lblErrorPw.setText(Bundle.getString("invalid.input.null"));
+                    lblErrorPw.setMinHeight(Region.USE_COMPUTED_SIZE);
                 }
                 else {
                     lblErrorPw.setText("");
@@ -265,12 +226,80 @@ public class SignUpController implements Serializable, Initializable {
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 String password=txtPw.getText();
                 String repas=repassword.getText();
-                if (password.indexOf(repas) == -1 || password.length()!=repas.length()){
-                    lblErrorRePw.setText(Bundle.getString("invalid.rePassword"));
-                }
-                else {
+                if (password.equals(repas)){
                     lblErrorRePw.setText("");
                 }
+                else
+                if (repas==""){
+                    lblErrorRePw.setText(Bundle.getString("invalid.input.null"));
+                }
+                else lblErrorRePw.setText(Bundle.getString("invalid.rePassword"));
+            }
+        });
+        Id.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                String txt= Id.getText();
+                int check=checkUsername(txt);
+                if (check==1){
+                    lblErrorId.setText(Bundle.getString("invalid.accountId.space"));
+                }
+                else if (check==2){
+                    lblErrorId.setText(Bundle.getString("invalid.accountId.character"));
+                }
+                else if (check==3){
+                    lblErrorId.setText(Bundle.getString("invalid.accountId.long"));
+                }
+                else
+                if (txt== ""){
+                    lblErrorId.setText(Bundle.getString("invalid.input.null"));
+                }
+                else lblErrorId.setText("");
+            }
+        });
+        studentId.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                String stdid= studentId.getText();
+                if (validStudentId(stdid)==false && stdid!=""){
+                    lblErrorStId.setText(Bundle.getString("invalid.studentId"));
+                }
+                else
+                if (stdid=="")
+                {
+                    lblErrorStId.setText(Bundle.getString("invalid.input.null"));
+                }
+                else lblErrorStId.setText("");
+            }
+        });
+        mobile.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                String mb=mobile.getText();
+                if (validMobile(mb)==false && mb!=""){
+                    lblErrorMb.setText(Bundle.getString("invalid.mobile"));
+                }
+                else
+                if (mb=="")
+                {
+                    lblErrorMb.setText(Bundle.getString("invalid.input.null"));
+                }
+                else lblErrorMb.setText("");
+            }
+        });
+        email.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                String validemail=email.getText();
+                if (!validEmail(validemail) && validemail!=""){
+                    lblErrorEmail.setText(Bundle.getString("invalid.email"));
+                }
+                else
+                if (validemail=="")
+                {
+                    lblErrorEmail.setText(Bundle.getString("invalid.input.null"));
+                }
+                else lblErrorEmail.setText("");
             }
         });
     }
