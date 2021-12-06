@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import java.util.regex.*;
 
 import com.jfoenix.controls.*;
+import javafx.beans.InvalidationListener;
 import pojo.User;
 import services.UserService;
 import utils.AlertUtils;
@@ -133,15 +134,6 @@ public class SignUpController implements Serializable, Initializable {
         return hasDigit.find() && hasSpecial.find();
     }
 
-    @FXML
-    public  void checkName(){
-        String Name=name.getText();
-        if (!validName(Name) && Name!=""){
-            lblErrorName.setText(Bundle.getString("invalid.name"));
-        }
-        else lblErrorName.setText("");
-        //name.setText(styleString(Name));
-    }
 
     @FXML
     public void checkId() {
@@ -162,26 +154,11 @@ public class SignUpController implements Serializable, Initializable {
     }
     @FXML
     public void checkPw(){
-        String s=txtPw.getText();
-        if (!checkPassword(s) && s!=""){
-            lblErrorPw.setText(Bundle.getString("invalid.password"));
-            lblErrorPw.setMinHeight(30);
-        }
-        else {
-            lblErrorPw.setText("");
-            lblErrorPw.setMinHeight(Region.USE_COMPUTED_SIZE);
-        }
+
     }
     @FXML
     public void checkRePw(){
-        String password=txtPw.getText();
-        String repas=repassword.getText();
-        if (password.indexOf(repas) == -1 || password.length()!=repas.length()){
-            lblErrorRePw.setText(Bundle.getString("invalid.rePassword"));
-        }
-        else {
-            lblErrorRePw.setText("");
-        }
+
     }
     @FXML
     public void checkStudentId(){
@@ -208,7 +185,7 @@ public class SignUpController implements Serializable, Initializable {
     @FXML
     public void checkEmail(){
         String validEmail=email.getText();
-        if (!validEmail(validEmail)&& validEmail!=""){
+        if (!validEmail(validEmail) && validEmail!=""){
             lblErrorEmail.setText(Bundle.getString("invalid.email"));
         }
         else {
@@ -255,9 +232,46 @@ public class SignUpController implements Serializable, Initializable {
         checkTerms.selectedProperty().addListener((observableValue, oldValue, newValue)
                 -> saveButton.setDisable(!newValue));
 
-        name.textProperty().addListener((observableValue, oldString, newString) -> {
+        /*name.textProperty().addListener((observableValue, oldString, newString) -> {
             if (newString.equals(""))
                 lblErrorName.setText("");
+        });*/
+        name.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                String Name=name.getText();
+                if (!validName(Name) && Name!=""){
+                    lblErrorName.setText(Bundle.getString("invalid.name"));
+                }
+                else lblErrorName.setText("");
+            }
+        });
+        txtPw.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                String pw=txtPw.getText();
+                if (!checkPassword(pw) && pw!=""){
+                    lblErrorPw.setText(Bundle.getString("invalid.password"));
+                    lblErrorPw.setMinHeight(30);
+                }
+                else {
+                    lblErrorPw.setText("");
+                    lblErrorPw.setMinHeight(Region.USE_COMPUTED_SIZE);
+                }
+            }
+        });
+        repassword.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                String password=txtPw.getText();
+                String repas=repassword.getText();
+                if (password.indexOf(repas) == -1 || password.length()!=repas.length()){
+                    lblErrorRePw.setText(Bundle.getString("invalid.rePassword"));
+                }
+                else {
+                    lblErrorRePw.setText("");
+                }
+            }
         });
     }
 }
