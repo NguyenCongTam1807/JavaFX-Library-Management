@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="custom-pane" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.main.MainController">
+    <children>
+        <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+            <children>
+               <JFXTabPane fx:id="mainTabPane" prefHeight="50.0" prefWidth="840.0" tabDragPolicy="REORDER" tabMinHeight="50" tabMinWidth="280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                   <tabs>
+                       <Tab fx:id="tabBookIssue" closable="false" styleClass="tab-main" text="BOOK ISSUE">
+
+                       </Tab>
+                       <Tab fx:id="tabBook" closable="false" styleClass="tab-main" text="BOOK">
+
+                       </Tab>
+                       <Tab fx:id="tabUser" closable="false" styleClass="tab-main" text="USER">
+
+                       </Tab>
+                   </tabs>
+               </JFXTabPane>
+               <JFXNodesList fx:id="nodesList" layoutX="875.0" layoutY="0" rotate="0" spacing="15">
+                       <JFXButton styleClass="animated-option-button" text="MENU" />
+                       <JFXButton styleClass="animated-option-button" text="Account Info" />
+                       <JFXButton styleClass="animated-option-button" text="Logout" />
+                   <JFXNodesList fx:id="nodesListSettings" rotate="90" spacing="75">
+                       <JFXButton styleClass="animated-option-button" text="Settings" />
+                       <JFXNodesList fx:id="nodesListTheme" rotate="0" spacing="15">
+                           <JFXButton styleClass="animated-option-button" text="Theme" />
+                           <JFXButton styleClass="animated-option-button" text="Dark" />
+                           <JFXButton styleClass="animated-option-button" text="Light" />
+                       </JFXNodesList>
+                       <JFXNodesList fx:id="nodesListLanguage" rotate="0" spacing="15">
+                           <JFXButton styleClass="animated-option-button" text="Language" />
+                           <JFXButton styleClass="animated-option-button" text="English" />
+                           <JFXButton styleClass="animated-option-button" text="Vietnamese" />
+                       </JFXNodesList>
+                   </JFXNodesList>
+               </JFXNodesList>
+
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>
