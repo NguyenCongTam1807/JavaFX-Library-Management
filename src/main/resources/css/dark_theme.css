@@ -361,3 +361,16 @@
 .colored-context-menu .menu-item:focused .label {
     -fx-text-fill: black;
 }
+
+/* NodesList */
+.animated-option-button {
+    -fx-pref-width: 50;
+    -fx-background-color: #44B449;
+    -fx-background-radius: 50;
+    -fx-pref-height: 50;
+    -fx-text-fill: white;
+    -fx-border-color: WHITE;
+    -fx-border-radius: 50;
+    -fx-border-width: 4;
+
+}

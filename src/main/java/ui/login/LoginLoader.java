@@ -11,7 +11,7 @@ public class LoginLoader extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/main2.fxml"));
         primaryStage.setTitle("Library Manager");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
