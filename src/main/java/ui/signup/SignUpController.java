@@ -1,6 +1,7 @@
 package ui.signup;
 
 import java.net.URL;
+import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import java.util.regex.*;
@@ -25,6 +26,7 @@ import javafx.stage.Stage;
 import java.io.Serializable;
 
 import static javafx.scene.input.KeyCode.V;
+//import static jdk.internal.logger.DefaultLoggerFinder.SharedLoggers.system;
 
 
 public class SignUpController implements Serializable, Initializable {
@@ -46,7 +48,8 @@ public class SignUpController implements Serializable, Initializable {
     @FXML private JFXTextField email;
     @FXML private JFXTextField name;
     @FXML private JFXDatePicker birthday;
-    @FXML private  VBox container;
+    @FXML private VBox container;
+    @FXML private Label lblErrorBirthday;
 
     private static boolean validSignUp=false;
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
@@ -118,36 +121,54 @@ public class SignUpController implements Serializable, Initializable {
         return matcher.find();
     }
     public static String upperCaseFirstLetter(String s) {
+        s=s.toLowerCase();
         String firstLetter = s.substring(0,1);
         String secondLetter = s.substring(1,s.length());
-        firstLetter.toUpperCase();
-        secondLetter.toLowerCase();
-        return firstLetter+secondLetter;
+        return firstLetter.toUpperCase()+secondLetter;
     }
+
+    public static String removeCharAt(String s, int pos,int i) {
+        return s.substring(0, pos) + s.substring(pos + i);
+    }
+    //   le dang   thanh dat
     public static String styleString(String s){
+        s.trim();
+        while (s.indexOf("  ")!=-1){
+            s=removeCharAt(s,s.indexOf("  ")+1,1);
+        }
         String ch[]=s.split("\\s");
         s="";
         for (String i:ch){
             s+=upperCaseFirstLetter(i)+" ";
         }
-        return s;
+        return s.substring(0,s.length()-1);
     }
+    public static String unAccent(String s) {
+        String temp = Normalizer.normalize(s, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        // return pattern.matcher(temp).replaceAll("");
+        return pattern.matcher(temp).replaceAll("").replaceAll("Đ", "D").replace("đ", "");
+    }
+
     public static boolean validName(String Name){
         Pattern digit = Pattern.compile("[0-9]");
         Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
         Matcher hasDigit = digit.matcher(Name);
         Matcher hasSpecial = special.matcher(Name);
-        return hasDigit.find() && hasSpecial.find();
+        return hasDigit.find() || hasSpecial.find();
     }
+
     String str = "";
     public boolean validSignUp(){
         str="";
-        container.getChildren().stream().filter(node -> node.getClass()==Label.class).map(Label->((Label) Label).getText()).forEach(text -> str+=text);
-        /*Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        System.out.print(1+str+1);
-        alert.setContentText(str);
-        alert.show();*/
-        return str.equals("\n");
+        container.getChildren().stream().filter(node -> node.getClass()==Label.class).map(Label->((Label) Label).getText()).forEach(text -> {
+            str+=text;
+        });
+        container.getChildren().stream().filter(node -> node.getClass()==JFXTextField.class).map(JFXTextField->((JFXTextField) JFXTextField).getText()).forEach(text->
+        {
+            if (text=="") str="false";
+        });
+        return str.equals("\n") || str.equals("") ;
     }
 
     @FXML
@@ -195,18 +216,26 @@ public class SignUpController implements Serializable, Initializable {
         checkTerms.selectedProperty().addListener((observableValue, oldValue, newValue)
                 -> saveButton.setDisable(!newValue));
 
-        /*name.textProperty().addListener((observableValue, oldString, newString) -> {
-            if (newString.equals(""))
-                lblErrorName.setText("");
-        });*/
         name.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-               /* String Name=name.getText();
-                if (!validName(Name) && Name!=""){
+                String Name=name.getText();
+                if (validName(unAccent(Name)) && Name!=""){
                     lblErrorName.setText(Bundle.getString("invalid.name"));
                 }
-                else lblErrorName.setText(Bundle.getString("invalid.input.null"));*/
+                else if (Name=="") {
+                    lblErrorName.setText(Bundle.getString("invalid.input.null"));
+                }
+                else lblErrorName.setText("");
+            }
+        });
+        name.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                if (!t1){
+                    if (name.getText()!="")
+                        name.setText(styleString(name.getText()));
+                }
             }
         });
         txtPw.textProperty().addListener(new ChangeListener<String>() {

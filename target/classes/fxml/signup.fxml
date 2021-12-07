@@ -5,7 +5,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
-<VBox fx:id="container" focusTraversable="true" prefHeight="153.0" prefWidth="404.0" spacing="10.0" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.signup.SignUpController">
+
+<VBox fx:id="container" focusTraversable="true" prefHeight="153.0" prefWidth="404.0" spacing="10.0" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.signup.SignUpController">
     <children>
         <JFXTextField fx:id="name" focusColor="#12fb08" labelFloat="true" promptText="Full Name" unFocusColor="#065103">
             <VBox.margin>
@@ -79,9 +80,17 @@
             <Glow level="0.9" />
          </effect>
         </JFXDatePicker>
+        <Label fx:id="lblErrorBirthday" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="-2.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </Label>
         <JFXTextField fx:id="studentId" focusColor="#12fb08" labelFloat="true" layoutX="20" layoutY="30.0" promptText="Enter student id" unFocusColor="#065103">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" top="15.0" />
+                <Insets left="10.0" right="10.0" top="-5.0" />
             </VBox.margin>
          <effect>
             <Glow level="0.9" />
@@ -97,19 +106,19 @@
         </Label>
         <HBox layoutX="20.0" layoutY="30.0" prefHeight="100.0" prefWidth="200.0">
             <children>
-                <JFXTextField editable="false" focusColor="#12fb08" labelFloat="true" layoutX="20" layoutY="30" prefHeight="30.0" text="+84" unFocusColor="#065103">
+                <JFXTextField editable="false" focusColor="#12fb08" focusTraversable="false" labelFloat="true" layoutX="20" layoutY="30" prefHeight="30.0" text="+84" unFocusColor="#065103">
                <effect>
                   <Glow level="0.9" />
                </effect>
                <HBox.margin>
-                  <Insets top="10.0" />
+                  <Insets top="5.0" />
                </HBox.margin></JFXTextField>
                 <JFXTextField fx:id="mobile" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" prefHeight="30.0" prefWidth="365.0" promptText="Mobile" unFocusColor="#065103">
                <effect>
                   <Glow level="0.9" />
                </effect>
                <HBox.margin>
-                  <Insets top="10.0" />
+                  <Insets top="5.0" />
                </HBox.margin></JFXTextField>
             </children>
             <VBox.margin>
@@ -125,7 +134,7 @@
                 <Glow level="0.9" />
             </effect>
         </Label>
-        <JFXTextField fx:id="email" focusColor="#12fb08" labelFloat="true" layoutX="10.0" layoutY="62.0"  promptText="Email" unFocusColor="#065103">
+        <JFXTextField fx:id="email" focusColor="#12fb08" labelFloat="true" layoutX="10.0" layoutY="62.0" promptText="Email" unFocusColor="#065103">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
@@ -141,7 +150,7 @@
                 <Glow level="0.9" />
             </effect>
         </Label>
-        <JFXCheckBox fx:id="checkTerms" checkedColor="#12fb08"  styleClass="normal">
+        <JFXCheckBox fx:id="checkTerms" checkedColor="#12fb08" styleClass="normal">
                 I agree to the terms of service
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="10.0" />
