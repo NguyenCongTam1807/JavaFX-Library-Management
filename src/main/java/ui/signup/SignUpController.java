@@ -46,6 +46,7 @@ public class SignUpController implements Serializable, Initializable {
     @FXML private JFXTextField email;
     @FXML private JFXTextField name;
     @FXML private JFXDatePicker birthday;
+    @FXML private  VBox container;
 
     private static boolean validSignUp=false;
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
@@ -141,12 +142,12 @@ public class SignUpController implements Serializable, Initializable {
     String str = "";
     public boolean validSignUp(){
         str="";
-        VBox vbox = new VBox();
-        vbox.getChildren().stream().map(Label.class::cast).map(Label::getText).forEach(text-> str.concat(text));
+        container.getChildren().stream().filter(node -> node.getClass()==Label.class).map(Label->((Label) Label).getText()).forEach(text -> str+=text);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        System.out.print(1+str+1);
         alert.setContentText(str);
         alert.show();
-        return str.equals("");
+        return str.equals("\n");
     }
 
     @FXML

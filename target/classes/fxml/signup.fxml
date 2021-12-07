@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
-<VBox focusTraversable="true" prefHeight="153.0" prefWidth="404.0" spacing="10.0" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.signup.SignUpController">
+<VBox fx:id="container" focusTraversable="true" prefHeight="153.0" prefWidth="404.0" spacing="10.0" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.signup.SignUpController">
     <children>
         <JFXTextField fx:id="name" focusColor="#12fb08" labelFloat="true" promptText="Full Name" unFocusColor="#065103">
             <VBox.margin>
