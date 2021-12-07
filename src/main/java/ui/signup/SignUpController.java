@@ -3,11 +3,14 @@ package ui.signup;
 import java.net.URL;
 import java.text.Normalizer;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.regex.*;
 
 import com.jfoenix.controls.*;
 import javafx.beans.InvalidationListener;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.VBox;
@@ -89,6 +92,13 @@ public class SignUpController implements Serializable, Initializable {
 
     }
 
+    private boolean validBirthday(LocalDate birthday){
+        int age=LocalDate.now().getYear()-birthday.getYear();
+        if(age>=18&&age<=130)
+            return true;
+        return false;
+    }
+
     private boolean validStudentId(String stdid){
         if (stdid.length()==10){
             Pattern digit = Pattern.compile("[0-9]");
@@ -158,17 +168,23 @@ public class SignUpController implements Serializable, Initializable {
         return hasDigit.find() || hasSpecial.find();
     }
 
-    String str = "";
+    boolean valid = true;
     public boolean validSignUp(){
-        str="";
+        valid=true;
         container.getChildren().stream().filter(node -> node.getClass()==Label.class).map(Label->((Label) Label).getText()).forEach(text -> {
-            str+=text;
+            if(text!="") valid=false;
         });
         container.getChildren().stream().filter(node -> node.getClass()==JFXTextField.class).map(JFXTextField->((JFXTextField) JFXTextField).getText()).forEach(text->
         {
-            if (text=="") str="false";
+            if (text=="") valid=false;
         });
-        return str.equals("\n") || str.equals("") ;
+        container.getChildren().stream().filter(node -> node.getClass()==JFXDatePicker.class).map(JFXDatePicker->((JFXDatePicker) JFXDatePicker).getValue()).forEach(date->
+        {
+            if(date==null) valid=false;
+        });
+//
+
+        return valid ;
     }
 
     @FXML
@@ -208,6 +224,7 @@ public class SignUpController implements Serializable, Initializable {
         lblErrorStId.setText("");
         lblErrorMb.setText("");
         lblErrorEmail.setText("");
+        lblErrorBirthday.setText("");
         checkTerms.setSelected(false);
     }
 
@@ -294,6 +311,21 @@ public class SignUpController implements Serializable, Initializable {
                 else lblErrorId.setText("");
             }
         });
+
+        birthday.valueProperty().addListener(new ChangeListener<LocalDate>() {
+            @Override
+            public void changed(ObservableValue<? extends LocalDate> observableValue, LocalDate localDate, LocalDate t1) {
+                LocalDate brthday=  birthday.getValue();
+                if(validBirthday(brthday)){
+                    lblErrorBirthday.setText("");
+                }
+                else {
+                    lblErrorBirthday.setText(Bundle.getString("invalid.birthday"));
+                }
+            }
+        });
+
+
         studentId.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
