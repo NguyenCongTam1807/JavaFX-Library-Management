@@ -143,10 +143,10 @@ public class SignUpController implements Serializable, Initializable {
     public boolean validSignUp(){
         str="";
         container.getChildren().stream().filter(node -> node.getClass()==Label.class).map(Label->((Label) Label).getText()).forEach(text -> str+=text);
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        /*Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         System.out.print(1+str+1);
         alert.setContentText(str);
-        alert.show();
+        alert.show();*/
         return str.equals("\n");
     }
 
@@ -180,6 +180,13 @@ public class SignUpController implements Serializable, Initializable {
         studentId.setText("");
         mobile.setText("");
         email.setText("");
+        lblErrorName.setText("");
+        lblErrorId.setText("");
+        lblErrorPw.setText("");
+        lblErrorRePw.setText("");
+        lblErrorStId.setText("");
+        lblErrorMb.setText("");
+        lblErrorEmail.setText("");
         checkTerms.setSelected(false);
     }
 
