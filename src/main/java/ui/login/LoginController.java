@@ -4,6 +4,10 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
+import javafx.scene.Node;
+import pojo.User;
+import services.UserService;
+import utils.AlertUtils;
 import utils.Bundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,13 +30,32 @@ public class LoginController implements Serializable {
     @FXML private JFXPasswordField txtPw;
     @FXML private JFXButton btnLogin, btnSignUp;
     @FXML
-    public void loginHandler() {
+    public void loginHandler(ActionEvent event) {
+        UserService userService=new UserService();
+        User user;
         String id = txtId.getText().toString();
         String pw = txtPw.getText().toString();
-
-        if (true)
-                ;
+        user=userService.getUser(id,pw,toggle.isSelected());
+        if (user!=null){
+            Parent root;
+            try{
+                root=FXMLLoader.load(getClass().getResource("/fxml/main2.fxml"));
+                Stage stage=(Stage)((Node) event.getSource()).getScene().getWindow();
+                stage.setResizable(false);
+                stage.setScene(new Scene(root,1000, 700));
+                stage.centerOnScreen();
+                stage.show();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            AlertUtils.showLoginFailAlert("alert.loginFail.title","alert.loginFail.content");
+        }
     }
+
+
     @FXML
     public void signUpHandler(ActionEvent event) {
         Parent root;

@@ -182,8 +182,6 @@ public class SignUpController implements Serializable, Initializable {
         {
             if(date==null) valid=false;
         });
-//
-
         return valid ;
     }
 

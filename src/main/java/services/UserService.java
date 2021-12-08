@@ -3,10 +3,7 @@ package services;
 import configs.JdbcUtils;
 import pojo.User;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class UserService {
@@ -31,4 +28,27 @@ public class UserService {
         }
         return true;
     }
+
+    public User getUser(String account,String password,boolean isLibrarian ){
+        try(Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm=conn.prepareStatement("SELECT * from user where account_id=?");
+            stm.setString(1,account);
+            ResultSet rs = stm.executeQuery();
+            User user=null;
+            if(rs.next()) {
+                user = new User(rs.getString("account_id"), rs.getString("password"), rs.getByte("status"), rs.getString("name"), rs.getDate("birthday"), rs.getString("phone_number"), rs.getString("email"), rs.getString("student_id"));
+                if(user.getPassword().equals(password))
+                {
+                    if((user.getStudentId()==null)==isLibrarian )
+                        return user;
+                }
+            }
+                return  null;
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+            return null;
+        }
+
+    }
+
 }
