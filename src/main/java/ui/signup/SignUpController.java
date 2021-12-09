@@ -58,7 +58,7 @@ public class SignUpController implements Serializable, Initializable {
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-    private int checkUsername(String s){
+    public static int checkUsername(String s){
         Pattern p = Pattern.compile("[^A-Za-z0-9]");
         Matcher m = p.matcher(s);
         if (s.indexOf(" ")!=-1){
@@ -72,7 +72,7 @@ public class SignUpController implements Serializable, Initializable {
         }
         return 0;
     }
-    private boolean checkPassword(String password)
+    public static boolean checkPassword(String password)
     {
 
         if(password.length()>=8)
@@ -142,7 +142,7 @@ public class SignUpController implements Serializable, Initializable {
     }
     //   le dang   thanh dat
     public static String styleString(String s){
-        s.trim();
+        s=s.trim();
         while (s.indexOf("  ")!=-1){
             s=removeCharAt(s,s.indexOf("  ")+1,1);
         }
