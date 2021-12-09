@@ -25,6 +25,7 @@ public class UserService {
             conn.commit();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            return false;
         }
         return true;
     }
