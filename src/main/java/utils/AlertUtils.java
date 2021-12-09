@@ -28,4 +28,11 @@ public class AlertUtils {
         alert.setContentText(Bundle.getString(contentResource));
         alert.show();
     }
+    public static  void showSignUpFailAlert(String titleResource,String contentResource){
+        Alert alert=new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(Bundle.getString(titleResource));
+        alert.setHeaderText(null);
+        alert.setContentText(Bundle.getString(contentResource));
+        alert.show();
+    }
 }

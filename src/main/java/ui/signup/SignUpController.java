@@ -192,15 +192,18 @@ public class SignUpController implements Serializable, Initializable {
         //Cái này để test hàm Insert User vào database
         if(validSignUp())
         {
-            /*User user = new User(Id.getText(),txtPw.getText(),1,name.getText(),java.sql.Date.valueOf(birthday.getValue()),
+            User user = new User(Id.getText(),txtPw.getText(),1,name.getText(),java.sql.Date.valueOf(birthday.getValue()),
                     mobile.getText(),email.getText(),studentId.getText());
             UserService userService = new UserService();
-            userService.addUser(user);*/
-            AlertUtils.showConfirmAlert("signup.success.title","signup.success.content");
-            //do sothing
-            Stage stage = (Stage) saveButton.getScene().getWindow();
-            // do what you have to do
-            stage.close();
+            if(userService.addUser(user)) {
+                AlertUtils.showConfirmAlert("signup.success.title", "signup.success.content");
+                //do sothing
+                Stage stage = (Stage) saveButton.getScene().getWindow();
+                // do what you have to do
+                stage.close();
+            }
+            else
+                AlertUtils.showSignUpFailAlert("alert.signUpFail.title","alert.signUpFail.content");
         } else {
             AlertUtils.showErrorAlert("signup.fail.title","signup.fail.content");
         }
