@@ -52,6 +52,7 @@ public class LoginLoader extends Application implements Serializable {
     @FXML private JFXPasswordField txtPw;
     @FXML private JFXButton btnLogin, btnSignUp;
     @FXML
+
     public void loginHandler(ActionEvent event) {
         UserService userService=new UserService();
         User user;
@@ -71,6 +72,7 @@ public class LoginLoader extends Application implements Serializable {
             catch (IOException e) {
                 e.printStackTrace();
             }
+
         }
         else {
             AlertUtils.showLoginFailAlert("alert.loginFail.title","alert.loginFail.content");
@@ -80,6 +82,7 @@ public class LoginLoader extends Application implements Serializable {
 
     @FXML
     public void signUpHandler(ActionEvent event) {
+
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("/fxml/signup.fxml"));
@@ -105,11 +108,18 @@ public class LoginLoader extends Application implements Serializable {
             setStyle("login.toggle.librarian",toggle.getToggleLineColor());
         else
             setStyle("login.toggle.student",toggle.getUnToggleColor());
+        toggle.setDisableVisualFocus(false);
     }
     public void setStyle(String textBundle, Paint color) {
         toggle.setText(Bundle.getString(textBundle));
         toggle.setTextFill(color);
     }
-
+    @FXML
+    private void eventHandler(KeyEvent event) {
+            if (event.getCode() == KeyCode.ENTER) {
+                btnLogin.fire();
+                event.consume();
+        }
+    }
 
 }
