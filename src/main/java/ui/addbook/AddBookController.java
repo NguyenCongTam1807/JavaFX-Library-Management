@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import pojo.Book;
+import services.BookService;
 import utils.Bundle;
 import utils.AlertUtils;
 
@@ -211,8 +213,9 @@ public class AddBookController implements Initializable {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (validInput()){
-                    //do something
-                    if (true){
+                    Book book=new Book(Integer.parseInt(txtIdBook.getText()),txtTitle.getText(),Integer.parseInt(txtAmount.getText()),txtAuthor.getText(),Integer.parseInt(txtPublishedYear.getText()),txtGenre.getText(),txtPublisher.getText(),txtSummary.getText());
+                    BookService bookService=new BookService();
+                    if (bookService.addBook(book)){
                         AlertUtils.showConfirmAlert("addBook.success.title","addBook.success.content");
                     }
                 }
@@ -232,5 +235,48 @@ public class AddBookController implements Initializable {
                 });
             }
         });
+        txtIdBook.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                if(!t1){
+                    if(txtIdBook.getText()!="") {
+                        Book book;
+                        BookService bookService = new BookService();
+                        book=bookService.checkBookId(Integer.parseInt(txtIdBook.getText()));
+                        if(book!=null) {
+                            txtTitle.setText(book.getTitle());
+                            txtAuthor.setText(book.getAuthor());
+                            txtGenre.setText(book.getGenre());
+                            txtSummary.setText(book.getSummary());
+                            txtPublisher.setText(book.getPublisher());
+                            txtPublishedYear.setText(String.valueOf(book.getPublishedYear()));
+                            disableAllField(true);
+                        }
+                        else {
+                            vbox.getChildren().stream().filter(node -> node.getClass()==JFXTextField.class).map(JFXTextField->((JFXTextField) JFXTextField)).forEach($field->{
+                                if (!$field.getId().equals("txtIdBook"))
+                                    $field.setText("");
+                            });
+                            disableAllField(false);
+                        }
+                    }
+                    else {
+                        vbox.getChildren().stream().filter(node -> node.getClass()==JFXTextField.class).map(JFXTextField->((JFXTextField) JFXTextField)).forEach($field->{
+                            if (!$field.getId().equals("txtIdBook"))
+                                $field.setText("");
+                        });
+                        disableAllField(false);
+                    }
+                }
+            }
+        });
     }
+
+    public void disableAllField(boolean disable){
+        vbox.getChildren().stream().filter(node -> node.getClass()==JFXTextField.class).map(JFXTextField->((JFXTextField) JFXTextField)).forEach(field->{
+            if(!field.getId().equals("txtIdBook")&&!field.getId().equals("txtAmount"))
+                field.setDisable(disable);
+        });
+    }
+
 }

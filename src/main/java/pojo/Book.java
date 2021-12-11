@@ -5,6 +5,18 @@ import java.util.UUID;
 public class Book {
     private int id,amount,publishedYear;
     private String title,author,genre,publisher,summary;
+
+    public Book(int id,String title,int amount,String author,int publishedYear,String genre,String publisher,String summary){
+        this.id=id;
+        this.title=title;
+        this.amount=amount;
+        this.author=author;
+        this.publishedYear=publishedYear;
+        this.genre=genre;
+        this.publisher=publisher;
+        this.summary=summary;
+    }
+
     public int getId() {
         return id;
     }
