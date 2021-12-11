@@ -161,12 +161,12 @@
         </JFXCheckBox>
         <HBox alignment="CENTER" prefHeight="47.0" prefWidth="404.0" spacing="30.0">
             <children>
-                <JFXButton fx:id="saveButton" disable="true" onAction="#signup" prefHeight="66.0" prefWidth="100.0" text="Register">
+                <JFXButton fx:id="saveButton" disable="true" prefHeight="66.0" prefWidth="100.0" text="Register">
                    <effect>
                       <Glow level="0.9" />
                    </effect>
                 </JFXButton><!--onAction="#addMember"-->
-                <JFXButton fx:id="cancelButton" layoutX="10.0" layoutY="10.0" onAction="#clearAllFields" prefHeight="66.0" prefWidth="100.0" text="Clear">
+                <JFXButton fx:id="cancelButton" layoutX="10.0" layoutY="10.0" prefHeight="66.0" prefWidth="100.0" text="Clear">
                    <effect>
                       <Glow level="0.9" />
                    </effect>

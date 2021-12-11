@@ -3,17 +3,17 @@ package ui.addbook;
 import javafx.beans.value.ChangeListener;
 import java.time.LocalDate;
 import javafx.beans.value.ObservableValue;
-import ui.signup.SignUpController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import configs.JdbcUtils;
-import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import utils.Bundle;
+import utils.AlertUtils;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 
 public class AddBookController implements Initializable {
     @FXML private VBox vbox;
-    @FXML private JFXButton btnAddBook, btnCancel;
+    @FXML private JFXButton btnAddBook, btnClear;
     @FXML private JFXTextField txtAmount,txtTitle,txtSummary,txtGenre,txtPublisher, txtPublishedYear, txtAuthor,txtIdBook;
     @FXML private Label lblErrorAmount,lblErrorSummary,lblErrorIdBook, lblErrorPublisher,lblErrorGenre,lblErrorPublishedYear,lblErrorAuthor, lblErrorTitle;
 
@@ -51,12 +51,24 @@ public class AddBookController implements Initializable {
         Matcher hasDigit = digit.matcher(s);
         return hasDigit.find();
     }
-
-    @FXML
-    private void cancel() {
-        Stage stage = (Stage) vbox.getScene().getWindow();
-        stage.close();
+    boolean valid;
+    private boolean validInput(){
+        valid=true;
+        vbox.getChildren().stream().filter(node -> node.getClass()==Label.class).map(Label ->((Label) Label).getText()).forEach(text ->{
+            if (text!="")
+                valid=false;
+        });
+        vbox.getChildren().stream().filter(node -> node.getClass()==JFXTextField.class).map(JFXTextField ->((JFXTextField) JFXTextField).getText()).forEach(text ->{
+           if (text=="")
+               valid=false;
+        });
+        return valid;
     }
+
+/*    @FXML*/
+    /*private void btnClear() {
+
+    }*/
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -193,6 +205,29 @@ public class AddBookController implements Initializable {
                     else lblErrorAmount.setText("");
                 }
                 else lblErrorAmount.setText(Bundle.getString("invalid.amount.null"));
+            }
+        });
+        btnAddBook.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (validInput()){
+                    //do something
+                    if (true){
+                        AlertUtils.showConfirmAlert("addBook.success.title","addBook.success.content");
+                    }
+                }
+                else {
+                    AlertUtils.showSignUpFailAlert("alert.addBookFail.title","alert.addBookFail.content");
+                }
+            }
+        });
+        btnClear.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+               /* Label[] label=new Label[10];
+                label.
+                vbox.getChildren().stream().filter(node -> node.getClass()==Label.class).map(Label ->((Label) Label)).forEach(lab->label.Controls.add(lab));
+                AlertUtils.showConfirmAlert("signup.success.title", "signup.success.content");*/
             }
         });
     }

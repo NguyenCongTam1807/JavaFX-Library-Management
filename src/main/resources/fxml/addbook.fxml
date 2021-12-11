@@ -2,11 +2,11 @@
 
 <?import com.jfoenix.controls.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Label?>
-<VBox fx:id="vbox" spacing="10.0" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.addbook.AddBookController">
+<VBox fx:id="vbox" spacing="10.0" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.addbook.AddBookController">
     <children>
         <JFXTextField fx:id="txtTitle" focusColor="#12fb08" labelFloat="true" promptText="Book Title" unFocusColor="#065103">
             <VBox.margin>
@@ -115,7 +115,7 @@
         <HBox alignment="CENTER" prefHeight="47.0" prefWidth="404.0" spacing="30.0">
             <children>
                 <JFXButton fx:id="btnAddBook" prefHeight="66.0" prefWidth="100.0" text="Save" /><!--onAction="#addBook"-->
-                <JFXButton fx:id="btnCancel" layoutX="10.0" layoutY="10.0" onAction="#cancel" prefHeight="66.0" prefWidth="100.0" text="Cancel" />
+                <JFXButton fx:id="btnClear" layoutX="10.0" layoutY="10.0" prefHeight="66.0" prefWidth="100.0" text="Clear" />
             </children>
             <VBox.margin>
                 <Insets top="10.0" />

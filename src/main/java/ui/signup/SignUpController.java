@@ -10,9 +10,11 @@ import java.util.regex.*;
 
 import com.jfoenix.controls.*;
 import javafx.beans.InvalidationListener;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Labeled;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import pojo.User;
 import services.UserService;
@@ -34,7 +36,7 @@ import static javafx.scene.input.KeyCode.V;
 
 public class SignUpController implements Serializable, Initializable {
 
-    @FXML private JFXButton saveButton;
+    @FXML private JFXButton saveButton,cancelButton;
     @FXML private Label lblErrorName;
     @FXML private Label lblErrorId;
     @FXML private Label lblErrorPw;
@@ -54,7 +56,6 @@ public class SignUpController implements Serializable, Initializable {
     @FXML private VBox container;
     @FXML private Label lblErrorBirthday;
 
-    private static boolean validSignUp=false;
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
@@ -185,7 +186,6 @@ public class SignUpController implements Serializable, Initializable {
         return valid ;
     }
 
-    @FXML
     public void signup() {
         //Dang suy nghi phuong phap toi uu de check
         //if (validSignUp)
@@ -197,7 +197,7 @@ public class SignUpController implements Serializable, Initializable {
             UserService userService = new UserService();
             if(userService.addUser(user)) {
                 AlertUtils.showConfirmAlert("signup.success.title", "signup.success.content");
-                //do sothing
+                //do something
                 Stage stage = (Stage) saveButton.getScene().getWindow();
                 // do what you have to do
                 stage.close();
@@ -370,6 +370,18 @@ public class SignUpController implements Serializable, Initializable {
                     lblErrorEmail.setText(Bundle.getString("invalid.input.null"));
                 }
                 else lblErrorEmail.setText("");
+            }
+        });
+        saveButton.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                signup();
+            }
+        });
+        cancelButton.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                clearAllFields();
             }
         });
     }
