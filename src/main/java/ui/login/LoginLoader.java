@@ -29,7 +29,7 @@ public class LoginLoader extends Application implements Serializable {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/signup.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/addbook.fxml"));
         primaryStage.setTitle("Library Manager");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);

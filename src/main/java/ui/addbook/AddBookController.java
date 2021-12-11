@@ -224,10 +224,12 @@ public class AddBookController implements Initializable {
         btnClear.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-               /* Label[] label=new Label[10];
-                label.
-                vbox.getChildren().stream().filter(node -> node.getClass()==Label.class).map(Label ->((Label) Label)).forEach(lab->label.Controls.add(lab));
-                AlertUtils.showConfirmAlert("signup.success.title", "signup.success.content");*/
+                vbox.getChildren().stream().filter(node -> node.getClass()==JFXTextField.class).map(JFXTextField->((JFXTextField) JFXTextField)).forEach($field->{
+                    $field.setText("");
+                });
+                vbox.getChildren().stream().filter(node -> node.getClass()==Label.class).map(Label ->((Label) Label)).forEach($text->{
+                    $text.setText("");
+                });
             }
         });
     }

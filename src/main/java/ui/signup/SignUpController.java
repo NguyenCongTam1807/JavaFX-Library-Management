@@ -210,22 +210,16 @@ public class SignUpController implements Serializable, Initializable {
     }
 
     public void clearAllFields() {
-        name.setText("");
-        Id.setText("");
-        txtPw.setText("");
-        repassword.setText("");
+        container.getChildren().stream().filter(node -> node.getClass()==JFXTextField.class).map(JFXTextField->((JFXTextField) JFXTextField)).forEach($field->{
+            $field.setText("");
+        });
+        container.getChildren().stream().filter(node -> node.getClass()==JFXPasswordField.class).map(JFXPasswordField ->((JFXPasswordField) JFXPasswordField)).forEach($pass->{
+            $pass.setText("");
+        });
+        container.getChildren().stream().filter(node -> node.getClass()==Label.class).map(Label ->((Label) Label)).forEach($text->{
+            $text.setText("");
+        });
         birthday.setValue(null);
-        studentId.setText("");
-        mobile.setText("");
-        email.setText("");
-        lblErrorName.setText("");
-        lblErrorId.setText("");
-        lblErrorPw.setText("");
-        lblErrorRePw.setText("");
-        lblErrorStId.setText("");
-        lblErrorMb.setText("");
-        lblErrorEmail.setText("");
-        lblErrorBirthday.setText("");
         checkTerms.setSelected(false);
     }
 
@@ -317,11 +311,13 @@ public class SignUpController implements Serializable, Initializable {
             @Override
             public void changed(ObservableValue<? extends LocalDate> observableValue, LocalDate localDate, LocalDate t1) {
                 LocalDate brthday=  birthday.getValue();
-                if(validBirthday(brthday)){
-                    lblErrorBirthday.setText("");
-                }
-                else {
-                    lblErrorBirthday.setText(Bundle.getString("invalid.birthday"));
+                if (brthday!=null)
+                {
+                    if (validBirthday(brthday)) {
+                        lblErrorBirthday.setText("");
+                    } else {
+                        lblErrorBirthday.setText(Bundle.getString("invalid.birthday"));
+                    }
                 }
             }
         });

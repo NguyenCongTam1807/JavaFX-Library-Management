@@ -5,10 +5,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox fx:id="container" focusTraversable="true" prefHeight="153.0" prefWidth="404.0" spacing="10.0" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.signup.SignUpController">
     <children>
-        <JFXTextField styleClass="label-form" fx:id="name" focusColor="#12fb08" labelFloat="true" promptText="Full Name" unFocusColor="#065103">
+        <JFXTextField fx:id="name" focusColor="#12fb08" labelFloat="true" promptText="Full Name" styleClass="label-form" unFocusColor="#065103">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="20.0" />
             </VBox.margin>
@@ -24,7 +25,7 @@
                 <Glow level="0.9" />
             </effect>
         </Label>
-        <JFXTextField styleClass="label-form" fx:id="Id" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" promptText="Username" unFocusColor="#065103">
+        <JFXTextField fx:id="Id" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" promptText="Username" styleClass="label-form" unFocusColor="#065103">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
@@ -40,7 +41,7 @@
                 <Glow level="0.9" />
             </effect>
         </Label>
-        <JFXPasswordField styleClass="label-form" fx:id="txtPw" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" promptText="Password" unFocusColor="#065103">
+        <JFXPasswordField fx:id="txtPw" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" promptText="Password" styleClass="label-form" unFocusColor="#065103">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
@@ -56,7 +57,7 @@
                 <Glow level="0.9" />
             </effect>
         </Label>
-        <JFXPasswordField styleClass="label-form" fx:id="repassword" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" promptText="Re-Enter Password" unFocusColor="#065103">
+        <JFXPasswordField fx:id="repassword" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" promptText="Re-Enter Password" styleClass="label-form" unFocusColor="#065103">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
@@ -72,7 +73,7 @@
                 <Glow level="0.9" />
             </effect>
         </Label>
-        <JFXDatePicker styleClass="label-form" fx:id="birthday" defaultColor="#12fb08" editable="false" layoutX="20" layoutY="  120.0" prefHeight="28.0" prefWidth="403.0" promptText="Select your birthday">
+        <JFXDatePicker fx:id="birthday" defaultColor="#12fb08" editable="false" layoutX="20" layoutY="  120.0" prefHeight="28.0" prefWidth="403.0" promptText="Select your birthday" styleClass="label-form">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" />
             </VBox.margin>
@@ -82,13 +83,13 @@
         </JFXDatePicker>
         <Label fx:id="lblErrorBirthday" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
             <VBox.margin>
-                <Insets left="10.0" right="10.0" top="-2.0" />
+                <Insets left="10.0" right="10.0" top="5.0" />
             </VBox.margin>
             <effect>
                 <Glow level="0.9" />
             </effect>
         </Label>
-        <JFXTextField styleClass="label-form" fx:id="studentId" focusColor="#12fb08" labelFloat="true" layoutX="20" layoutY="30.0" promptText="Enter student id" unFocusColor="#065103">
+        <JFXTextField fx:id="studentId" focusColor="#12fb08" labelFloat="true" layoutX="20" layoutY="30.0" promptText="Enter student id" styleClass="label-form" unFocusColor="#065103">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-5.0" />
             </VBox.margin>
@@ -106,13 +107,16 @@
         </Label>
         <HBox layoutX="20.0" layoutY="30.0" prefHeight="100.0" prefWidth="200.0">
             <children>
-                <JFXTextField editable="false" focusColor="#12fb08" focusTraversable="false" labelFloat="true" layoutX="20" layoutY="30" prefHeight="30.0" text="+84" unFocusColor="#065103">
+                <Label focusTraversable="false" layoutX="20" layoutY="30" prefHeight="30.0" prefWidth="88.0" text="+84" textAlignment="CENTER" textFill="#f54040">
                <effect>
                   <Glow level="0.9" />
                </effect>
                <HBox.margin>
                   <Insets top="5.0" />
-               </HBox.margin></JFXTextField>
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Label>
                 <JFXTextField fx:id="mobile" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" prefHeight="30.0" prefWidth="365.0" promptText="Mobile" unFocusColor="#065103">
                <effect>
                   <Glow level="0.9" />
