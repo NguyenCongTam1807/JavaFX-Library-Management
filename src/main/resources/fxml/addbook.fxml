@@ -8,12 +8,12 @@
 
 <VBox fx:id="vbox" spacing="10.0" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.addbook.AddBookController">
     <children>
-        <JFXTextField fx:id="txtTitle" focusColor="#12fb08" labelFloat="true" promptText="Book Title" unFocusColor="#065103">
+        <JFXTextField fx:id="txtIdBook" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" promptText="Book ID" unFocusColor="#065103">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="20.0" />
             </VBox.margin>
         </JFXTextField>
-        <Label fx:id="lblErrorTitle" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
+        <Label fx:id="lblErrorIdBook" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-2.0" />
             </VBox.margin>
@@ -21,12 +21,12 @@
                 <Glow level="0.9" />
             </effect>
         </Label>
-        <JFXTextField fx:id="txtIdBook" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" promptText="Book ID" unFocusColor="#065103">
+        <JFXTextField fx:id="txtTitle" focusColor="#12fb08" labelFloat="true" promptText="Book Title" unFocusColor="#065103">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="0.0" />
             </VBox.margin>
         </JFXTextField>
-        <Label fx:id="lblErrorIdBook" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
+        <Label fx:id="lblErrorTitle" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-2.0" />
             </VBox.margin>

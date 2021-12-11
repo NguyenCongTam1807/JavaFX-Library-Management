@@ -48,10 +48,9 @@ public class AddBookController implements Initializable {
         return s;
     }
 
-    public static boolean validMount(String s){
-        Pattern digit = Pattern.compile("[0-9]");
-        Matcher hasDigit = digit.matcher(s);
-        return hasDigit.find();
+    public boolean validMount(String s){
+        s=ui.signup.SignUpController.unAccent(s);
+        return !s.matches("-?\\d+(\\.\\d+)?");
     }
     boolean valid;
     private boolean validInput(){
@@ -65,6 +64,15 @@ public class AddBookController implements Initializable {
                valid=false;
         });
         return valid;
+    }
+    public void clearField(){
+        vbox.getChildren().stream().filter(node -> node.getClass()==JFXTextField.class).map(JFXTextField->((JFXTextField) JFXTextField)).forEach($field->{
+            $field.setText("");
+        });
+        vbox.getChildren().stream().filter(node -> node.getClass()==Label.class).map(Label ->((Label) Label)).forEach($text->{
+            $text.setText("");
+        });
+        disableAllField(false);
     }
 
 /*    @FXML*/
@@ -117,19 +125,11 @@ public class AddBookController implements Initializable {
         txtIdBook.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                String txt= txtIdBook.getText();
-                int check=ui.signup.SignUpController.checkUsername(txt);
-                if (check==1){
-                    lblErrorIdBook.setText(Bundle.getString("invalid.accountId.space"));
-                }
-                else if (check==2){
-                    lblErrorIdBook.setText(Bundle.getString("invalid.accountId.character"));
-                }
-                else if (check==3){
-                    lblErrorIdBook.setText(Bundle.getString("invalid.accountId.long"));
+                if (validMount(txtIdBook.getText()) && txtIdBook.getText()!=""){
+                    lblErrorIdBook.setText(Bundle.getString("invalid.idbook.number"));
                 }
                 else
-                if (txt== ""){
+                if (txtIdBook.getText()== ""){
                     lblErrorIdBook.setText(Bundle.getString("invalid.input.null"));
                 }
                 else lblErrorIdBook.setText("");
@@ -175,9 +175,8 @@ public class AddBookController implements Initializable {
                 if (!t1){
                     if (txtSummary.getText()!=""){
                         txtSummary.setText(clearSpace(txtSummary.getText()));
-                        lblErrorSummary.setText("");
+                        //lblErrorSummary.setText("");
                     }
-                    else lblErrorSummary.setText(Bundle.getString("invalid.input.null"));
                 }
             }
         });
@@ -199,7 +198,8 @@ public class AddBookController implements Initializable {
         txtAmount.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                if (validMount(txtAmount.getText())){
+                boolean t=validMount(txtAmount.getText());
+                if (!t && txtAmount.getText()!=""){
                     int i=Integer.parseInt(txtAmount.getText());
                     if (i<1){
                         lblErrorAmount.setText(Bundle.getString("invalid.amount.outRange"));
@@ -227,19 +227,15 @@ public class AddBookController implements Initializable {
         btnClear.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                vbox.getChildren().stream().filter(node -> node.getClass()==JFXTextField.class).map(JFXTextField->((JFXTextField) JFXTextField)).forEach($field->{
-                    $field.setText("");
-                });
-                vbox.getChildren().stream().filter(node -> node.getClass()==Label.class).map(Label ->((Label) Label)).forEach($text->{
-                    $text.setText("");
-                });
+                clearField();
             }
         });
         txtIdBook.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
                 if(!t1){
-                    if(txtIdBook.getText()!="") {
+                    String t=txtIdBook.getText();
+                    if(t!="" && !validMount(t)) {
                         Book book;
                         BookService bookService = new BookService();
                         book=bookService.checkBookId(Integer.parseInt(txtIdBook.getText()));
@@ -253,19 +249,22 @@ public class AddBookController implements Initializable {
                             disableAllField(true);
                         }
                         else {
+                           /* vbox.getChildren().stream().filter(node -> node.getClass()==Label.class).map(Label->((Label) Label)).forEach($label->{
+                                if (!$label.getId().equals("lblErrorIdBook"))
+                                    $label.setText("");
+                            });
                             vbox.getChildren().stream().filter(node -> node.getClass()==JFXTextField.class).map(JFXTextField->((JFXTextField) JFXTextField)).forEach($field->{
                                 if (!$field.getId().equals("txtIdBook"))
                                     $field.setText("");
                             });
-                            disableAllField(false);
+                            disableAllField(false);*/
+                            clearField();
+                            txtIdBook.setText(t);
                         }
                     }
                     else {
-                        vbox.getChildren().stream().filter(node -> node.getClass()==JFXTextField.class).map(JFXTextField->((JFXTextField) JFXTextField)).forEach($field->{
-                            if (!$field.getId().equals("txtIdBook"))
-                                $field.setText("");
-                        });
-                        disableAllField(false);
+                        clearField();
+                        txtIdBook.setText(t);
                     }
                 }
             }

@@ -60,6 +60,7 @@ public class SignUpController implements Serializable, Initializable {
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     public static int checkUsername(String s){
+        s=unAccent(s);
         Pattern p = Pattern.compile("[^A-Za-z0-9]");
         Matcher m = p.matcher(s);
         if (s.indexOf(" ")!=-1){
@@ -75,7 +76,6 @@ public class SignUpController implements Serializable, Initializable {
     }
     public static boolean checkPassword(String password)
     {
-
         if(password.length()>=8)
         {
             Pattern letter = Pattern.compile("[a-zA-z]");
