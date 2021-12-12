@@ -35,13 +35,12 @@ public class UserService {
             PreparedStatement stm=conn.prepareStatement("SELECT * from user where account_id=?");
             stm.setString(1,account);
             ResultSet rs = stm.executeQuery();
-            User user=null;
+            User user;
             if(rs.next()) {
                 user = new User(rs.getString("account_id"), rs.getString("password"), rs.getByte("status"), rs.getString("name"), rs.getDate("birthday"), rs.getString("phone_number"), rs.getString("email"), rs.getString("student_id"));
                 if(user.getPassword().equals(password))
                 {
-                    //if(user.getStudentId().isEmpty()==isLibrarian )
-                    if((user.getStudentId()==null)==isLibrarian )
+                    if((user.getStudentId()==null||user.getStudentId().isEmpty())==isLibrarian )
                         return user;
                 }
             }

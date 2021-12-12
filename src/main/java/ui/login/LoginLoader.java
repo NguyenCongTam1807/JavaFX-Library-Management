@@ -143,7 +143,7 @@ public class LoginLoader extends Application implements Serializable, Initializa
     public void initialize(URL url, ResourceBundle resourceBundle) {
         final Animation animation = new Transition() {
             {
-                setCycleDuration(Duration.millis(1000));
+                setCycleDuration(Duration.millis(2000));
                 setInterpolator(Interpolator.LINEAR);
                 setCycleCount(Animation.INDEFINITE);
             }
@@ -157,18 +157,5 @@ public class LoginLoader extends Application implements Serializable, Initializa
             }
         };
         animation.play();
-        /*lblCredit.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-
-                lblCredit.setTextFill(new LinearGradient(-0.3,0,0.7,1,true, CycleMethod.REPEAT,Arrays.asList(new Stop(0, Color.RED), new Stop((double)1/7, Color.ORANGE),
-                        new Stop((double)2/7, Color.YELLOW), new Stop((double)3/7, Color.GREEN), new Stop((double)4/7, Color.BLUE),
-                        new Stop((double)5/7, Color.INDIGO), new Stop((double)6/7, Color.VIOLET), new Stop(1, Color.RED))));
-            }
-        });
-        List<Stop> stops = Arrays.asList(new Stop(0, Color.RED), new Stop((double)1/7, Color.ORANGE),
-                new Stop((double)2/7, Color.YELLOW), new Stop((double)3/7, Color.GREEN), new Stop((double)4/7, Color.BLUE),
-                new Stop((double)5/7, Color.INDIGO), new Stop((double)6/7, Color.VIOLET), new Stop(1, Color.RED));
-        lblCredit.setTextFill(new LinearGradient(0,0,1,1,true, CycleMethod.REFLECT,stops));*/
     }
 }
