@@ -3,15 +3,7 @@ package ui.login;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
-import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.*;
 import javafx.util.Duration;
 import utils.AlertUtils;
@@ -35,7 +27,6 @@ import javafx.stage.Modality;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -55,7 +46,6 @@ public class LoginLoader extends Application implements Serializable, Initializa
         primaryStage.setTitle("Library Manager");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
-        //primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
 
         primaryStage.setOnCloseRequest((e) -> {
@@ -78,7 +68,7 @@ public class LoginLoader extends Application implements Serializable, Initializa
         if (user!=null){
             Parent root;
             try{
-                root=FXMLLoader.load(getClass().getResource("/fxml/main2.fxml"));
+                root=FXMLLoader.load(getClass().getResource("/fxml/main_librarian.fxml"));
                 Stage stage=(Stage)((Node) event.getSource()).getScene().getWindow();
                 stage.setResizable(false);
                 stage.setScene(new Scene(root,1000, 700));
@@ -131,13 +121,6 @@ public class LoginLoader extends Application implements Serializable, Initializa
         toggle.setText(Bundle.getString(textBundle));
         toggle.setTextFill(color);
     }
-    @FXML
-    private void eventHandler(KeyEvent event) {
-            if (event.getCode() == KeyCode.ENTER) {
-                btnLogin.fire();
-                event.consume();
-        }
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -153,7 +136,7 @@ public class LoginLoader extends Application implements Serializable, Initializa
                 List<Stop> stops = Arrays.asList(new Stop(0, Color.RED), new Stop((double)1/7, Color.ORANGE),
                         new Stop((double)2/7, Color.YELLOW), new Stop((double)3/7, Color.GREEN), new Stop((double)4/7, Color.BLUE),
                         new Stop((double)5/7, Color.INDIGO), new Stop((double)6/7, Color.VIOLET), new Stop(1, Color.RED));
-                lblCredit.setTextFill(new LinearGradient(-frac,0,1-frac,1,true, CycleMethod.REPEAT,stops));
+                lblCredit.setTextFill(new LinearGradient(frac-1,0,frac,1,true, CycleMethod.REPEAT,stops));
             }
         };
         animation.play();

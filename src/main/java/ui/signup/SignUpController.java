@@ -2,18 +2,12 @@ package ui.signup;
 
 import java.net.URL;
 import java.text.Normalizer;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.regex.*;
 
 import com.jfoenix.controls.*;
-import javafx.beans.InvalidationListener;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Labeled;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import pojo.User;
@@ -29,8 +23,6 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.Serializable;
-
-import static javafx.scene.input.KeyCode.V;
 //import static jdk.internal.logger.DefaultLoggerFinder.SharedLoggers.system;
 
 

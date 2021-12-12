@@ -1,8 +1,10 @@
 package pojo;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
 import java.sql.Date;
 
-public class User {
+public class User extends RecursiveTreeObject<User> {
     private int id,status;
     private String accountId,password,name,email,studentId,phoneNumber;
     private Date birthday;

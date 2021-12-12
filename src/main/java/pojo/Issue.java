@@ -1,10 +1,21 @@
 package pojo;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
 import java.util.Date;
 
-public class BookIssue {
+public class Issue extends RecursiveTreeObject<Issue> {
     private int id,userId;
     private Date date,returnDueDate;
+
+    public Issue(){};
+
+    public Issue(int id, int userId, Date date, Date returnDueDate){
+        this.id = id;
+        this.userId = userId;
+        this.date = date;
+        this.returnDueDate = returnDueDate;
+    }
 
     public int getId() {
         return id;

@@ -4,7 +4,6 @@ import configs.JdbcUtils;
 import pojo.User;
 
 import java.sql.*;
-import java.util.List;
 
 public class UserService {
     public boolean addUser(User user) {
@@ -30,7 +29,7 @@ public class UserService {
         return true;
     }
 
-    public User getUser(String account,String password,boolean isLibrarian ){
+    public User getUser(String account, String password, boolean isLibrarian ){
         try(Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm=conn.prepareStatement("SELECT * from user where account_id=?");
             stm.setString(1,account);

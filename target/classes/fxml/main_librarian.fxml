@@ -1,24 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
 <StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="custom-pane" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.main.MainController">
     <children>
-        <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+        <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                <JFXTabPane fx:id="mainTabPane" prefHeight="50.0" prefWidth="840.0" tabDragPolicy="REORDER" tabMinHeight="50" tabMinWidth="280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                    <tabs>
                        <Tab fx:id="tabBookIssue" closable="false" styleClass="tab-main" text="BOOK ISSUE">
+                           <VBox>
+                               <HBox alignment="CENTER_LEFT" prefHeight="60.0">
+                                   <FontIcon iconLiteral="bx-search-alt-2" iconSize="25" rotate="80.0">
+                                       <HBox.margin>
+                                           <Insets left="5.0" />
+                                       </HBox.margin>
+                                       <effect>
+                                           <Glow level="0.67" />
+                                       </effect>
+                                   </FontIcon>
+                                   <JFXTextField prefWidth="300" promptText="Search">
+                                       <HBox.margin>
+                                           <Insets left="3.0" />
+                                       </HBox.margin>
+                                   </JFXTextField>
 
+                               </HBox>
+                               <JFXTreeTableView fx:id="bookIssueTTV" prefHeight="590">
+
+                               </JFXTreeTableView>
+                           </VBox>
                        </Tab>
                        <Tab fx:id="tabBook" closable="false" styleClass="tab-main" text="BOOK">
+                           <JFXTreeTableView fx:id="bookTTV">
 
+                           </JFXTreeTableView>
                        </Tab>
                        <Tab fx:id="tabUser" closable="false" styleClass="tab-main" text="USER">
+                           <JFXTreeTableView fx:id="userTTV">
 
+                           </JFXTreeTableView>
                        </Tab>
                    </tabs>
                </JFXTabPane>
@@ -39,6 +65,9 @@
                            <JFXButton styleClass="animated-option-button" text="Vietnamese" />
                        </JFXNodesList>
                    </JFXNodesList>
+               <effect>
+                  <DropShadow spread="0.48" />
+               </effect>
                </JFXNodesList>
 
             </children>

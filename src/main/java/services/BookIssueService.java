@@ -1,13 +1,13 @@
 package services;
 
-import pojo.BookIssue;
+import pojo.Issue;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookIssueService {
-    public List<BookIssue> getBookIssues(){
-        List<BookIssue> issues = new ArrayList<>();
+    public List<Issue> getBookIssues(){
+        List<Issue> issues = new ArrayList<>();
         return issues;
     }
 }
