@@ -220,7 +220,7 @@ public class AddBookController implements Initializable {
                     }
                 }
                 else {
-                    AlertUtils.showSignUpFailAlert("alert.addBookFail.title","alert.addBookFail.content");
+                    AlertUtils.showErrorAlert("alert.addBookFail.title","alert.addBookFail.content");
                 }
             }
         });

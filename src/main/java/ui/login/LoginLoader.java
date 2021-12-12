@@ -1,7 +1,19 @@
 package ui.login;
 
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
+import javafx.animation.Transition;
+import javafx.event.EventHandler;
+import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.*;
+import javafx.util.Duration;
 import utils.AlertUtils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,17 +31,27 @@ import utils.Bundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
 
 
-public class LoginLoader extends Application implements Serializable {
+public class LoginLoader extends Application implements Serializable, Initializable {
+
+    @FXML private JFXToggleButton toggle;
+    @FXML private Label lblError, lblCredit;
+    @FXML private JFXTextField txtId;
+    @FXML private JFXPasswordField txtPw;
+    @FXML private JFXButton btnLogin, btnSignUp;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/addbook.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
         primaryStage.setTitle("Library Manager");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
@@ -40,24 +62,18 @@ public class LoginLoader extends Application implements Serializable {
             if (!AlertUtils.showConfirmAlert("alert.close.title", "alert.close.content"))
                 e.consume();
         });
+
     }
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    @FXML private JFXToggleButton toggle;
-    @FXML private Label lblError;
-    @FXML private JFXTextField txtId;
-    @FXML private JFXPasswordField txtPw;
-    @FXML private JFXButton btnLogin, btnSignUp;
-    @FXML
-
     public void loginHandler(ActionEvent event) {
         UserService userService=new UserService();
         User user;
-        String id = txtId.getText().toString();
-        String pw = txtPw.getText().toString();
+        String id = txtId.getText();
+        String pw = txtPw.getText();
         user=userService.getUser(id,pw,toggle.isSelected());
         if (user!=null){
             Parent root;
@@ -75,7 +91,8 @@ public class LoginLoader extends Application implements Serializable {
 
         }
         else {
-            AlertUtils.showLoginFailAlert("alert.loginFail.title","alert.loginFail.content");
+            lblError.setText(Bundle.getString("login.error"));
+            //AlertUtils.showErrorAlert("alert.loginFail.title","alert.loginFail.content");
         }
     }
 
@@ -122,4 +139,36 @@ public class LoginLoader extends Application implements Serializable {
         }
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        final Animation animation = new Transition() {
+            {
+                setCycleDuration(Duration.millis(1000));
+                setInterpolator(Interpolator.LINEAR);
+                setCycleCount(Animation.INDEFINITE);
+            }
+
+            @Override
+            protected void interpolate(double frac) {
+                List<Stop> stops = Arrays.asList(new Stop(0, Color.RED), new Stop((double)1/7, Color.ORANGE),
+                        new Stop((double)2/7, Color.YELLOW), new Stop((double)3/7, Color.GREEN), new Stop((double)4/7, Color.BLUE),
+                        new Stop((double)5/7, Color.INDIGO), new Stop((double)6/7, Color.VIOLET), new Stop(1, Color.RED));
+                lblCredit.setTextFill(new LinearGradient(-frac,0,1-frac,1,true, CycleMethod.REPEAT,stops));
+            }
+        };
+        animation.play();
+        /*lblCredit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+                lblCredit.setTextFill(new LinearGradient(-0.3,0,0.7,1,true, CycleMethod.REPEAT,Arrays.asList(new Stop(0, Color.RED), new Stop((double)1/7, Color.ORANGE),
+                        new Stop((double)2/7, Color.YELLOW), new Stop((double)3/7, Color.GREEN), new Stop((double)4/7, Color.BLUE),
+                        new Stop((double)5/7, Color.INDIGO), new Stop((double)6/7, Color.VIOLET), new Stop(1, Color.RED))));
+            }
+        });
+        List<Stop> stops = Arrays.asList(new Stop(0, Color.RED), new Stop((double)1/7, Color.ORANGE),
+                new Stop((double)2/7, Color.YELLOW), new Stop((double)3/7, Color.GREEN), new Stop((double)4/7, Color.BLUE),
+                new Stop((double)5/7, Color.INDIGO), new Stop((double)6/7, Color.VIOLET), new Stop(1, Color.RED));
+        lblCredit.setTextFill(new LinearGradient(0,0,1,1,true, CycleMethod.REFLECT,stops));*/
+    }
 }

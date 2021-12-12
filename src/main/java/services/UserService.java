@@ -40,7 +40,8 @@ public class UserService {
                 user = new User(rs.getString("account_id"), rs.getString("password"), rs.getByte("status"), rs.getString("name"), rs.getDate("birthday"), rs.getString("phone_number"), rs.getString("email"), rs.getString("student_id"));
                 if(user.getPassword().equals(password))
                 {
-                    if(user.getStudentId().isEmpty()==isLibrarian )
+                    //if(user.getStudentId().isEmpty()==isLibrarian )
+                    if((user.getStudentId()==null)==isLibrarian )
                         return user;
                 }
             }

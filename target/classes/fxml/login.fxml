@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<VBox onKeyPressed="#eventHandler" id="VBox" fx:id="vbox" alignment="CENTER" prefHeight="386.0" prefWidth="400.0" styleClass="custom-pane" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.login.LoginLoader">
+<VBox id="VBox" fx:id="vbox" alignment="CENTER" onKeyPressed="#eventHandler" prefHeight="386.0" prefWidth="400.0" styleClass="custom-pane" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.login.LoginLoader">
     <children>
       <Label prefHeight="50.0" prefWidth="400.0" scaleShape="false" styleClass="top" text="FUTURE LIBRARY">
          <VBox.margin>
@@ -44,7 +44,7 @@
             <Glow level="0.9" />
          </effect>
         </JFXPasswordField>
-        <Label fx:id="lblError" prefHeight="30.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="Library Manager">
+        <Label fx:id="lblError" prefHeight="30.0" prefWidth="400.0" scaleShape="false" styleClass="errorSmall" text="">
             <VBox.margin>
                 <Insets left="70.0" right="70.0" />
             </VBox.margin>
@@ -65,7 +65,7 @@
             <Glow level="0.9" />
          </effect>
         </HBox>
-      <Label alignment="CENTER_RIGHT" prefHeight="14.0" prefWidth="400.0" styleClass="info" text="ver 1.0">
+      <Label fx:id="lblCredit" alignment="CENTER" prefHeight="35.0" prefWidth="400.0" text="Công Tâm - Gia Huy - Đăng Khoa - Thành Đạt&#10;DH19CS02 - Open University" textAlignment="CENTER">
          <effect>
             <Glow level="0.9" />
          </effect>

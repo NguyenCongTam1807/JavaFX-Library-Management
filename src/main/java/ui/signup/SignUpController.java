@@ -114,7 +114,7 @@ public class SignUpController implements Serializable, Initializable {
             return false;
         }
         else if (mb.indexOf("0")==0){
-            mb=mb.substring(1,mb.length());
+            mb=mb.substring(1);
             mobile.setText(mb);
             return validMobile(mb);
         }
@@ -134,7 +134,7 @@ public class SignUpController implements Serializable, Initializable {
     public static String upperCaseFirstLetter(String s) {
         s=s.toLowerCase();
         String firstLetter = s.substring(0,1);
-        String secondLetter = s.substring(1,s.length());
+        String secondLetter = s.substring(1);
         return firstLetter.toUpperCase()+secondLetter;
     }
 
@@ -203,7 +203,7 @@ public class SignUpController implements Serializable, Initializable {
                 stage.close();
             }
             else
-                AlertUtils.showSignUpFailAlert("alert.signUpFail.title","alert.signUpFail.content");
+                AlertUtils.showErrorAlert("alert.signUpFail.title","alert.signUpFail.content");
         } else {
             AlertUtils.showErrorAlert("signup.fail.title","signup.fail.content");
         }
