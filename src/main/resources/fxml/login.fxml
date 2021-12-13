@@ -18,9 +18,10 @@
          </effect>
       </Label>
         <FontIcon iconColor="#12fb08" iconLiteral="bxs-book-bookmark" iconSize="40">
-         <effect>
-            <Glow level="0.67" />
-         </effect></FontIcon>
+             <effect>
+                <Glow level="0.67" />
+             </effect>
+        </FontIcon>
         <JFXToggleButton fx:id="toggle" alignment="CENTER_RIGHT" onAction="#toggleHandler" prefWidth="400.0" size="7.0" text="Login as&#10;Student" textAlignment="CENTER" textFill="#12fb08" unToggleColor="#12fb08" unToggleLineColor="#10910c">
          <effect>
             <Glow level="0.67" />

@@ -3,6 +3,7 @@ package ui.main;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
@@ -20,7 +22,9 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import pojo.Issue;
 import pojo.User;
+import services.IssueService;
 import utils.AlertUtils;
+import utils.Bundle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,6 +40,8 @@ public class MainController implements Initializable {
     @FXML JFXButton logoutButton;
     @FXML Tab tabBookIssue,tabBook,tabUser;
     @FXML JFXTreeTableView bookIssueTTV,bookTTV,userTTV;
+    @FXML Label lblTotal;
+    ObservableList<Issue> issues;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -60,15 +66,25 @@ public class MainController implements Initializable {
         dueDate.setPrefWidth(200);
         dueDate.setCellValueFactory(param  -> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getReturnDueDate())));
 
-        ObservableList<Issue> issues = FXCollections.observableArrayList();
-        issues.add(new Issue(1, 1, Date.valueOf("2020-12-5"),Date.valueOf("2020-12-5")));
-        issues.add(new Issue(1, 2, Date.valueOf(LocalDate.now()),Date.valueOf("2020-12-5")));
-
+        IssueService s = new IssueService();
+        issues = FXCollections.observableArrayList(s.getIssues());
+        lblTotal.setText("Total: "+ issues.size());
         final TreeItem<Issue> root = new RecursiveTreeItem<>(issues, RecursiveTreeObject::getChildren);
         bookIssueTTV.getColumns().setAll(issueId, userId, date, dueDate);
         bookIssueTTV.setRoot(root);
         bookIssueTTV.setShowRoot(false);
 
+        bookIssueTTV.expandedItemCountProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                lblTotal.setText("Total: "+ t1);
+                if ((int)t1==0) {
+                    Label label = new Label(Bundle.getString("main.tableview.empty"));
+                    label.setStyle("-fx-font-size: 16; -fx-text-fill: -fx-text;");
+                    bookIssueTTV.setPlaceholder(label);
+                }
+            }
+        });
     }
 
     @FXML
@@ -87,6 +103,12 @@ public class MainController implements Initializable {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void deleteHandler(ActionEvent event) {
+        TreeItem<Issue> selectedItem = ((TreeItem<Issue>) bookIssueTTV.getSelectionModel().getSelectedItem());
+        ((TreeItem<Issue>) bookIssueTTV.getSelectionModel().getSelectedItem()).getParent().getChildren().remove(selectedItem);
+
     }
 
 }

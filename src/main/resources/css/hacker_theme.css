@@ -3,7 +3,7 @@
     -fx-voidblack:#000000;
     -fx-black : #111111;
     -fx-dark : #222222;
-    -fx-gray: #5a5a5a;
+    -fx-gray: #808080;
     -fx-white: #cccccc;
     -fx-green: #12fb08;
     -fx-green-low: rgba(18,251,8,0.5);
@@ -46,8 +46,9 @@ Label.top {
     -fx-alignment: CENTER;
 }
 
-.info {
-    -fx-text-fill: -fx-others;
+Label.info {
+    -fx-font-size: 16;
+    -fx-text-fill: -fx-text;
 }
 .errorSmall {
     -fx-text-fill:-fx-error;
@@ -73,6 +74,14 @@ JFXTextField, JFXPasswordField, JFXButton {
     -fx-text-fill: -fx-text;
     -fx-font-size: 16;
 }
+/*JFXButton {*/
+/*    -fx-border-color: -fx-text;*/
+/*    -fx-border-width: 2;*/
+/*}*/
+/*.image-button {*/
+/*    -fx-pref-width: 20;*/
+/*    -fx-pref-height: 20;*/
+/*}*/
 .jfx-text-field, .jfx-password-field
 {
     -jfx-focus-color: -fx-text;
@@ -104,6 +113,8 @@ JFXDatePicker {
 .jfx-check-box:selected .mark, .jfx-check-box .mark{
     -fx-border-color: -fx-text3;
 }
+
+/** DatePicker **/
 .today {
     -fx-border-color: -fx-bg;
     -fx-border-radius: 40;
@@ -119,7 +130,7 @@ JFXDatePicker {
     -fx-text-fill: -fx-others;
 }
 
-/** TabPane**/
+/** TabPane **/
 .jfx-tab-pane .tab .tab-label {
     -fx-font-weight: bold;
     -fx-text-fill: -fx-prompt;
@@ -173,7 +184,7 @@ JFXDatePicker {
     -fx-tree-table-color: -fx-drag;
     -fx-tree-table-rippler-color : -fx-drag;
     -fx-background-color: -fx-bg0;
-    -fx-font-size: 16;
+    -fx-font-size: 15;
     -fx-border-color: -fx-text;
     -fx-border-width : 2 0 2 0;
 }
@@ -356,122 +367,122 @@ JFXDatePicker {
 .tree-table-cell {
     -fx-border-color: -fx-text;
     -fx-border-width: 1 0 0 0;
-    -fx-font-size: 16;
+    -fx-font-size: 15;
     -fx-text-fill: -fx-text;
 
 }
 
-.table-cell :focused {
-    -fx-border-color: -fx-text -fx-text -fx-text -fx-text;
-    -fx-font: 13px "Arial";
-    -fx-text-fill: green;
-}
+/*.table-cell :focused {*/
+/*    -fx-border-color: -fx-text -fx-text -fx-text -fx-text;*/
+/*    -fx-font: 13px "Arial";*/
+/*    -fx-text-fill: green;*/
+/*}*/
 
 
-.table-view {
-    -fx-table-header-border-color: #959595;
-    -fx-table-cell-border-color: -fx-box-border;
-}
+/*.table-view {*/
+/*    -fx-table-header-border-color: #959595;*/
+/*    -fx-table-cell-border-color: -fx-box-border;*/
+/*}*/
 
-.table-view:focused {
-    -fx-background-color: -fx-box-border, -fx-box-border, white;
-}
+/*.table-view:focused {*/
+/*    -fx-background-color: -fx-box-border, -fx-box-border, white;*/
+/*}*/
 
-.table-row-cell {
-    -fx-background-color: transparent;
-}
+/*.table-row-cell {*/
+/*    -fx-background-color: transparent;*/
+/*}*/
 
-.table-row-cell:odd {
-    -fx-background-color: #F9F9F9;
-    -fx-background-insets: 0, 0 0 1 0;
-}
+/*.table-row-cell:odd {*/
+/*    -fx-background-color: #F9F9F9;*/
+/*    -fx-background-insets: 0, 0 0 1 0;*/
+/*}*/
 
-.table-row-cell:even {
-    -fx-background-color: white;
-    -fx-background-insets: 0, 0 0 1 0;
-}
+/*.table-row-cell:even {*/
+/*    -fx-background-color: white;*/
+/*    -fx-background-insets: 0, 0 0 1 0;*/
+/*}*/
 
-.table-view:focused .table-row-cell:focused, .table-view:focused .table-row-cell:focused:odd {
-    -fx-background-color: -fx-box-border, #F9F9F9;
-    -fx-background-insets: 0, 1, 2;
-}
+/*.table-view:focused .table-row-cell:focused, .table-view:focused .table-row-cell:focused:odd {*/
+/*    -fx-background-color: -fx-box-border, #F9F9F9;*/
+/*    -fx-background-insets: 0, 1, 2;*/
+/*}*/
 
-.table-view:focused .table-row-cell:focused, .table-view:focused .table-row-cell:focused:even {
-    -fx-background-color: -fx-box-border, white;
-    -fx-background-insets: 0, 1, 2;
-}
+/*.table-view:focused .table-row-cell:focused, .table-view:focused .table-row-cell:focused:even {*/
+/*    -fx-background-color: -fx-box-border, white;*/
+/*    -fx-background-insets: 0, 1, 2;*/
+/*}*/
 
-.table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: -fx-box-border, rgb(205, 205, 205);
-}
+/*.table-view:focused .table-row-cell:filled:focused:selected {*/
+/*    -fx-background-color: -fx-box-border, rgb(205, 205, 205);*/
+/*}*/
 
-.table-view:focused .table-row-cell:filled:selected, .table-view:row-selection .table-row-cell:filled:hover:selected {
-    -fx-background-color: rgb(205, 205, 205);
-    -fx-background-insets: 0, 1 1 1 1 0;
-}
+/*.table-view:focused .table-row-cell:filled:selected, .table-view:row-selection .table-row-cell:filled:hover:selected {*/
+/*    -fx-background-color: rgb(205, 205, 205);*/
+/*    -fx-background-insets: 0, 1 1 1 1 0;*/
+/*}*/
 
-.table-view:focused .table-row-cell:filled:focused:selected:hover {
-    -fx-background-color: -fx-box-border, rgb(205, 205, 205);
-    -fx-background-insets: 0, 1 1 1 1 0;
-}
+/*.table-view:focused .table-row-cell:filled:focused:selected:hover {*/
+/*    -fx-background-color: -fx-box-border, rgb(205, 205, 205);*/
+/*    -fx-background-insets: 0, 1 1 1 1 0;*/
+/*}*/
 
-.table-row-cell:filled:selected:focused, .table-row-cell:filled:selected {
-    -fx-background-color: rgb(205, 205, 205);
-}
+/*.table-row-cell:filled:selected:focused, .table-row-cell:filled:selected {*/
+/*    -fx-background-color: rgb(205, 205, 205);*/
+/*}*/
 
-.table-view:row-selection .table-row-cell:filled:hover {
-    -fx-background-color: rgb(231, 231, 231);
-}
+/*.table-view:row-selection .table-row-cell:filled:hover {*/
+/*    -fx-background-color: rgb(231, 231, 231);*/
+/*}*/
 
-.table-view:row-selection .table-row-cell:filled:focused:hover {
-    -fx-background-color: rgb(205, 205, 205);
-}
+/*.table-view:row-selection .table-row-cell:filled:focused:hover {*/
+/*    -fx-background-color: rgb(205, 205, 205);*/
+/*}*/
 
-.table-view:focused .table-row-cell:filled:focused:hover {
-    -fx-background-color: -fx-box-border, rgb(231, 231, 231);
-}
+/*.table-view:focused .table-row-cell:filled:focused:hover {*/
+/*    -fx-background-color: -fx-box-border, rgb(231, 231, 231);*/
+/*}*/
 
-.table-view .column-header-background {
-    -fx-background-color: transparent;
-}
+/*.table-view .column-header-background {*/
+/*    -fx-background-color: transparent;*/
+/*}*/
 
-.table-view .column-header .label {
-    -fx-text-fill: black;
-    /*-fx-background-color: -fx-box-border, #F7F7F7;*/
-}
+/*.table-view .column-header .label {*/
+/*    -fx-text-fill: black;*/
+/*    !*-fx-background-color: -fx-box-border, #F7F7F7;*!*/
+/*}*/
 
-.table-view .column-header, .table-view .filler {
-    -fx-background-color: #F7F7F7;
-    -fx-size: 35px;
-    -fx-border-color: -fx-box-border;
-    -fx-border-insets: -1 0 0 -1;
-    -fx-padding: 0 5 0 0;
-}
+/*.table-view .column-header, .table-view .filler {*/
+/*    -fx-background-color: #F7F7F7;*/
+/*    -fx-size: 35px;*/
+/*    -fx-border-color: -fx-box-border;*/
+/*    -fx-border-insets: -1 0 0 -1;*/
+/*    -fx-padding: 0 5 0 0;*/
+/*}*/
 
-.table-view .show-hide-columns-button {
-    -fx-background-color: white;
-    -fx-border-color: -fx-box-border;
-    -fx-border-insets: -1 -1 0 0;
-}
+/*.table-view .show-hide-columns-button {*/
+/*    -fx-background-color: white;*/
+/*    -fx-border-color: -fx-box-border;*/
+/*    -fx-border-insets: -1 -1 0 0;*/
+/*}*/
 
-.table-view .column-drag-header {
-    -fx-background-color: -fx-def-color;
-    -fx-opacity: 0.6;
-}
+/*.table-view .column-drag-header {*/
+/*    -fx-background-color: -fx-def-color;*/
+/*    -fx-opacity: 0.6;*/
+/*}*/
 
-.table-view .column-resize-line {
-    -fx-background-color: -fx-def-color;
-}
+/*.table-view .column-resize-line {*/
+/*    -fx-background-color: -fx-def-color;*/
+/*}*/
 
-.table-view .column-overlay {
-    -fx-background-color: darkgray;
-    -fx-opacity: 0.2;
-}
+/*.table-view .column-overlay {*/
+/*    -fx-background-color: darkgray;*/
+/*    -fx-opacity: 0.2;*/
+/*}*/
 
-.table-view .arrow {
-    -fx-padding: 0.2em;
-    -fx-shape: "M4,17v-2.889l4.124-3.86l4.125,3.86V17l-4.125-3.375L4,17z";
-}
+/*.table-view .arrow {*/
+/*    -fx-padding: 0.2em;*/
+/*    -fx-shape: "M4,17v-2.889l4.124-3.86l4.125,3.86V17l-4.125-3.375L4,17z";*/
+/*}*/
 
 
 
