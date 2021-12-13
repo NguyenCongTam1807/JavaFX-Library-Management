@@ -14,7 +14,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <StackPane xmlns="https://javafx.com/javafx" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="1000.0" styleClass="custom-pane"
-           xmlns:fx="http://javafx.com/fxml" fx:controller="ui.main.MainController" stylesheets="@../css/dark_theme.css"
+           xmlns:fx="http://javafx.com/fxml" fx:controller="ui.MainController" stylesheets="@../css/dark_theme.css"
             >
     <children>
         <!--<JFXDrawer fx:id="drawer" defaultDrawerSize="150.0" resizableOnDrag="true" resizeContent="true" styleClass="jfx-drawer" />-->

@@ -54,6 +54,10 @@ Label.info {
     -fx-text-fill:-fx-error;
     -fx-font-size: 12;
 }
+Label.prompt {
+    fx-font-size: 19;
+    -fx-text-fill: -fx-prompt;
+}
 .normal {
     -fx-text-fill:-fx-text;
 }
@@ -75,14 +79,11 @@ JFXTextField, JFXPasswordField, JFXButton {
     -fx-font-size: 16;
 }
 
-/*JFXButton {*/
-/*    -fx-border-color: -fx-text;*/
-/*    -fx-border-width: 2;*/
-/*}*/
-/*.image-button {*/
-/*    -fx-pref-width: 20;*/
-/*    -fx-pref-height: 20;*/
-/*}*/
+.important {
+    -jfx-button-type: RAISED;
+    -fx-background-color: -fx-bg3;
+    -fx-text-fill: -fx-text3;
+}
 .jfx-text-field, .jfx-password-field
 {
     -jfx-focus-color: -fx-text;

@@ -6,12 +6,6 @@ module JavaFX.Library.Manager {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.fontawesome;
 
-    opens ui.login;
-    opens ui.signup;
-    opens ui.addbook;
-    opens ui.addissue;
-    opens ui.main;
-
-    exports ui.signup;
-    exports ui.addbook;
+    opens ui;
+    exports ui;
 }
