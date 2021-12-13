@@ -74,6 +74,7 @@ JFXTextField, JFXPasswordField, JFXButton {
     -fx-text-fill: -fx-text;
     -fx-font-size: 16;
 }
+
 /*JFXButton {*/
 /*    -fx-border-color: -fx-text;*/
 /*    -fx-border-width: 2;*/
@@ -114,6 +115,21 @@ JFXDatePicker {
     -fx-border-color: -fx-text3;
 }
 
+.util-hbox {
+    -fx-background-color: -fx-bg2;
+    -fx-pref-height: 70;
+}
+
+.util-hbox * {
+    -fx-icon-color: -fx-untoggleLine;
+    -fx-text-fill: -fx-untoggleLine;
+    -jfx-focus-color: -fx-untoggleLine;
+    -jfx-unfocus-color: -fx-untoggle;
+}
+.util-hbox .input-line {
+    -fx-background-color: -fx-untoggle;
+}
+
 /** DatePicker **/
 .today {
     -fx-border-color: -fx-bg;
@@ -141,7 +157,7 @@ JFXDatePicker {
     -fx-text-fill: -fx-text;
 }
 .jfx-tab-pane .headers-region {
-    -fx-background-color: -fx-bg2;
+    -fx-background-color: -fx-bg0;
 }
 .jfx-tab-pane .tab-header-background {
     -fx-background-color: -fx-bg2;

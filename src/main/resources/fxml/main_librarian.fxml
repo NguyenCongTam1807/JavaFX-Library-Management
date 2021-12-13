@@ -11,53 +11,14 @@
     <children>
         <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-               <JFXTabPane fx:id="mainTabPane" prefHeight="50.0" prefWidth="840.0" tabDragPolicy="REORDER" tabMinHeight="50" tabMinWidth="280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <JFXTabPane fx:id="tabPane" prefHeight="50.0" prefWidth="840.0" tabDragPolicy="REORDER" tabMinHeight="50" tabMinWidth="280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                    <tabs>
                        <Tab fx:id="tabBookIssue" closable="false" styleClass="tab-main" text="BOOK ISSUE">
                            <VBox>
-                               <HBox alignment="CENTER_LEFT" prefHeight="60.0">
-                                   <Label fx:id="lblTotal" prefWidth="200" styleClass="info" text="Total: " >
-                                       <HBox.margin>
-                                           <Insets left="5.0" />
-                                       </HBox.margin>
-                                   </Label>
-                                   <FontIcon iconLiteral="bx-search-alt-2" iconSize="25" rotate="80.0">
-                                       <effect>
-                                           <Glow level="0.67" />
-                                       </effect>
-                                   </FontIcon>
-                                   <JFXTextField prefWidth="300" promptText="Search">
-                                       <HBox.margin>
-                                           <Insets left="3.0" />
-                                       </HBox.margin>
-                                   </JFXTextField>
-                                   <JFXButton fx:id="btnAdd">
-                                       <HBox.margin>
-                                           <Insets left="65.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                           <FontIcon iconLiteral="anto-plus-square" iconSize="30" />
-                                       </graphic>
-                                   </JFXButton>
-                                   <JFXButton fx:id="btnEdit">
-                                       <HBox.margin>
-                                           <Insets left="5.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                           <FontIcon iconLiteral="anto-edit" iconSize="30" />
-                                       </graphic>
-                                   </JFXButton>
-                                   <JFXButton fx:id="btnDelete" onAction="#deleteHandler">
-                                       <HBox.margin>
-                                           <Insets left="5.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                           <FontIcon iconLiteral="anto-delete" iconSize="30" />
-                                       </graphic>
-                                   </JFXButton>
-                               </HBox>
                                <JFXTreeTableView fx:id="bookIssueTTV" prefHeight="590">
-
+                                    <VBox.margin>
+                                        <Insets top="70" />
+                                    </VBox.margin>
                                </JFXTreeTableView>
                            </VBox>
                        </Tab>
@@ -73,28 +34,68 @@
                        </Tab>
                    </tabs>
                </JFXTabPane>
-               <JFXNodesList fx:id="nodesList" layoutX="875.0" layoutY="0" rotate="0" spacing="15">
-                       <JFXButton styleClass="animated-option-button" text="MENU" />
-                       <JFXButton styleClass="animated-option-button" text="Account Info" />
-                       <JFXButton fx:id="logoutButton" onAction="#logoutHandle" styleClass="animated-option-button" text="Logout" />
-                   <JFXNodesList fx:id="nodesListSettings" rotate="90" spacing="75">
-                       <JFXButton styleClass="animated-option-button" text="Settings" />
-                       <JFXNodesList fx:id="nodesListTheme" rotate="0" spacing="15">
-                           <JFXButton styleClass="animated-option-button" text="Theme" />
-                           <JFXButton styleClass="animated-option-button" text="Dark" />
-                           <JFXButton styleClass="animated-option-button" text="Light" />
-                       </JFXNodesList>
-                       <JFXNodesList fx:id="nodesListLanguage" rotate="0" spacing="15">
-                           <JFXButton styleClass="animated-option-button" text="Language" />
-                           <JFXButton styleClass="animated-option-button" text="English" />
-                           <JFXButton styleClass="animated-option-button" text="Vietnamese" />
-                       </JFXNodesList>
-                   </JFXNodesList>
-               <effect>
-                  <DropShadow spread="0.48" />
-               </effect>
-               </JFXNodesList>
-
+                <HBox alignment="CENTER_LEFT" prefWidth="1000" styleClass="util-hbox" AnchorPane.topAnchor="50">
+                    <Label fx:id="lblTotal" prefWidth="200" styleClass="info" text="Total: " >
+                        <HBox.margin>
+                            <Insets left="5.0" />
+                        </HBox.margin>
+                    </Label>
+                    <FontIcon iconLiteral="bx-search-alt-2" iconSize="25" rotate="80.0">
+                        <effect>
+                            <Glow level="0.67" />
+                        </effect>
+                    </FontIcon>
+                    <JFXTextField prefWidth="300" promptText="Search">
+                        <HBox.margin>
+                            <Insets left="3.0" />
+                        </HBox.margin>
+                    </JFXTextField>
+                    <JFXButton fx:id="btnAdd" onAction="#addHandler">
+                        <HBox.margin>
+                            <Insets left="65.0" />
+                        </HBox.margin>
+                        <graphic>
+                            <FontIcon iconLiteral="anto-plus-square" iconSize="30" />
+                        </graphic>
+                    </JFXButton>
+                    <JFXButton fx:id="btnEdit" onAction="#editHandler">
+                        <HBox.margin>
+                            <Insets left="5.0" />
+                        </HBox.margin>
+                        <graphic>
+                            <FontIcon iconLiteral="anto-edit" iconSize="30" />
+                        </graphic>
+                    </JFXButton>
+                    <JFXButton fx:id="btnDelete" onAction="#deleteHandler">
+                        <HBox.margin>
+                            <Insets left="5.0" />
+                        </HBox.margin>
+                        <graphic>
+                            <FontIcon iconLiteral="anto-delete" iconSize="30" />
+                        </graphic>
+                    </JFXButton>
+                </HBox>
+                <JFXNodesList fx:id="nodesList" layoutX="875.0" layoutY="0" rotate="0" spacing="15">
+                    <JFXButton styleClass="animated-option-button" text="MENU" />
+                    <JFXButton styleClass="animated-option-button" text="Account Info" />
+                    <JFXButton fx:id="logoutButton" onAction="#logoutHandle" styleClass="animated-option-button" text="Logout" />
+                    <JFXNodesList fx:id="nodesListSettings" rotate="90" spacing="75">
+                        <JFXButton styleClass="animated-option-button" text="Settings" />
+                        <JFXNodesList fx:id="nodesListTheme" rotate="0" spacing="15">
+                            <JFXButton styleClass="animated-option-button" text="Theme" />
+                            <JFXButton styleClass="animated-option-button" text="Dark" />
+                            <JFXButton styleClass="animated-option-button" text="Light" />
+                        </JFXNodesList>
+                        <JFXNodesList fx:id="nodesListLanguage" rotate="0" spacing="15">
+                            <JFXButton styleClass="animated-option-button" text="Language" />
+                            <JFXButton styleClass="animated-option-button" text="English" />
+                            <JFXButton styleClass="animated-option-button" text="Vietnamese" />
+                        </JFXNodesList>
+                    </JFXNodesList>
+                    <effect>
+                        <DropShadow spread="0.5" />
+                    </effect>
+                </JFXNodesList>
             </children>
         </AnchorPane>
     </children>

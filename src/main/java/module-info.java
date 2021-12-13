@@ -9,8 +9,7 @@ module JavaFX.Library.Manager {
     opens ui.login;
     opens ui.signup;
     opens ui.addbook;
-    opens ui.booklist;
-    opens ui.issuelist;
+    opens ui.addissue;
     opens ui.main;
 
     exports ui.signup;
