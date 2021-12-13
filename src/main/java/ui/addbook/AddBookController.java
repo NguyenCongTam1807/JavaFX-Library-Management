@@ -59,9 +59,10 @@ public class AddBookController implements Initializable {
             if (text!="")
                 valid=false;
         });
-        vbox.getChildren().stream().filter(node -> node.getClass()==JFXTextField.class).map(JFXTextField ->((JFXTextField) JFXTextField).getText()).forEach(text ->{
-           if (text=="")
-               valid=false;
+        vbox.getChildren().stream().filter(node -> node.getClass()==JFXTextField.class).map(JFXTextField ->((JFXTextField) JFXTextField)).forEach(text ->{
+           if (!text.getId().equals("txtSummary"))
+               if (text.getText()=="")
+                    valid=false;
         });
         return valid;
     }
@@ -175,7 +176,6 @@ public class AddBookController implements Initializable {
                 if (!t1){
                     if (txtSummary.getText()!=""){
                         txtSummary.setText(clearSpace(txtSummary.getText()));
-                        //lblErrorSummary.setText("");
                     }
                 }
             }
