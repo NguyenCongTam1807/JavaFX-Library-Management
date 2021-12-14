@@ -17,6 +17,8 @@ import javafx.scene.effect.Glow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import pojo.Book;
+import services.BookService;
 import utils.Bundle;
 import utils.DateUtils;
 
@@ -43,9 +45,8 @@ public class AddIssueController implements Serializable, Initializable {
     @FXML private List<JFXTextField> issuedBooks = new ArrayList<>();
     @FXML private List<Label> issuedLabels=new ArrayList<>();
     private int i;
-    private Scene scene;
-    private List<Integer> idBooks=getIdBook();
-    private List<String> nameBooks=getNameBook();
+    private BookService bs=new BookService();
+    private List<Book> books=bs.getBooks();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -81,6 +82,8 @@ public class AddIssueController implements Serializable, Initializable {
             textField.setPromptText("Book ID No."+(i+1));
             addTextFieldListeners(textField, label);
             VBox.setMargin(textField,new Insets(20,0,0,0));
+            addTextFieldListeners(textField,label);
+            VBox.setMargin(textField,new Insets(20,0,0,0));
             VBox.setMargin(label,new Insets(5,0,0,0));
             root.getScene().getWindow().setHeight(Math.round(root.getHeight()+101));
             vboxBookList.getChildren().add(textField);
@@ -95,7 +98,7 @@ public class AddIssueController implements Serializable, Initializable {
             if (!t1){
                 if (textField.getText()!="" && label.getText()==""){
                     if (checkBook(textField.getText())!=-1)
-                        label.setText(nameBooks.get(checkBook(textField.getText())));
+                        label.setText(books.get(checkBook(textField.getText())).getTitle());
                     else label.setText(Bundle.getString("invalid.book.null"));
                 }
             }
@@ -114,40 +117,11 @@ public class AddIssueController implements Serializable, Initializable {
 
     private int checkBook(String s){
         int id=Integer.parseInt(s);
-        for (int i = 0; i < idBooks.size(); i++) {
-            if (idBooks.get(i)==id)
+        for (int i = 0; i < books.size(); i++) {
+            if (books.get(i).getId()==id)
                 return i;
         }
         return -1;
-    }
-
-    public List<Integer> getIdBook(){
-        List<Integer> id=new ArrayList<Integer>();
-        try(Connection conn= JdbcUtils.getConn()){
-            conn.setAutoCommit(false);
-            PreparedStatement stm=conn.prepareStatement("SELECT book_id FROM book");
-            ResultSet rs = stm.executeQuery();
-            while(rs.next()){
-                id.add(rs.getInt("book_id"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return id;
-    }
-    public List<String> getNameBook(){
-        List<String> id=new ArrayList<String>();
-        try(Connection conn= JdbcUtils.getConn()){
-            conn.setAutoCommit(false);
-            PreparedStatement stm=conn.prepareStatement("SELECT title FROM book");
-            ResultSet rs = stm.executeQuery();
-            while(rs.next()){
-                id.add(rs.getString("title"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return id;
     }
 
 }

@@ -4,6 +4,7 @@ import configs.JdbcUtils;
 import pojo.User;
 
 import java.sql.*;
+import java.util.*;
 
 public class UserService {
     public boolean addUser(User user) {
@@ -43,12 +44,33 @@ public class UserService {
                         return user;
                 }
             }
-                return  null;
+            return  null;
         }catch (SQLException throwables){
             throwables.printStackTrace();
             return null;
         }
 
+    }
+
+    public List<User> getStudentUsers(){
+        try(Connection conn=JdbcUtils.getConn()){
+            PreparedStatement stm=conn.prepareStatement("SELECT * FROM user WHERE student_id != ? OR student_id is not null ");
+            stm.setString(1,"");
+            ResultSet rs = stm.executeQuery();
+            List<User> users=new ArrayList<>();
+            int i=0;
+            while (rs.next()){
+                users.add(new User(rs.getString("account_id"), rs.getString("password"),rs.getInt("status"),
+                        rs.getString("name"),rs.getDate("birthday"),rs.getString("phone_number"),
+                        rs.getString("email"), rs.getString("student_id") ));
+                users.get(i).setId(rs.getInt("user_id"));
+                i++;
+            }
+            return users;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
