@@ -11,8 +11,7 @@ public class DateUtils {
         SimpleDateFormat sdf = new SimpleDateFormat(oldFormat);
         Date d = sdf.parse(dateString);
         sdf.applyPattern(newFormat);
-        String newDateString = sdf.format(d);
-        return newDateString;
+        return sdf.format(d);
     }
 
     public static String changeFormat(Date date, String newFormat) {

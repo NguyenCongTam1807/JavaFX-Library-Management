@@ -116,7 +116,7 @@ public class MainController implements Initializable {
                 case 0:
                     bookIssueTTV.setPredicate((Predicate<TreeItem<Issue>>) treeItem -> {
                         Boolean flag = String.valueOf(treeItem.getValue().getId()).contains(newVal);
-                        System.out.println(String.valueOf(treeItem.getValue().getId()));
+                        System.out.println(treeItem.getValue().getId());
                         return flag;
                     });
                     break;
