@@ -2,6 +2,7 @@ package ui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import configs.JdbcUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -11,6 +12,10 @@ import utils.DateUtils;
 
 import java.io.Serializable;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +30,7 @@ public class AddIssueController implements Serializable, Initializable {
     @FXML private JFXButton btnAdd, btnDelete;
     @FXML private List<JFXTextField> issuedBooks = new ArrayList<>();
     private int i;
+    private List<Integer> idBooks=getIdBook();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -55,6 +61,21 @@ public class AddIssueController implements Serializable, Initializable {
             vboxBookList.getChildren().remove(issuedBooks.get(i-1));
             issuedBooks.remove(i-1);
         }
+    }
+
+    public List<Integer> getIdBook(){
+        List<Integer> id=new ArrayList<Integer>();
+        try(Connection conn= JdbcUtils.getConn()){
+            conn.setAutoCommit(false);
+            PreparedStatement stm=conn.prepareStatement("SELECT book_id FROM book");
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                id.add(rs.getInt("book_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 
 }
