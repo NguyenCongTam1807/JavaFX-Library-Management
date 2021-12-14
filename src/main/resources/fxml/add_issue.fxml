@@ -15,7 +15,7 @@
                 <Glow level="0.9" />
             </effect>
         </JFXTextField>
-        <Label fx:id="lblErrorName" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="errorSmall" text="Kiểm tra user có tồn tại và được phép mượn">
+        <Label fx:id="lblErrorName" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error-small" text="Kiểm tra user có tồn tại và được phép mượn">
             <VBox.margin>
                 <Insets top="5.0" />
             </VBox.margin>
@@ -57,7 +57,7 @@
             <Insets top="30.0" />
          </VBox.margin>
         </JFXDatePicker>
-        <Label prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="errorSmall" text="Kiểm tra hạn trả sách hợp lệ">
+        <Label prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error-small" text="Kiểm tra hạn trả sách hợp lệ">
             <effect>
                 <Glow level="0.9" />
             </effect>
@@ -103,8 +103,8 @@
             <Insets top="20.0" />
          </VBox.margin>
         </HBox>
-        <VBox fx:id="vboxBookList" prefHeight="0.0" prefWidth="370.0">
-            <JFXTextField fx:id="txtBook1" labelFloat="true" minHeight="30.0" prefWidth="200.0" promptText="Book ID No.1">
+        <VBox fx:id="vboxBookList" >
+            <JFXTextField fx:id="txtBook1" labelFloat="true" prefHeight="30.0" prefWidth="200.0" promptText="Book ID No.1">
                 <VBox.margin>
                     <Insets top="20.0" />
                 </VBox.margin>
@@ -112,7 +112,7 @@
                <Glow level="0.9" />
             </effect>
             </JFXTextField>
-            <Label fx:id="label1" minHeight="13.0" prefWidth="400.0" styleClass="errorSmall">
+            <Label fx:id="label1" prefHeight="13.0" prefWidth="400.0" styleClass="error-small">
                 <VBox.margin>
                     <Insets top="5.0" />
                 </VBox.margin>

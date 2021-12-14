@@ -58,7 +58,7 @@ public class AddIssueController implements Serializable, Initializable {
         btnDelete.onMouseClickedProperty().set(mouseEvent -> {
             i = issuedBooks.size();
             if (i>1) {
-                root.getScene().getWindow().setHeight(Math.round(root.getHeight()-20));
+                root.getScene().getWindow().setHeight(Math.round(root.getHeight()-31));
                 vboxBookList.getChildren().remove(issuedBooks.get(i-1));
                 vboxBookList.getChildren().remove(issuedLabels.get(i-1));
                 issuedLabels.remove(i-1);
@@ -72,20 +72,18 @@ public class AddIssueController implements Serializable, Initializable {
         if (i<5) {
             JFXTextField textField = new JFXTextField();
             Label label=new Label();
-            label.setMinHeight(13);
-            label.getStyleClass().clear();
-            label.getStyleClass().add("errorSmall");
+            label.setPrefHeight(13);
+            label.getStyleClass().add("error-small");
             label.setEffect(new Glow(0.9));
             textField.setLabelFloat(true);
             textField.setEffect(new Glow(0.9));
-            textField.setMinHeight(30);
+            textField.setPrefHeight(30);
             textField.setPromptText("Book ID No."+(i+1));
             addTextFieldListeners(textField, label);
             VBox.setMargin(textField,new Insets(20,0,0,0));
-            addTextFieldListeners(textField,label);
-            VBox.setMargin(textField,new Insets(20,0,0,0));
             VBox.setMargin(label,new Insets(5,0,0,0));
-            root.getScene().getWindow().setHeight(Math.round(root.getHeight()+101));
+            root.getScene().getWindow().setHeight(Math.round(root.getHeight()+105));
+            System.out.println(root.getHeight());
             vboxBookList.getChildren().add(textField);
             vboxBookList.getChildren().add(label);
             issuedBooks.add(textField);
@@ -97,9 +95,11 @@ public class AddIssueController implements Serializable, Initializable {
         textField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
             if (!t1){
                 if (textField.getText()!="" && label.getText()==""){
-                    if (checkBook(textField.getText())!=-1)
+                    if (checkBook(textField.getText())!=-1) {
                         label.setText(books.get(checkBook(textField.getText())).getTitle());
-                    else label.setText(Bundle.getString("invalid.book.null"));
+                    }
+                    else
+                        label.setText(Bundle.getString("invalid.book.null"));
                 }
             }
         });

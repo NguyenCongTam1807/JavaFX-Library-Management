@@ -17,7 +17,7 @@
             <Glow level="0.9" />
          </effect>
         </JFXTextField>
-        <Label fx:id="lblErrorName" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="errorSmall" text="&#10;">
+        <Label fx:id="lblErrorName" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error-small" text="&#10;">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-5.0" />
             </VBox.margin>
@@ -33,7 +33,7 @@
             <Glow level="0.9" />
          </effect>
         </JFXTextField>
-        <Label fx:id="lblErrorId" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="errorSmall" text="&#10;">
+        <Label fx:id="lblErrorId" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error-small" text="&#10;">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-5.0" />
             </VBox.margin>
@@ -49,7 +49,7 @@
             <Glow level="0.9" />
          </effect>
         </JFXPasswordField>
-        <Label fx:id="lblErrorPw" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="354.0" scaleShape="false" styleClass="errorSmall" textFill="WHITE">
+        <Label fx:id="lblErrorPw" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="354.0" scaleShape="false" styleClass="error-small" textFill="WHITE">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-5.0" />
             </VBox.margin>
@@ -65,7 +65,7 @@
             <Glow level="0.9" />
          </effect>
         </JFXPasswordField>
-        <Label fx:id="lblErrorRePw" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="errorSmall" text="&#10;">
+        <Label fx:id="lblErrorRePw" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error-small" text="&#10;">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-2.0" />
             </VBox.margin>
@@ -81,7 +81,7 @@
             <Glow level="0.9" />
          </effect>
         </JFXDatePicker>
-        <Label fx:id="lblErrorBirthday" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="errorSmall" text="&#10;">
+        <Label fx:id="lblErrorBirthday" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error-small" text="&#10;">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="5.0" />
             </VBox.margin>
@@ -97,7 +97,7 @@
             <Glow level="0.9" />
          </effect>
         </JFXTextField>
-        <Label fx:id="lblErrorStId" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="errorSmall" text="&#10;">
+        <Label fx:id="lblErrorStId" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error-small" text="&#10;">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-5.0" />
             </VBox.margin>
@@ -130,7 +130,7 @@
             </VBox.margin>
         </HBox>
 
-        <Label fx:id="lblErrorMb" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="errorSmall" text="&#10;&#10;">
+        <Label fx:id="lblErrorMb" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error-small" text="&#10;&#10;">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-5.0" />
             </VBox.margin>
@@ -146,7 +146,7 @@
             <Glow level="0.9" />
          </effect>
         </JFXTextField>
-        <Label fx:id="lblErrorEmail" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="errorSmall" text="&#10;&#10;">
+        <Label fx:id="lblErrorEmail" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error-small" text="&#10;&#10;">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-5.0" />
             </VBox.margin>

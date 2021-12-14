@@ -260,7 +260,7 @@ public class MainController implements Initializable {
 
         JFXTreeTableColumn<User,String> phoneNumber=new JFXTreeTableColumn<>("Phone Number");
         phoneNumber.setPrefWidth(150);
-        phoneNumber.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getPhoneNumber())));
+        phoneNumber.setCellValueFactory(param-> new SimpleStringProperty("0"+ param.getValue().getValue().getPhoneNumber()));
 
         JFXTreeTableColumn<User,String> email=new JFXTreeTableColumn<>("Email");
         email.setPrefWidth(250);

@@ -45,7 +45,7 @@
             <Glow level="0.9" />
          </effect>
         </JFXPasswordField>
-        <Label fx:id="lblError" prefHeight="30.0" prefWidth="400.0" scaleShape="false" styleClass="errorSmall" text="">
+        <Label fx:id="lblError" prefHeight="30.0" prefWidth="400.0" scaleShape="false" styleClass="error-small" text="">
             <VBox.margin>
                 <Insets left="70.0" right="70.0" />
             </VBox.margin>
