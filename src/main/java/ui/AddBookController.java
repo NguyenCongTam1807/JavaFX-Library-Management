@@ -49,7 +49,7 @@ public class AddBookController implements Initializable {
         return s;
     }
 
-    public boolean validMount(String s){
+    public static boolean validMount(String s){
         s= SignUpController.unAccent(s);
         return !s.matches("-?\\d+(\\.\\d+)?");
     }
