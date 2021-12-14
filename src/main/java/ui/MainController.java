@@ -23,11 +23,14 @@ import pojo.Issue;
 import pojo.User;
 import services.BookService;
 import services.IssueService;
+import services.UserService;
 import utils.AlertUtils;
 import utils.Bundle;
+import utils.DateUtils;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -173,11 +176,11 @@ public class MainController implements Initializable {
 
         JFXTreeTableColumn<Issue, String> date = new JFXTreeTableColumn<>("Issue Date");
         date.setPrefWidth(200);
-        date.setCellValueFactory(param  -> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getDate())));
+        date.setCellValueFactory(param  -> new SimpleStringProperty(DateUtils.changeFormat(param.getValue().getValue().getDate(),"dd/MM/yyyy")));
 
         JFXTreeTableColumn<Issue, String> dueDate = new JFXTreeTableColumn<>("Return Due Date");
         dueDate.setPrefWidth(200);
-        dueDate.setCellValueFactory(param  -> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getReturnDueDate())));
+        dueDate.setCellValueFactory(param  -> new SimpleStringProperty(DateUtils.changeFormat(param.getValue().getValue().getReturnDueDate(),"dd/MM/yyyy")));
 
         IssueService is = new IssueService();
         issues = FXCollections.observableArrayList(is.getIssues());
@@ -229,7 +232,50 @@ public class MainController implements Initializable {
         bookTTV.setShowRoot(false);
     }
 
+
     public void initUserTab() {
+        JFXTreeTableColumn<User,String> userId=new JFXTreeTableColumn<>("User Id");
+        userId.setPrefWidth(100);
+        userId.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getId())));
+
+        JFXTreeTableColumn<User,String> acount=new JFXTreeTableColumn<>("Acount");
+        acount.setPrefWidth(200);
+        acount.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getAccountId())));
+
+        JFXTreeTableColumn<User,String> password=new JFXTreeTableColumn<>("Password");
+        password.setPrefWidth(200);
+        password.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getPassword())));
+
+        JFXTreeTableColumn<User,String> status=new JFXTreeTableColumn<>("Status");
+        status.setPrefWidth(60);
+        status.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getStatus())));
+
+        JFXTreeTableColumn<User,String> name=new JFXTreeTableColumn<>("Name");
+        name.setPrefWidth(200);
+        name.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getName())));
+
+        JFXTreeTableColumn<User,String> birthday=new JFXTreeTableColumn<>("Birthday");
+        birthday.setPrefWidth(200);
+        birthday.setCellValueFactory(param-> new SimpleStringProperty(DateUtils.changeFormat(param.getValue().getValue().getBirthday(),"dd/MM/yyyy")));
+
+        JFXTreeTableColumn<User,String> phoneNumber=new JFXTreeTableColumn<>("Phone Number");
+        phoneNumber.setPrefWidth(150);
+        phoneNumber.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getPhoneNumber())));
+
+        JFXTreeTableColumn<User,String> email=new JFXTreeTableColumn<>("Email");
+        email.setPrefWidth(250);
+        email.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getEmail())));
+
+        JFXTreeTableColumn<User,String> studentId=new JFXTreeTableColumn<>("Student Id");
+        studentId.setPrefWidth(150);
+        studentId.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getStudentId())));
+
+        UserService us=new UserService();
+        users=FXCollections.observableArrayList(us.getStudentUsers());
+        final TreeItem<User> root=new RecursiveTreeItem<>(users,RecursiveTreeObject::getChildren);
+        userTTV.getColumns().setAll(userId,acount,password,status,name,birthday,phoneNumber,email,studentId);
+        userTTV.setRoot(root);
+        userTTV.setShowRoot(false);
 
     }
 
