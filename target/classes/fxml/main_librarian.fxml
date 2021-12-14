@@ -9,11 +9,11 @@
 
 <StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="custom-pane" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainController">
     <children>
-        <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane fx:id="anchorPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                <JFXTabPane fx:id="tabPane" prefHeight="50.0" prefWidth="840.0" tabDragPolicy="REORDER" tabMinHeight="50" tabMinWidth="280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                    <tabs>
-                       <Tab fx:id="tabBookIssue" closable="false" styleClass="tab-main" text="BOOK ISSUE">
+                       <Tab fx:id="tabBookIssue"  text="BOOK ISSUE">
                            <VBox>
                                <JFXTreeTableView fx:id="bookIssueTTV" prefHeight="590">
                                     <VBox.margin>
@@ -22,15 +22,23 @@
                                </JFXTreeTableView>
                            </VBox>
                        </Tab>
-                       <Tab fx:id="tabBook" closable="false" styleClass="tab-main" text="BOOK">
-                           <JFXTreeTableView fx:id="bookTTV">
-
-                           </JFXTreeTableView>
+                       <Tab fx:id="tabBook" closable="false"  text="BOOK">
+                           <VBox>
+                               <JFXTreeTableView fx:id="bookTTV" prefHeight="590">
+                                   <VBox.margin>
+                                       <Insets top="70" />
+                                   </VBox.margin>
+                               </JFXTreeTableView>
+                           </VBox>
                        </Tab>
-                       <Tab fx:id="tabUser" closable="false" styleClass="tab-main" text="USER">
-                           <JFXTreeTableView fx:id="userTTV">
-
-                           </JFXTreeTableView>
+                       <Tab fx:id="tabUser" closable="false"  text="USER">
+                           <VBox>
+                               <JFXTreeTableView fx:id="userTTV" prefHeight="590">
+                                   <VBox.margin>
+                                       <Insets top="70" />
+                                   </VBox.margin>
+                               </JFXTreeTableView>
+                           </VBox>
                        </Tab>
                    </tabs>
                </JFXTabPane>
@@ -45,7 +53,7 @@
                             <Glow level="0.67" />
                         </effect>
                     </FontIcon>
-                    <JFXTextField prefWidth="300" promptText="Search">
+                    <JFXTextField fx:id="txtSearch" prefWidth="300" promptText="Search">
                         <HBox.margin>
                             <Insets left="3.0" />
                         </HBox.margin>

@@ -1,8 +1,10 @@
 package pojo;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
 import java.util.UUID;
 
-public class Book {
+public class Book extends RecursiveTreeObject<Book> {
     private int id,amount,publishedYear;
     private String title,author,genre,publisher,summary;
 

@@ -2,11 +2,14 @@ package services;
 
 import configs.JdbcUtils;
 import pojo.Book;
+import pojo.Issue;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookService {
     public boolean addBook(Book book){
@@ -39,6 +42,7 @@ public class BookService {
         }
         return true;
     }
+
     public Book checkBookId(int id){
         try(Connection conn=JdbcUtils.getConn()){
             PreparedStatement stm=conn.prepareStatement("SELECT * FROM book WHERE book_id=?");
@@ -54,5 +58,23 @@ public class BookService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public List<Book> getBooks(){
+        try(Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm=conn.prepareStatement("SELECT * from book");
+            ResultSet rs = stm.executeQuery();
+            List<Book> books = new ArrayList<>();
+            while(rs.next()) {
+                books.add(new Book(rs.getInt("book_id"),rs.getString("title"),
+                        rs.getInt("amount"),rs.getString("author"),
+                        rs.getInt("published_year"),rs.getString("genre"),
+                        rs.getString("publisher"),rs.getString("summary") ));
+            }
+            return books;
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+            return null;
+        }
     }
 }
