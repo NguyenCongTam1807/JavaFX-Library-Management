@@ -251,7 +251,7 @@ public class MainController implements Initializable {
             case 1:
                 root = FXMLLoader.load(getClass().getResource("/fxml/add_book.fxml"));
                 stage = new Stage();
-                stage.setTitle(Bundle.getString("addBook.title"));
+                stage.setTitle(Bundle.getString("addIssue.title"));
                 stage.setScene(new Scene(root));
                 primaryStage = (Stage) lblTotal.getScene().getWindow();
                 stage.initOwner(primaryStage);
@@ -259,10 +259,10 @@ public class MainController implements Initializable {
                 stage.initModality(Modality.WINDOW_MODAL);
                 stage.show();
                 break;
-            case 2:
+            default:
                 root = FXMLLoader.load(getClass().getResource("/fxml/signup.fxml"));
                 stage = new Stage();
-                stage.setTitle(Bundle.getString("addBook.title"));
+                stage.setTitle(Bundle.getString("addUser.title"));
                 stage.setScene(new Scene(root));
                 primaryStage = (Stage) lblTotal.getScene().getWindow();
                 stage.initOwner(primaryStage);
