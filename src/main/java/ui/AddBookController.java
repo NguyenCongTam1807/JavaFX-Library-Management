@@ -50,7 +50,7 @@ public class AddBookController implements Initializable {
 
     public static boolean validAmount(String s){
         s= SignUpController.unAccent(s);
-        return !s.matches("-?\\d+(\\.\\d+)?");
+        return !s.matches("-?\\d+?");
     }
     boolean valid;
     private boolean validInput(){

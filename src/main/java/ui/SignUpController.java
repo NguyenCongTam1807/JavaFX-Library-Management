@@ -73,14 +73,7 @@ public class SignUpController implements Serializable, Initializable {
     {
         if(password.length()>=8)
         {
-            Pattern letter = Pattern.compile("[a-zA-z]");
-            Pattern digit = Pattern.compile("[0-9]");
-            Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
-            Matcher hasLetter = letter.matcher(password);
-            Matcher hasDigit = digit.matcher(password);
-            Matcher hasSpecial = special.matcher(password);
-
-            return hasLetter.find() && hasDigit.find() && hasSpecial.find();
+            return password.matches("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}");
 
         }
         else
@@ -97,9 +90,7 @@ public class SignUpController implements Serializable, Initializable {
 
     private boolean validStudentId(String stdid){
         if (stdid.length()==10){
-            Pattern digit = Pattern.compile("[0-9]");
-            Matcher hasDigit = digit.matcher(stdid);
-            return hasDigit.find();
+            return stdid.matches("-?\\d+?");
         }
         else return false;
     }
@@ -114,9 +105,7 @@ public class SignUpController implements Serializable, Initializable {
             return validMobile(mb);
         }
         else if (mb.length()==9){
-            Pattern digit = Pattern.compile("[0-9]");
-            Matcher hasDigit = digit.matcher(mb);
-            return hasDigit.find();
+            return mb.matches("-?\\d+?");
         }
 
         return false;
@@ -158,7 +147,7 @@ public class SignUpController implements Serializable, Initializable {
 
     public static boolean validName(String Name){
         Pattern digit = Pattern.compile("[0-9]");
-        Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
+        Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}:;'.,/\\[\\]\"~-]");
         Matcher hasDigit = digit.matcher(Name);
         Matcher hasSpecial = special.matcher(Name);
         return hasDigit.find() || hasSpecial.find();
@@ -182,9 +171,6 @@ public class SignUpController implements Serializable, Initializable {
     }
 
     public void signup() {
-        //Dang suy nghi phuong phap toi uu de check
-        //if (validSignUp)
-        //Cái này để test hàm Insert User vào database
         if(validSignUp())
         {
             user = new User(Id.getText(),txtPw.getText(),1,name.getText(),java.sql.Date.valueOf(birthday.getValue()),
@@ -250,6 +236,11 @@ public class SignUpController implements Serializable, Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 String pw=txtPw.getText();
+                if (repassword.getText()!=""){
+                    String t=repassword.getText();
+                    repassword.setText("");
+                    repassword.setText(t);
+                }
                 if (!checkPassword(pw) && pw!=""){
                     lblErrorPw.setText(Bundle.getString("invalid.password"));
                     lblErrorPw.setMinHeight(30);
@@ -271,7 +262,7 @@ public class SignUpController implements Serializable, Initializable {
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 String password=txtPw.getText();
                 String repas=repassword.getText();
-                if (password.equals(repas)){
+                if (password.equals(repas)&& password.length()==repas.length()){
                     lblErrorRePw.setText("");
                 }
                 else
