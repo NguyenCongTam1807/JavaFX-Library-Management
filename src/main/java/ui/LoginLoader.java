@@ -45,7 +45,7 @@ public class LoginLoader extends Application implements Serializable, Initializa
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/add_issue.fxml"));
         primaryStage.setTitle("Library Manager");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);

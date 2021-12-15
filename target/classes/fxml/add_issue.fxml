@@ -8,14 +8,14 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<VBox fx:id="root" prefHeight="450.0" prefWidth="450" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.AddIssueController">
+<VBox fx:id="root" prefHeight="450.0" prefWidth="450" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.AddIssueController">
     <children>
-        <JFXTextField fx:id="txtIdBook" labelFloat="true" prefHeight="30.0" prefWidth="200.0" promptText="User ID">
+        <JFXTextField fx:id="userId" labelFloat="true" prefHeight="30.0" prefWidth="200.0" promptText="User ID">
             <effect>
                 <Glow level="0.9" />
             </effect>
         </JFXTextField>
-        <Label fx:id="lblErrorName" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error-small" text="Kiểm tra user có tồn tại và được phép mượn">
+        <Label fx:id="lblErrorName" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error-small" text="">
             <VBox.margin>
                 <Insets top="5.0" />
             </VBox.margin>
@@ -23,7 +23,7 @@
                 <Glow level="0.9" />
             </effect>
         </Label>
-        <JFXButton prefWidth="110.0" styleClass="important" text="Check user">
+        <JFXButton fx:id="btnCheckUser" prefWidth="110.0" styleClass="important" text="Check user">
          <VBox.margin>
             <Insets top="15.0" />
          </VBox.margin>
@@ -49,23 +49,15 @@
             <Insets />
          </VBox.margin>
         </JFXTextField>
-        <JFXDatePicker fx:id="txtReturnDueDate" defaultColor="#12fb08" editable="false" layoutX="20" layoutY="  120.0" maxHeight="1.7976931348623157E308" prefHeight="0.0" prefWidth="370.0" promptText="Return due date">
+        <JFXTextField fx:id="txtReturnDueDate" labelFloat="true" editable="false" layoutX="20" layoutY="  120.0" maxHeight="1.7976931348623157E308" prefHeight="0.0" prefWidth="370.0" promptText="Return due date">
             <effect>
                 <Glow level="0.9" />
             </effect>
          <VBox.margin>
             <Insets top="30.0" />
          </VBox.margin>
-        </JFXDatePicker>
-        <Label prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error-small" text="Kiểm tra hạn trả sách hợp lệ">
-            <effect>
-                <Glow level="0.9" />
-            </effect>
-         <VBox.margin>
-            <Insets top="5.0" />
-         </VBox.margin>
-        </Label>
-        <HBox alignment="CENTER_LEFT" prefHeight="50.0">
+        </JFXTextField>
+        <HBox fx:id="btn" alignment="CENTER_LEFT" disable="true" prefHeight="50.0">
             <JFXButton fx:id="btnAdd">
                 <graphic>
                     <FontIcon iconLiteral="anto-plus-circle" iconSize="30" />
@@ -100,10 +92,10 @@
                 </HBox.margin>
             </Label>
          <VBox.margin>
-            <Insets top="20.0" />
+            <Insets top="30.0" />
          </VBox.margin>
         </HBox>
-        <VBox fx:id="vboxBookList" >
+        <VBox fx:id="vboxBookList" disable="true">
             <JFXTextField fx:id="txtBook1" labelFloat="true" prefHeight="30.0" prefWidth="200.0" promptText="Book ID No.1">
                 <VBox.margin>
                     <Insets top="20.0" />
@@ -121,7 +113,7 @@
             </effect>
             </Label>
         </VBox>
-        <JFXButton alignment="CENTER" defaultButton="true" minHeight="-Infinity" prefHeight="30.0" prefWidth="450.0" text="Done">
+        <JFXButton fx:id="btnDone" alignment="CENTER" defaultButton="true" disable="true" minHeight="-Infinity" prefHeight="30.0" prefWidth="450.0" text="Done">
          <VBox.margin>
             <Insets bottom="10.0" left="120.0" right="120.0" top="30.0" />
          </VBox.margin>
