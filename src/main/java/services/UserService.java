@@ -49,7 +49,6 @@ public class UserService {
             throwables.printStackTrace();
             return null;
         }
-
     }
 
     public List<User> getStudentUsers(){

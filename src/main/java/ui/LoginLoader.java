@@ -24,6 +24,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
+import utils.Context;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
@@ -34,16 +36,16 @@ import java.util.ResourceBundle;
 
 public class LoginLoader extends Application implements Serializable, Initializable {
 
-
     @FXML private JFXToggleButton toggle;
     @FXML private Label lblError, lblCredit;
     @FXML private JFXTextField txtId;
     @FXML private JFXPasswordField txtPw;
     @FXML private JFXButton btnLogin, btnSignUp;
+    User user;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/add_issue.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
         primaryStage.setTitle("Library Manager");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
@@ -56,13 +58,33 @@ public class LoginLoader extends Application implements Serializable, Initializa
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Context.getInstance().setLoginLoader(this);
+
+        final Animation animation = new Transition() {
+            {
+                setCycleDuration(Duration.millis(2000));
+                setInterpolator(Interpolator.LINEAR);
+                setCycleCount(Animation.INDEFINITE);
+            }
+
+            @Override
+            protected void interpolate(double frac) {
+                List<Stop> stops = Arrays.asList(new Stop(0, Color.RED), new Stop((double)1/7, Color.ORANGE),
+                        new Stop((double)2/7, Color.YELLOW), new Stop((double)3/7, Color.GREEN), new Stop((double)4/7, Color.BLUE),
+                        new Stop((double)5/7, Color.INDIGO), new Stop((double)6/7, Color.VIOLET), new Stop(1, Color.RED));
+                lblCredit.setTextFill(new LinearGradient(frac-1,0,frac,1,true, CycleMethod.REPEAT,stops));
+            }
+        };
+        animation.play();
+    }
     public static void main(String[] args) {
         launch(args);
     }
 
     public void loginHandler(ActionEvent event) {
         UserService userService=new UserService();
-        User user;
         String id = txtId.getText();
         String pw = txtPw.getText();
         user=userService.getUser(id,pw,toggle.isSelected());
@@ -123,23 +145,8 @@ public class LoginLoader extends Application implements Serializable, Initializa
         toggle.setTextFill(color);
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        final Animation animation = new Transition() {
-            {
-                setCycleDuration(Duration.millis(2000));
-                setInterpolator(Interpolator.LINEAR);
-                setCycleCount(Animation.INDEFINITE);
-            }
-
-            @Override
-            protected void interpolate(double frac) {
-                List<Stop> stops = Arrays.asList(new Stop(0, Color.RED), new Stop((double)1/7, Color.ORANGE),
-                        new Stop((double)2/7, Color.YELLOW), new Stop((double)3/7, Color.GREEN), new Stop((double)4/7, Color.BLUE),
-                        new Stop((double)5/7, Color.INDIGO), new Stop((double)6/7, Color.VIOLET), new Stop(1, Color.RED));
-                lblCredit.setTextFill(new LinearGradient(frac-1,0,frac,1,true, CycleMethod.REPEAT,stops));
-            }
-        };
-        animation.play();
-    }
+//    public User getLoggedInUser() {
+//        UserService userService = new UserService();
+//        return userService.getUser();
+//    }
 }

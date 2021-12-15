@@ -26,6 +26,7 @@ import services.IssueService;
 import services.UserService;
 import utils.AlertUtils;
 import utils.Bundle;
+import utils.Context;
 import utils.DateUtils;
 
 import java.io.IOException;
@@ -57,6 +58,7 @@ public class MainController implements Initializable {
         initBookIssueTab();
         initBookTab();
         initUserTab();
+        User currentUser = Context.getInstance().getLoginLoader().user;
 
         tabPane.getSelectionModel().selectedItemProperty().addListener((observableValue, oldTab, newTab) -> {
             int total = 0;
@@ -87,6 +89,14 @@ public class MainController implements Initializable {
                 bookTTV.setPlaceholder(label);
             }
         });
+        userTTV.expandedItemCountProperty().addListener((observableValue, oldNum, newNum) -> {
+            lblTotal.setText("Total: "+ newNum);
+            if ((int)oldNum* (int)newNum==0) {
+                Label label = new Label(Bundle.getString("main.tableview.empty"));
+                label.setStyle("-fx-font-size: 16; -fx-text-fill: -fx-text;");
+                userTTV.setPlaceholder(label);
+            }
+        });
 
         /** Clear row selection if clicked again **/
         bookIssueTTV.setRowFactory((Callback<TreeTableView, TreeTableRow>) treeTableView -> {
@@ -101,11 +111,22 @@ public class MainController implements Initializable {
             return row;
         });
         bookTTV.setRowFactory((Callback<TreeTableView, TreeTableRow>) treeTableView -> {
-            final TreeTableRow<Issue> row = new TreeTableRow<>();
+            final TreeTableRow<Book> row = new TreeTableRow<>();
             row.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
                 final int index = row.getIndex();
                 if (index >= 0 && bookTTV.getSelectionModel().isSelected(index)  ) {
                     bookTTV.getSelectionModel().clearSelection();
+                    event.consume();
+                }
+            });
+            return row;
+        });
+        userTTV.setRowFactory((Callback<TreeTableView, TreeTableRow>) treeTableView -> {
+            final TreeTableRow<Book> row = new TreeTableRow<>();
+            row.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+                final int index = row.getIndex();
+                if (index >= 0 && userTTV.getSelectionModel().isSelected(index)  ) {
+                    userTTV.getSelectionModel().clearSelection();
                     event.consume();
                 }
             });
@@ -124,17 +145,18 @@ public class MainController implements Initializable {
                     });
                     break;
                 case 1:
-                    if (bookTTV.expandedItemCountProperty().getValue() > 0) {
-                        TreeItem<Book> selectedBook = (TreeItem<Book>) bookTTV.getSelectionModel().getSelectedItem();
-                        selectedBook.getParent().getChildren().remove(selectedBook);
-                    }
-
+                    bookTTV.setPredicate((Predicate<TreeItem<Book>>) treeItem -> {
+                        Boolean flag = String.valueOf(treeItem.getValue().getId()).contains(newVal);
+                        System.out.println(treeItem.getValue().getId());
+                        return flag;
+                    });
                     break;
                 default:
-                    if (userTTV.expandedItemCountProperty().getValue() > 0) {
-                        TreeItem<User> selectedUser = (TreeItem<User>) userTTV.getSelectionModel().getSelectedItem();
-                        selectedUser.getParent().getChildren().remove(selectedUser);
-                    }
+                    userTTV.setPredicate((Predicate<TreeItem<User>>) treeItem -> {
+                        Boolean flag = String.valueOf(treeItem.getValue().getId()).contains(newVal);
+                        System.out.println(treeItem.getValue().getId());
+                        return flag;
+                    });
             }
         });
     }
@@ -242,10 +264,6 @@ public class MainController implements Initializable {
         acount.setPrefWidth(200);
         acount.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getAccountId())));
 
-        JFXTreeTableColumn<User,String> password=new JFXTreeTableColumn<>("Password");
-        password.setPrefWidth(200);
-        password.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getPassword())));
-
         JFXTreeTableColumn<User,String> status=new JFXTreeTableColumn<>("Status");
         status.setPrefWidth(60);
         status.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getStatus())));
@@ -273,7 +291,7 @@ public class MainController implements Initializable {
         UserService us=new UserService();
         users=FXCollections.observableArrayList(us.getStudentUsers());
         final TreeItem<User> root=new RecursiveTreeItem<>(users,RecursiveTreeObject::getChildren);
-        userTTV.getColumns().setAll(userId,acount,password,status,name,birthday,phoneNumber,email,studentId);
+        userTTV.getColumns().setAll(userId,acount,status,name,birthday,phoneNumber,email,studentId);
         userTTV.setRoot(root);
         userTTV.setShowRoot(false);
 
@@ -355,4 +373,5 @@ public class MainController implements Initializable {
                 }
         }
     }
+
 }
