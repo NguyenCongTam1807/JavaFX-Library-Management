@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXToggleButton;
 import javafx.scene.Node;
 import pojo.User;
 import services.UserService;
@@ -36,7 +35,6 @@ import java.util.ResourceBundle;
 
 public class LoginLoader extends Application implements Serializable, Initializable {
 
-    @FXML private JFXToggleButton toggle;
     @FXML private Label lblError, lblCredit;
     @FXML private JFXTextField txtId;
     @FXML private JFXPasswordField txtPw;
@@ -45,7 +43,7 @@ public class LoginLoader extends Application implements Serializable, Initializa
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/add_issue.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
         primaryStage.setTitle("Library Manager");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
@@ -87,11 +85,16 @@ public class LoginLoader extends Application implements Serializable, Initializa
         UserService userService=new UserService();
         String id = txtId.getText();
         String pw = txtPw.getText();
-        user=userService.getUser(id,pw,toggle.isSelected());
+        user=userService.getUser(id,pw);
         if (user!=null){
             Parent root;
             try{
-                root=FXMLLoader.load(getClass().getResource("/fxml/main_librarian.fxml"));
+                String resourcePath;
+                if (user.getStudentId()==null||user.getStudentId().isEmpty())
+                    resourcePath = "/fxml/main_librarian.fxml";
+                else
+                    resourcePath = "/fxml/main_user.fxml";
+                root=FXMLLoader.load(getClass().getResource(resourcePath));
                 Stage stage=(Stage)((Node) event.getSource()).getScene().getWindow();
                 stage.setResizable(false);
                 stage.setScene(new Scene(root,1000, 700));
@@ -132,21 +135,5 @@ public class LoginLoader extends Application implements Serializable, Initializa
             e.printStackTrace();
         }
     }
-    @FXML
-    public void toggleHandler() {
-        if (toggle.isSelected())
-            setStyle("login.toggle.librarian",toggle.getToggleLineColor());
-        else
-            setStyle("login.toggle.student",toggle.getUnToggleColor());
-        toggle.setDisableVisualFocus(false);
-    }
-    public void setStyle(String textBundle, Paint color) {
-        toggle.setText(Bundle.getString(textBundle));
-        toggle.setTextFill(color);
-    }
 
-//    public User getLoggedInUser() {
-//        UserService userService = new UserService();
-//        return userService.getUser();
-//    }
 }

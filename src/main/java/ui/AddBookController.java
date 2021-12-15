@@ -14,7 +14,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import pojo.Book;
 import services.BookService;
-import ui.SignUpController;
 import utils.Bundle;
 import utils.AlertUtils;
 
@@ -49,7 +48,7 @@ public class AddBookController implements Initializable {
         return s;
     }
 
-    public static boolean validMount(String s){
+    public static boolean validAmount(String s){
         s= SignUpController.unAccent(s);
         return !s.matches("-?\\d+(\\.\\d+)?");
     }
@@ -127,7 +126,7 @@ public class AddBookController implements Initializable {
         txtIdBook.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                if (validMount(txtIdBook.getText()) && txtIdBook.getText()!=""){
+                if (validAmount(txtIdBook.getText()) && txtIdBook.getText()!=""){
                     lblErrorIdBook.setText(Bundle.getString("invalid.idbook.number"));
                 }
                 else
@@ -199,7 +198,7 @@ public class AddBookController implements Initializable {
         txtAmount.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                boolean t=validMount(txtAmount.getText());
+                boolean t= validAmount(txtAmount.getText());
                 if (!t && txtAmount.getText()!=""){
                     int i=Integer.parseInt(txtAmount.getText());
                     if (i<1){
@@ -236,7 +235,7 @@ public class AddBookController implements Initializable {
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
                 if(!t1){
                     String t=txtIdBook.getText();
-                    if(t!="" && !validMount(t)) {
+                    if(t!="" && !validAmount(t)) {
                         Book book;
                         BookService bookService = new BookService();
                         book=bookService.checkBookId(Integer.parseInt(txtIdBook.getText()));

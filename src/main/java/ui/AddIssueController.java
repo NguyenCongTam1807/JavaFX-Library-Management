@@ -1,24 +1,16 @@
 package ui;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
-import configs.JdbcUtils;
-import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 import pojo.Book;
 import pojo.User;
 import services.BookService;
@@ -29,13 +21,7 @@ import utils.DateUtils;
 
 import java.io.Serializable;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
-
-import ui.SignUpController;
 
 public class AddIssueController implements Serializable, Initializable {
 
@@ -135,7 +121,6 @@ public class AddIssueController implements Serializable, Initializable {
     private void addTextFieldListeners(JFXTextField textField, Label label) {
         textField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
             if (!t1){
-                /*System.out.println(txt);*/
                 if (label.getText().equals(Bundle.getString("invalid.book.selected"))){
                 }
                 else
@@ -150,7 +135,7 @@ public class AddIssueController implements Serializable, Initializable {
         });
 
         textField.textProperty().addListener(((observableValue, s, t1) -> {
-            String id=" "+textField.getText()+" ";
+            String id=" "+t1+" ";
             txt=" ";
             int t=0,index=0;
             for (int j = 0; j < issuedBooks.size(); j++) {
@@ -161,15 +146,15 @@ public class AddIssueController implements Serializable, Initializable {
                 t++;
                 index=txt.indexOf(id,index)+1;
             }
-            if (t!=1 && textField.getText()!=""){
+            if (t!=1 && t1!=""){
                 label.setText(Bundle.getString("invalid.book.selected"));
             }
             else
-            if (AddBookController.validMount(textField.getText()) && textField.getText()!=""){
+            if (AddBookController.validAmount(t1) && t1!=""){
                 label.setText(Bundle.getString("invalid.idbook.number"));
             }
             else
-            if (textField.getText()== ""){
+            if (t1== ""){
                 label.setText(Bundle.getString("invalid.input.null"));
             }
             else label.setText("");
@@ -200,14 +185,17 @@ public class AddIssueController implements Serializable, Initializable {
         }
         return -1;
     }
+
     private int checkUsername(String s){
+        int id=Integer.parseInt(s);
         for (int j = 0; j < users.size(); j++) {
-            if (s.equals(users.get(j).getAccountId())){
+            if (users.get(j).getId()==id){
                 return j;
             }
         }
         return -1;
     }
+
     private void userIdIsTrue(boolean isTrue){
        btn.setDisable(isTrue);
        vboxBookList.setDisable(isTrue);

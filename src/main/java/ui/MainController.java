@@ -42,7 +42,7 @@ public class MainController implements Initializable {
     @FXML JFXNodesList nodesListSettings;
     @FXML JFXNodesList nodesListLanguage;
     @FXML JFXNodesList nodesListTheme;
-    @FXML JFXButton logoutButton;
+    @FXML JFXButton logoutButton,infoButton;
     @FXML Tab tabBookIssue,tabBook,tabUser;
     @FXML JFXTreeTableView bookIssueTTV,bookTTV,userTTV;
     @FXML Label lblTotal;
@@ -98,7 +98,7 @@ public class MainController implements Initializable {
             }
         });
 
-        /** Clear row selection if clicked again **/
+        /** Clear row selection if clicked twice **/
         bookIssueTTV.setRowFactory((Callback<TreeTableView, TreeTableRow>) treeTableView -> {
             final TreeTableRow<Issue> row = new TreeTableRow<>();
             row.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
@@ -368,7 +368,6 @@ public class MainController implements Initializable {
                         selectedBook.getParent().getChildren().remove(selectedBook);
                     }
                 }
-
                 break;
             default:
                 if (userTTV.expandedItemCountProperty().getValue()>0) {
@@ -378,9 +377,12 @@ public class MainController implements Initializable {
                         userService.deleteUser(selectedUser.getValue().getId());
                         selectedUser.getParent().getChildren().remove(selectedUser);
                     }
-
                 }
         }
+    }
+
+    public void showInfo() {
+
     }
 
 }

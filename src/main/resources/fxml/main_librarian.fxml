@@ -85,7 +85,7 @@
                 </HBox>
                 <JFXNodesList fx:id="nodesList" layoutX="875.0" layoutY="0" rotate="0" spacing="15">
                     <JFXButton styleClass="animated-option-button" text="MENU" />
-                    <JFXButton styleClass="animated-option-button" text="Account Info" />
+                    <JFXButton fx:id="infoButton" onAction="#showInfo" styleClass="animated-option-button" text="Account Info" />
                     <JFXButton fx:id="logoutButton" onAction="#logoutHandle" styleClass="animated-option-button" text="Logout" />
                     <JFXNodesList fx:id="nodesListSettings" rotate="90" spacing="75">
                         <JFXButton styleClass="animated-option-button" text="Settings" />
