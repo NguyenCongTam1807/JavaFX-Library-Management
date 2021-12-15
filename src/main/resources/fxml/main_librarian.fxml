@@ -41,29 +41,42 @@
                            </VBox>
                        </Tab>
                    </tabs>
+                   <effect>
+                       <Glow level="0.4" />
+                   </effect>
                </JFXTabPane>
                 <HBox alignment="CENTER_LEFT" prefWidth="1000" styleClass="util-hbox" AnchorPane.topAnchor="50">
                     <Label fx:id="lblTotal" prefWidth="200" styleClass="info" text="Total: " >
                         <HBox.margin>
                             <Insets left="5.0" />
                         </HBox.margin>
+                        <effect>
+                            <Glow level="0.6" />
+                        </effect>
                     </Label>
                     <FontIcon iconLiteral="bx-search-alt-2" iconSize="25" rotate="80.0">
                         <effect>
-                            <Glow level="0.67" />
+                            <Glow level="0.6" />
                         </effect>
                     </FontIcon>
                     <JFXTextField fx:id="txtSearch" prefWidth="300" promptText="Search by ID">
                         <HBox.margin>
                             <Insets left="3.0" />
                         </HBox.margin>
+                        <effect>
+                            <Glow level="0.6" />
+                        </effect>
                     </JFXTextField>
                     <JFXButton fx:id="btnAdd" onAction="#addHandler">
                         <HBox.margin>
                             <Insets left="65.0" />
                         </HBox.margin>
                         <graphic>
-                            <FontIcon iconLiteral="anto-plus-square" iconSize="30" />
+                            <FontIcon iconLiteral="anto-plus-square" iconSize="30">
+                                <effect>
+                                    <Glow level="0.4" />
+                                </effect>
+                            </FontIcon>
                         </graphic>
                     </JFXButton>
                     <JFXButton fx:id="btnEdit" onAction="#editHandler">
@@ -71,7 +84,11 @@
                             <Insets left="5.0" />
                         </HBox.margin>
                         <graphic>
-                            <FontIcon iconLiteral="anto-edit" iconSize="30" />
+                            <FontIcon iconLiteral="anto-edit" iconSize="30">
+                                <effect>
+                                    <Glow level="0.4" />
+                                </effect>
+                            </FontIcon>
                         </graphic>
                     </JFXButton>
                     <JFXButton fx:id="btnDelete" onAction="#deleteHandler">
@@ -79,7 +96,23 @@
                             <Insets left="5.0" />
                         </HBox.margin>
                         <graphic>
-                            <FontIcon iconLiteral="anto-delete" iconSize="30" />
+                            <FontIcon iconLiteral="anto-delete" iconSize="30">
+                                <effect>
+                                    <Glow level="0.4" />
+                                </effect>
+                            </FontIcon>
+                        </graphic>
+                    </JFXButton>
+                    <JFXButton fx:id="btnRefresh" onAction="#refreshHandler">
+                        <HBox.margin>
+                            <Insets left="5.0" />
+                        </HBox.margin>
+                        <graphic>
+                            <FontIcon iconLiteral="bx-refresh" iconSize="30">
+                                <effect>
+                                    <Glow level="0.4" />
+                                </effect>
+                            </FontIcon>
                         </graphic>
                     </JFXButton>
                 </HBox>

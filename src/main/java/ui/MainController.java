@@ -48,6 +48,7 @@ public class MainController implements Initializable {
     @FXML Label lblTotal;
     @FXML JFXTextField txtSearch;
 
+    User currentUser = Context.getInstance().getLoginLoader().user;
     ObservableList<Issue> issues;
     ObservableList<Book> books;
     ObservableList<User> users;
@@ -58,7 +59,6 @@ public class MainController implements Initializable {
         initBookIssueTab();
         initBookTab();
         initUserTab();
-        User currentUser = Context.getInstance().getLoginLoader().user;
 
         tabPane.getSelectionModel().selectedItemProperty().addListener((observableValue, oldTab, newTab) -> {
             int total = 0;
@@ -265,7 +265,7 @@ public class MainController implements Initializable {
         acount.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getAccountId())));
 
         JFXTreeTableColumn<User,String> status=new JFXTreeTableColumn<>("Status");
-        status.setPrefWidth(60);
+        status.setPrefWidth(70);
         status.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getStatus())));
 
         JFXTreeTableColumn<User,String> name=new JFXTreeTableColumn<>("Name");
@@ -333,9 +333,7 @@ public class MainController implements Initializable {
                 stage.setResizable(false);
                 stage.initModality(Modality.WINDOW_MODAL);
                 stage.show();
-                break;
         }
-
     }
 
     public void editHandler() {
@@ -346,7 +344,6 @@ public class MainController implements Initializable {
             case 1:
                 break;
             default:;
-
         }
     }
 
@@ -381,6 +378,16 @@ public class MainController implements Initializable {
         }
     }
 
+    public void refreshHandler() {
+        int tabIndex = tabPane.getSelectionModel().getSelectedIndex();
+        switch (tabIndex) {
+            case 0:initBookIssueTab();
+                break;
+            case 1:initBookTab();
+                break;
+            default:initUserTab();
+        }
+    }
     public void showInfo() {
 
     }

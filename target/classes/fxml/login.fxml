@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<VBox id="VBox" fx:id="vBox" alignment="CENTER" prefHeight="386.0" prefWidth="400.0" styleClass="custom-pane" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.LoginLoader">
+<VBox id="VBox" fx:id="vbox" alignment="CENTER" prefHeight="386.0" prefWidth="400.0" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.LoginLoader">
     <children>
-      <Label prefHeight="50.0" prefWidth="400.0" scaleShape="false" styleClass="top" text="FUTURE LIBRARY">
+      <Label prefHeight="50.0" prefWidth="400.0" scaleShape="false" styleClass="top" text="HACKER LIBRARY">
          <VBox.margin>
             <Insets />
          </VBox.margin>
@@ -38,14 +38,6 @@
             <Glow level="0.9" />
          </effect>
         </JFXPasswordField>
-        <Label fx:id="lblError" prefHeight="30.0" prefWidth="400.0" scaleShape="false" styleClass="error-small" text="">
-            <VBox.margin>
-                <Insets left="70.0" right="70.0" />
-            </VBox.margin>
-         <effect>
-            <Glow level="0.9" />
-         </effect>
-        </Label>
         <HBox alignment="CENTER" prefHeight="80.0" prefWidth="398.0" spacing="40.0">
             <JFXButton fx:id="btnLogin" onAction="#loginHandler" prefHeight="40.0" prefWidth="90.0" styleClass="login-button" text="Login">
             <effect>

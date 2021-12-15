@@ -110,7 +110,6 @@ public class AddIssueController implements Serializable, Initializable {
             VBox.setMargin(textField,new Insets(20,0,0,0));
             VBox.setMargin(label,new Insets(5,0,0,0));
             root.getScene().getWindow().setHeight(Math.round(root.getHeight()+105));
-            System.out.println(root.getHeight());
             vboxBookList.getChildren().add(textField);
             vboxBookList.getChildren().add(label);
             issuedBooks.add(textField);

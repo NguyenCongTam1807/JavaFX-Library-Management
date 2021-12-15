@@ -89,7 +89,7 @@
                 <Glow level="0.9" />
             </effect>
         </Label>
-        <JFXTextField fx:id="studentId" focusColor="#12fb08" labelFloat="true" layoutX="20" layoutY="30.0" promptText="Enter student id" styleClass="label-form" unFocusColor="#065103">
+        <JFXTextField fx:id="studentId" focusColor="#12fb08" labelFloat="true" layoutX="20" layoutY="30.0" promptText="Enter student ID" styleClass="label-form" unFocusColor="#065103">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-5.0" />
             </VBox.margin>

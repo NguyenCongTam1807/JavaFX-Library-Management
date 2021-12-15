@@ -1,6 +1,7 @@
 package utils;
 
 import ui.LoginLoader;
+import ui.SignUpController;
 
 import java.sql.Connection;
 
@@ -20,11 +21,18 @@ public class Context {
 //    }
 
     private LoginLoader loginLoader;
-    public void setLoginLoader( LoginLoader tabRough) {
-        this.loginLoader=tabRough;
+    public void setLoginLoader( LoginLoader loginLoader) {
+        this.loginLoader=loginLoader;
     }
-
     public  LoginLoader getLoginLoader() {
         return loginLoader;
+    }
+
+    private SignUpController signUpController;
+    public SignUpController getSignUpController() {
+        return signUpController;
+    }
+    public void setSignUpController(SignUpController signUpController) {
+        this.signUpController = signUpController;
     }
 }

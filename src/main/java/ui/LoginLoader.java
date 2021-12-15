@@ -3,7 +3,12 @@ package ui;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
+import javafx.concurrent.Task;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.*;
 import javafx.util.Duration;
 import utils.AlertUtils;
@@ -107,11 +112,9 @@ public class LoginLoader extends Application implements Serializable, Initializa
 
         }
         else {
-            lblError.setText(Bundle.getString("login.error"));
-            //AlertUtils.showErrorAlert("alert.loginFail.title","alert.loginFail.content");
+            AlertUtils.showErrorAlert("alert.loginFail.title","alert.loginFail.content");
         }
     }
-
 
     @FXML
     public void signUpHandler(ActionEvent event) {

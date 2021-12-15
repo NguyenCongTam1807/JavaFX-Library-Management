@@ -21,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import utils.Context;
 
 import java.io.Serializable;
 //import static jdk.internal.logger.DefaultLoggerFinder.SharedLoggers.system;
@@ -47,6 +48,8 @@ public class SignUpController implements Serializable, Initializable {
     @FXML private JFXDatePicker birthday;
     @FXML private VBox container;
     @FXML private Label lblErrorBirthday;
+
+    User user;
 
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -184,11 +187,11 @@ public class SignUpController implements Serializable, Initializable {
         //Cái này để test hàm Insert User vào database
         if(validSignUp())
         {
-            User user = new User(Id.getText(),txtPw.getText(),1,name.getText(),java.sql.Date.valueOf(birthday.getValue()),
+            user = new User(Id.getText(),txtPw.getText(),1,name.getText(),java.sql.Date.valueOf(birthday.getValue()),
                     mobile.getText(),email.getText(),studentId.getText());
             UserService userService = new UserService();
             if(userService.addUser(user)) {
-                AlertUtils.showConfirmAlert("signup.success.title", "signup.success.content");
+                AlertUtils.showInfoAlert("signup.success.title", "signup.success.content");
                 //do something
                 Stage stage = (Stage) saveButton.getScene().getWindow();
                 // do what you have to do
@@ -217,6 +220,7 @@ public class SignUpController implements Serializable, Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Context.getInstance().setSignUpController(this);
         checkTerms.selectedProperty().addListener((observableValue, oldValue, newValue)
                 -> saveButton.setDisable(!newValue));
 

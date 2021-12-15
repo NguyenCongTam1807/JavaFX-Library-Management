@@ -9,6 +9,7 @@
     -fx-green-low: rgba(18,251,8,0.5);
     -fx-green-dark: #10910c;
     -fx-red: #cc0000;
+    -fx-red-low: rgba(51,0,0, 1);
     -fx-start-margin: 0;
     -fx-end-margin: 0;
     -fx-cyan: #00e5ff;
@@ -27,6 +28,7 @@
     -fx-prompt: -fx-gray;
     -fx-unfocus: -fx-green-dark;
     -fx-error: -fx-red;
+    -fx-errorbg: -fx-red-low;
     -fx-border: -fx-green;
     -fx-others: -fx-white;
     -fx-untoggle:-fx-cyan-dark;
@@ -500,6 +502,55 @@ JFXDatePicker {
 /*    -fx-padding: 0.2em;*/
 /*    -fx-shape: "M4,17v-2.889l4.124-3.86l4.125,3.86V17l-4.125-3.375L4,17z";*/
 /*}*/
+
+/********** Alert **********/
+.dialog-pane{
+    -fx-border-color:-fx-error;
+    -fx-border-width:2;
+    -fx-pref-height: 200;
+}
+
+/**Customization of The Bar where the buttons are located**/
+.dialog-pane > .button-bar > .container {
+    -fx-background-color:-fx-errorbg;
+}
+
+.dialog-pane > .content.label {
+    /*-fx-padding: 2 2 2 2;*/
+    -fx-background-color: -fx-errorbg;
+    -fx-text-fill:-fx-error;
+    -fx-font-size: 16;
+}
+
+/**Customization of DialogPane Header**/
+.dialog-pane .header-panel {
+    -fx-background-color: -fx-errorbg;
+
+}
+
+.dialog-pane .header-panel .label{
+    -fx-background-color: -fx-bg0;
+    -fx-text-fill:-fx-error;
+    -fx-font-size:22;
+    -fx-padding: 10;
+    -fx-effect: dropshadow( three-pass-box, -fx-bg, 10.0, 0.0, 0.0, 0.0);
+}
+
+
+/**Customization of Buttons**/
+.dialog-pane .button{
+    -fx-background-color:black;
+    -fx-text-fill:-fx-error;
+    -fx-wrap-text: true;
+    -fx-effect: dropshadow( three-pass-box, orangered, 10, 0, 0.0, 0.0);
+    -fx-cursor:hand;
+}
+
+.dialog-pane .button:hover{
+    -fx-background-color:white;
+    -fx-text-fill:-fx-error;
+    -fx-font-weight:bold;
+}
 
 
 
