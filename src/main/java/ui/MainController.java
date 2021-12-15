@@ -356,20 +356,29 @@ public class MainController implements Initializable {
             case 0:
                 if (bookIssueTTV.expandedItemCountProperty().getValue()>0) {
                     TreeItem<Issue> selectedIssue = (TreeItem<Issue>) bookIssueTTV.getSelectionModel().getSelectedItem();
-                    selectedIssue.getParent().getChildren().remove(selectedIssue);
+                    if (selectedIssue!=null) {
+                        selectedIssue.getParent().getChildren().remove(selectedIssue);
+                    }
                 }
                 break;
             case 1:
                 if (bookTTV.expandedItemCountProperty().getValue()>0) {
                     TreeItem<Book> selectedBook = (TreeItem<Book>) bookTTV.getSelectionModel().getSelectedItem();
-                    selectedBook.getParent().getChildren().remove(selectedBook);
+                    if (selectedBook!=null) {
+                        selectedBook.getParent().getChildren().remove(selectedBook);
+                    }
                 }
 
                 break;
             default:
                 if (userTTV.expandedItemCountProperty().getValue()>0) {
                     TreeItem<User> selectedUser = (TreeItem<User>) userTTV.getSelectionModel().getSelectedItem();
-                    selectedUser.getParent().getChildren().remove(selectedUser);
+                    if (selectedUser!=null) {
+                        UserService userService = new UserService();
+                        userService.deleteUser(selectedUser.getValue().getId());
+                        selectedUser.getParent().getChildren().remove(selectedUser);
+                    }
+
                 }
         }
     }

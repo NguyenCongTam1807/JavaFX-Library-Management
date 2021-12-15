@@ -72,4 +72,17 @@ public class UserService {
         }
     }
 
+    public boolean deleteUser(int id) {
+        try (Connection conn = JdbcUtils.getConn()) {
+            conn.setAutoCommit(false);
+            PreparedStatement stm = conn.prepareStatement("DELETE FROM user WHERE user_id = ?");
+            stm.setInt(1,id);
+            stm.executeUpdate();
+            conn.commit();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }
