@@ -20,6 +20,7 @@ import utils.AlertUtils;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,6 +31,8 @@ public class AddBookController implements Initializable {
     @FXML private JFXButton btnAddBook, btnClear;
     @FXML private JFXTextField txtAmount,txtTitle,txtSummary,txtGenre,txtPublisher, txtPublishedYear, txtAuthor,txtIdBook;
     @FXML private Label lblErrorAmount,lblErrorSummary,lblErrorIdBook, lblErrorPublisher,lblErrorGenre,lblErrorPublishedYear,lblErrorAuthor, lblErrorTitle;
+
+
 
     public boolean validYear(String s) {
         if (s.length()==4){
@@ -83,6 +86,33 @@ public class AddBookController implements Initializable {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        txtTitle.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                if(!t1){
+                    if(txtTitle.getText()!=""){
+                        String t=SignUpController.styleString(txtTitle.getText());
+                        txtTitle.setText(t);
+                        BookService bs=new BookService();
+                        Book book=bs.checkBookTitle(t);
+                        System.out.println(book.getTitle());
+                        if(book!=null){
+                            txtIdBook.setText(String.valueOf(book.getId()));
+                            txtAuthor.setText(book.getAuthor());
+                            txtGenre.setText(book.getGenre());
+                            txtSummary.setText(book.getSummary());
+                            txtPublisher.setText(book.getPublisher());
+                            txtPublishedYear.setText(String.valueOf(book.getPublishedYear()));
+                            disableAllField(true);
+                        }
+                        else {
+                            clearField();
+                            txtTitle.setText(t);
+                        }
+                    }
+                }
+            }
+        });
         txtPublisher.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
@@ -244,15 +274,6 @@ public class AddBookController implements Initializable {
                             disableAllField(true);
                         }
                         else {
-                           /* vbox.getChildren().stream().filter(node -> node.getClass()==Label.class).map(Label->((Label) Label)).forEach($label->{
-                                if (!$label.getId().equals("lblErrorIdBook"))
-                                    $label.setText("");
-                            });
-                            vbox.getChildren().stream().filter(node -> node.getClass()==JFXTextField.class).map(JFXTextField->((JFXTextField) JFXTextField)).forEach($field->{
-                                if (!$field.getId().equals("txtIdBook"))
-                                    $field.setText("");
-                            });
-                            disableAllField(false);*/
                             clearField();
                             txtIdBook.setText(t);
                         }

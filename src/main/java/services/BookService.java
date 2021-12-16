@@ -60,6 +60,23 @@ public class BookService {
         return null;
     }
 
+    public Book checkBookTitle(String title){
+        try(Connection conn=JdbcUtils.getConn()){
+            PreparedStatement stm=conn.prepareStatement("SELECT * FROM book WHERE title=?");
+            stm.setString(1,title);
+            ResultSet rs = stm.executeQuery();
+            Book book=null;
+            if(rs.next()){
+                book=new Book(rs.getInt("book_id"), rs.getString("title"),rs.getInt("amount"),rs.getString("author"),rs.getInt("published_year"),rs.getString("genre"),rs.getString("publisher"),rs.getString("summary") );
+            }
+            return book;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public List<Book> getBooks(){
         try(Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm=conn.prepareStatement("SELECT * from book");
