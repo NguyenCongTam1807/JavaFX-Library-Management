@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="container" focusTraversable="true" prefHeight="153.0" prefWidth="404.0" spacing="10.0" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.SignUpController">
+<VBox fx:id="container" focusTraversable="true" prefHeight="153.0" prefWidth="450.0" spacing="10.0" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.SignUpController">
     <children>
         <JFXTextField fx:id="name" focusColor="#12fb08" labelFloat="true" promptText="Full Name" styleClass="label-form" unFocusColor="#065103">
             <VBox.margin>
@@ -165,12 +165,12 @@
         </JFXCheckBox>
         <HBox alignment="CENTER" prefHeight="47.0" prefWidth="404.0" spacing="30.0">
             <children>
-                <JFXButton fx:id="saveButton" disable="true" prefHeight="66.0" prefWidth="100.0" text="Register">
+                <JFXButton fx:id="saveButton" disable="true" prefHeight="66.0" prefWidth="100.0" styleClass="bordered" text="Register">
                    <effect>
                       <Glow level="0.9" />
                    </effect>
                 </JFXButton><!--onAction="#addMember"-->
-                <JFXButton fx:id="cancelButton" layoutX="10.0" layoutY="10.0" prefHeight="66.0" prefWidth="100.0" text="Clear">
+                <JFXButton fx:id="cancelButton" layoutX="10.0" layoutY="10.0" prefHeight="66.0" prefWidth="100.0" styleClass="bordered" text="Clear">
                    <effect>
                       <Glow level="0.9" />
                    </effect>
@@ -182,6 +182,6 @@
         </HBox>
     </children>
     <padding>
-        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+        <Insets bottom="40.0" left="30.0" right="30.0" top="30.0" />
     </padding>
 </VBox>

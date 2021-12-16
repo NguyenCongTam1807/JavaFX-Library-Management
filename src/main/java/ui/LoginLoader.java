@@ -3,12 +3,7 @@ package ui;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
-import javafx.concurrent.Task;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.*;
 import javafx.util.Duration;
 import utils.AlertUtils;
@@ -44,11 +39,11 @@ public class LoginLoader extends Application implements Serializable, Initializa
     @FXML private JFXTextField txtId;
     @FXML private JFXPasswordField txtPw;
     @FXML private JFXButton btnLogin, btnSignUp;
-    User user;
+    User loggedInUser;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/add_book.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
         primaryStage.setTitle("Library Manager");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
@@ -90,12 +85,12 @@ public class LoginLoader extends Application implements Serializable, Initializa
         UserService userService=new UserService();
         String id = txtId.getText();
         String pw = txtPw.getText();
-        user=userService.getUser(id,pw);
-        if (user!=null){
+        loggedInUser=userService.getUser(id,pw);
+        if (loggedInUser!=null){
             Parent root;
             try{
                 String resourcePath;
-                if (user.getStudentId()==null||user.getStudentId().isEmpty())
+                if (loggedInUser.getStudentId()==null||loggedInUser.getStudentId().isEmpty())
                     resourcePath = "/fxml/main_librarian.fxml";
                 else
                     resourcePath = "/fxml/main_user.fxml";

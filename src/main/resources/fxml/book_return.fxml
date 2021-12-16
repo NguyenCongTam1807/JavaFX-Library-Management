@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="root" prefHeight="450.0" prefWidth="450" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.BookReturnController">
+    <children>
+        <Label prefHeight="10.0" prefWidth="400.0" styleClass="prompt" text="Issue ID">
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+            <font>
+                <Font name="Consolas" size="13.5" />
+            </font>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+        </Label>
+        <JFXTextField fx:id="txtIssueID" editable="false" labelFloat="true" prefHeight="30.0" prefWidth="200.0">
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+        </JFXTextField>
+        <Label prefHeight="10.0" prefWidth="400.0" styleClass="prompt" text="User ID">
+            <VBox.margin>
+                <Insets left="20.0" right="20.0" top="30.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+            <font>
+                <Font name="Consolas" size="13.5" />
+            </font>
+        </Label>
+        <JFXTextField fx:id="txtUserID" editable="false" labelFloat="true" prefHeight="30.0" prefWidth="200.0">
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+        </JFXTextField>
+        <Label prefHeight="10.0" prefWidth="400.0" styleClass="prompt" text="Issue date">
+            <VBox.margin>
+                <Insets left="20.0" right="20.0" top="30.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+            <font>
+                <Font name="Consolas" size="13.5" />
+            </font>
+        </Label>
+        <JFXTextField fx:id="txtIssueDate" editable="false" prefWidth="200.0">
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+            <VBox.margin>
+                <Insets left="20.0" right="20.0" />
+            </VBox.margin>
+        </JFXTextField>
+        <Label prefHeight="10.0" prefWidth="400.0" styleClass="prompt" text="Return due date">
+            <VBox.margin>
+                <Insets left="20.0" right="20.0" top="30.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+            <font>
+                <Font name="Consolas" size="13.5" />
+            </font>
+        </Label>
+        <JFXTextField fx:id="txtReturnDueDate" editable="false" layoutX="20" layoutY="  120.0" maxHeight="1.7976931348623157E308" prefHeight="0.0" prefWidth="370.0">
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+            <VBox.margin>
+                <Insets left="20.0" right="20.0" />
+            </VBox.margin>
+        </JFXTextField>
+        <Label minHeight="4.0" prefWidth="500.0" style="-fx-background-color: -fx-text;">
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+        </Label>
+        <VBox fx:id="vboxBookList">
+            <Label fx:id="lbl1" prefWidth="400.0" styleClass="others-small">
+                <effect>
+                    <Glow level="0.9" />
+                </effect>
+                <font>
+                    <Font name="Consolas" size="13.5" />
+                </font>
+            </Label>
+            <HBox alignment="CENTER_LEFT" prefHeight="60.0">
+                <JFXTextField fx:id="txtBook1" disable="true" labelFloat="true" prefWidth="400.0" promptText="Book state when returned">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                    <effect>
+                        <Glow level="0.9" />
+                    </effect>
+                </JFXTextField>
+                <JFXToggleButton fx:id="toggle1" contentDisplay="GRAPHIC_ONLY" size="8.0" toggleColor="#12fb08" toggleLineColor="#10910c" unToggleColor="#cccccc">
+                   <effect>
+                      <Glow level="0.6" />
+                   </effect>
+                </JFXToggleButton>
+            </HBox>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" top="20.0" />
+         </VBox.margin>
+        </VBox>
+        <JFXButton fx:id="btnOK" alignment="CENTER" defaultButton="true" minHeight="-Infinity" onAction="#okHandler" prefHeight="35.0" prefWidth="450.0" styleClass="bordered" text="Done">
+            <VBox.margin>
+                <Insets bottom="10.0" left="120.0" right="120.0" top="50.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </JFXButton>
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="40.0" />
+    </padding>
+</VBox>

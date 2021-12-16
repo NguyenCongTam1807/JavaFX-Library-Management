@@ -52,6 +52,14 @@ Label.info {
     -fx-font-size: 16;
     -fx-text-fill: -fx-text;
 }
+Label.info-small {
+    -fx-text-fill:-fx-text;
+    -fx-font-size: 12;
+}
+Label.others-small {
+    -fx-text-fill:-fx-others;
+    -fx-font-size: 12;
+}
 .error-small {
     -fx-text-fill:-fx-error;
     -fx-font-size: 12;
@@ -71,20 +79,25 @@ JFXToggleButton {
     -fx-font-size:10;
 }
 .jfx-toggle-button{
-    -fx-toggle-color: color-value;
-    -fx-untoggle-color: color-value;
-    -fx-toggle-line-color: color-value;
-    -fx-untoggle-line-color: color-value;
+    -fx-toggle-color: -fx-text;
+    -fx-untoggle-color: -fx-bg2;
+    -fx-toggle-line-color: -fx-unfocus;
+    -fx-untoggle-line-color: -fx-prompt;
 }
 JFXTextField, JFXPasswordField, JFXButton {
     -fx-text-fill: -fx-text;
     -fx-font-size: 16;
 }
-
+JFXButton.bordered {
+    -fx-border-width: 2;
+    -fx-border-color: -fx-text;
+    -fx-pref-height: 35;
+}
 .important {
     -jfx-button-type: RAISED;
     -fx-background-color: -fx-bg3;
     -fx-text-fill: -fx-text3;
+    -fx-pref-height: 35;
 }
 .jfx-text-field, .jfx-password-field
 {

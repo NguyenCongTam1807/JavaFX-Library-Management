@@ -30,13 +30,14 @@ public class AddIssueController implements Serializable, Initializable {
 
     @FXML private VBox root,vboxBookList;
     @FXML private HBox btn;
-    @FXML private JFXTextField userId;
+    @FXML private JFXTextField txtUserID;
     @FXML private JFXTextField txtIssueDate,txtReturnDueDate;
     @FXML private JFXTextField txtBook1;
     @FXML private Label label1,lblErrorName;
     @FXML private JFXButton btnAdd, btnDelete,btnCheckUser,btnDone;
     @FXML private List<JFXTextField> issuedBooks = new ArrayList<>();
     @FXML private List<Label> issuedLabels=new ArrayList<>();
+
     private static final int MAX_QUANTITY_PER_ISSUE = 5;
     private int maxQuantity = 0;      //Number of books user can borrow this time
     private BookService bs=new BookService();
@@ -64,7 +65,7 @@ public class AddIssueController implements Serializable, Initializable {
                 issuedBooks.remove(i-1);
             }
         });
-        userId.textProperty().addListener(new ChangeListener<String>() {
+        txtUserID.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 userIdIsTrue(true);
@@ -72,7 +73,7 @@ public class AddIssueController implements Serializable, Initializable {
             }
         });
         btnCheckUser.onMouseClickedProperty().set(mouseEvent -> {
-            String user=userId.getText();
+            String user= txtUserID.getText();
             int j=checkUsername(user);
             if (j!=-1){
                 if (users.get(j).getStatus()==0){
@@ -82,7 +83,7 @@ public class AddIssueController implements Serializable, Initializable {
                 else {
                     AlertUtils.showConfirmAlert("addIssue.usersCheck.content","addIssue.usersCheck.title");
                     userIdIsTrue(false);
-                    maxQuantity = MAX_QUANTITY_PER_ISSUE - ids.notReturnedBooks(user);
+                    maxQuantity = MAX_QUANTITY_PER_ISSUE - ids.notReturnedBookCount(user);
                     lblErrorName.setText(String.format(Bundle.getString("addIssue.usersCheck.numberOfBook"),maxQuantity));
                 }
             }
@@ -94,7 +95,7 @@ public class AddIssueController implements Serializable, Initializable {
         btnDone.onMouseClickedProperty().set(mouseEvent ->{
             if (validBtnDone()){
                 try {
-                    is.addIssue(Integer.parseInt(userId.getText()),
+                    is.addIssue(Integer.parseInt(txtUserID.getText()),
                             java.sql.Date.valueOf(DateUtils.changeFormat(txtIssueDate.getText(),"dd/MM/yyyy","yyyy-MM-dd"))
                     ,java.sql.Date.valueOf(DateUtils.changeFormat(txtReturnDueDate.getText(),"dd/MM/yyyy","yyyy-MM-dd")));
                 } catch (ParseException e) {
@@ -103,7 +104,7 @@ public class AddIssueController implements Serializable, Initializable {
                 List<Integer> issuedBookIDs = new ArrayList<>();
                 for (int i = 0; i < issuedBooks.size(); i++)
                     issuedBookIDs.add(Integer.parseInt(issuedBooks.get(i).getText()));
-                ids.addIssueDetail(issuedBookIDs,Integer.parseInt(userId.getText()));
+                ids.addIssueDetail(issuedBookIDs,Integer.parseInt(txtUserID.getText()));
                 AlertUtils.showConfirmAlert("addIssue.success.title","addIssue.success.content");
             }
             else AlertUtils.showErrorAlert("addIssue.fail.title","addIssue.fail.content");

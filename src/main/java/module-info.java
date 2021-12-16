@@ -8,4 +8,6 @@ module JavaFX.Library.Manager {
 
     opens ui;
     exports ui;
+    opens utils;
+    exports utils;
 }

@@ -94,4 +94,26 @@ public class BookService {
             return null;
         }
     }
+
+    public List<Book> getIssuedBooks(int issueID) {
+        try(Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm=conn.prepareStatement("SELECT * FROM book WHERE book_id IN " +
+                    "(SELECT book_id FROM issue_details " +
+                        "WHERE issue_id = ? )"
+                    );
+            stm.setInt(1,issueID);
+            ResultSet rs = stm.executeQuery();
+            List<Book> books = new ArrayList<>();
+            while(rs.next()) {
+                books.add(new Book(rs.getInt("book_id"),rs.getString("title"),
+                        rs.getInt("amount"),rs.getString("author"),
+                        rs.getInt("published_year"),rs.getString("genre"),
+                        rs.getString("publisher"),rs.getString("summary") ));
+            }
+            return books;
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+            return null;
+        }
+    }
 }

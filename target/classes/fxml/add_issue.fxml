@@ -8,9 +8,9 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<VBox fx:id="root" prefHeight="450.0" prefWidth="450" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.AddIssueController">
+<VBox fx:id="root" prefHeight="450.0" prefWidth="450" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.AddIssueController">
     <children>
-        <JFXTextField fx:id="userId" labelFloat="true" prefHeight="30.0" prefWidth="200.0" promptText="User ID">
+        <JFXTextField fx:id="txtUserID" labelFloat="true" prefHeight="30.0" prefWidth="200.0" promptText="User ID">
             <effect>
                 <Glow level="0.9" />
             </effect>
@@ -49,7 +49,7 @@
             <Insets />
          </VBox.margin>
         </JFXTextField>
-        <JFXTextField fx:id="txtReturnDueDate" labelFloat="true" editable="false" layoutX="20" layoutY="  120.0" maxHeight="1.7976931348623157E308" prefHeight="0.0" prefWidth="370.0" promptText="Return due date">
+        <JFXTextField fx:id="txtReturnDueDate" editable="false" labelFloat="true" layoutX="20" layoutY="  120.0" maxHeight="1.7976931348623157E308" prefHeight="0.0" prefWidth="370.0" promptText="Return due date">
             <effect>
                 <Glow level="0.9" />
             </effect>
@@ -113,7 +113,7 @@
             </effect>
             </Label>
         </VBox>
-        <JFXButton fx:id="btnDone" alignment="CENTER" defaultButton="true" disable="true" minHeight="-Infinity" prefHeight="30.0" prefWidth="450.0" text="Done">
+        <JFXButton fx:id="btnDone" alignment="CENTER" defaultButton="true" disable="true" minHeight="-Infinity" prefHeight="30.0" prefWidth="450.0" styleClass="bordered" text="Done">
          <VBox.margin>
             <Insets bottom="10.0" left="120.0" right="120.0" top="30.0" />
          </VBox.margin>

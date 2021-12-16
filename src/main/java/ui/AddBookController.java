@@ -95,7 +95,6 @@ public class AddBookController implements Initializable {
                         txtTitle.setText(t);
                         BookService bs=new BookService();
                         Book book=bs.checkBookTitle(t);
-                        System.out.println(book.getTitle());
                         if(book!=null){
                             txtIdBook.setText(String.valueOf(book.getId()));
                             txtAuthor.setText(book.getAuthor());

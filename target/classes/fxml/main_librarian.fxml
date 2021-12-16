@@ -15,7 +15,7 @@
                    <tabs>
                        <Tab fx:id="tabBookIssue"  text="BOOK ISSUE">
                            <VBox>
-                               <JFXTreeTableView fx:id="bookIssueTTV" prefHeight="590">
+                               <JFXTreeTableView fx:id="bookIssueTTV" prefHeight="590" >
                                     <VBox.margin>
                                         <Insets top="70" />
                                     </VBox.margin>

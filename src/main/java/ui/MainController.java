@@ -13,8 +13,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -22,6 +24,7 @@ import pojo.Book;
 import pojo.Issue;
 import pojo.User;
 import services.BookService;
+import services.IssueDetailService;
 import services.IssueService;
 import services.UserService;
 import utils.AlertUtils;
@@ -31,27 +34,29 @@ import utils.DateUtils;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 public class MainController implements Initializable {
-    @FXML AnchorPane anchorPane;
-    @FXML JFXTabPane tabPane;
-    @FXML JFXNodesList nodesList;
-    @FXML JFXNodesList nodesListSettings;
-    @FXML JFXNodesList nodesListLanguage;
-    @FXML JFXNodesList nodesListTheme;
-    @FXML JFXButton logoutButton,infoButton;
-    @FXML Tab tabBookIssue,tabBook,tabUser;
-    @FXML JFXTreeTableView bookIssueTTV,bookTTV,userTTV;
-    @FXML Label lblTotal;
-    @FXML JFXTextField txtSearch;
+    @FXML private AnchorPane anchorPane;
+    @FXML private JFXTabPane tabPane;
+    @FXML private JFXNodesList nodesList;
+    @FXML private JFXNodesList nodesListSettings;
+    @FXML private JFXNodesList nodesListLanguage;
+    @FXML private JFXNodesList nodesListTheme;
+    @FXML private JFXButton logoutButton,infoButton;
+    @FXML private Tab tabBookIssue,tabBook,tabUser;
+    @FXML private JFXTreeTableView bookIssueTTV,bookTTV,userTTV;
+    @FXML private Label lblTotal;
+    @FXML private JFXTextField txtSearch;
 
-    User currentUser = Context.getInstance().getLoginLoader().user;
-    ObservableList<Issue> issues;
-    ObservableList<Book> books;
-    ObservableList<User> users;
+    BookService bs = new BookService();
+
+    private ObservableList<Issue> issues;
+    private ObservableList<Book> books;
+    private ObservableList<User> users;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -59,7 +64,7 @@ public class MainController implements Initializable {
         initBookIssueTab();
         initBookTab();
         initUserTab();
-
+        //lblTotal.setText(loggedInUser.getEmail());
         tabPane.getSelectionModel().selectedItemProperty().addListener((observableValue, oldTab, newTab) -> {
             int total = 0;
             if (newTab==tabBookIssue)
@@ -103,7 +108,7 @@ public class MainController implements Initializable {
             final TreeTableRow<Issue> row = new TreeTableRow<>();
             row.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
                 final int index = row.getIndex();
-                if (index >= 0 && bookIssueTTV.getSelectionModel().isSelected(index)  ) {
+                if (index >= 0 && bookIssueTTV.getSelectionModel().isSelected(index) && event.getClickCount()<=1 ) {
                     bookIssueTTV.getSelectionModel().clearSelection();
                     event.consume();
                 }
@@ -114,7 +119,7 @@ public class MainController implements Initializable {
             final TreeTableRow<Book> row = new TreeTableRow<>();
             row.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
                 final int index = row.getIndex();
-                if (index >= 0 && bookTTV.getSelectionModel().isSelected(index)  ) {
+                if (index >= 0 && bookTTV.getSelectionModel().isSelected(index) && event.getClickCount()<=1 ) {
                     bookTTV.getSelectionModel().clearSelection();
                     event.consume();
                 }
@@ -125,12 +130,68 @@ public class MainController implements Initializable {
             final TreeTableRow<Book> row = new TreeTableRow<>();
             row.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
                 final int index = row.getIndex();
-                if (index >= 0 && userTTV.getSelectionModel().isSelected(index)  ) {
+                if (index >= 0 && userTTV.getSelectionModel().isSelected(index) && event.getClickCount()<=1 ) {
                     userTTV.getSelectionModel().clearSelection();
                     event.consume();
                 }
             });
             return row;
+        });
+
+        /** Double click event for TreeTableView rows **/
+
+        bookIssueTTV.setOnMouseClicked(event -> {
+            if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() > 1 &&
+                    (event.getTarget() != null || ((VBox) event.getTarget()).getChildren().size() > 0)) {
+                TreeItem<Issue> selectedIssue = (TreeItem<Issue>) bookIssueTTV.getSelectionModel().getSelectedItem();
+                Parent root;
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/book_return.fxml"));
+                    loader.setControllerFactory(aClass -> {
+                        if (aClass == BookReturnController.class) {
+                            BookReturnController controller = new BookReturnController();
+                            controller.getIssueInfo(selectedIssue.getValue().getId(),selectedIssue.getValue().getUserId(),
+                                    selectedIssue.getValue().getDate(),selectedIssue.getValue().getReturnDueDate());
+                            controller.setStage(new Stage());
+                            return controller ;
+                        } else {
+                            try {
+                                return aClass.getDeclaredConstructor().newInstance();
+                            } catch (Exception exc) {
+                                throw new RuntimeException(exc);
+                            }
+                        }
+                    });
+                    root = loader.load();
+                    Stage stage = new Stage();
+                    stage.setTitle(Bundle.getString("bookReturn.title"));
+                    stage.setScene(new Scene(root));
+                    Stage primaryStage = (Stage) lblTotal.getScene().getWindow();
+                    stage.initOwner(primaryStage);
+                    stage.setResizable(false);
+                    stage.initModality(Modality.WINDOW_MODAL);
+                    stage.show();
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        bookTTV.setOnMouseClicked(event -> {
+            if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 &&
+                    (event.getTarget() != null || ((AnchorPane) event.getTarget()).getChildren().size() > 0)) {
+
+                //your code here
+            }
+        });
+
+        userTTV.setOnMouseClicked(event -> {
+            if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 &&
+                    (event.getTarget() != null || ((AnchorPane) event.getTarget()).getChildren().size() > 0)) {
+
+                //your code here
+            }
         });
 
         /** Search bar **/
@@ -171,7 +232,7 @@ public class MainController implements Initializable {
                 root=FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
                 Stage stage=(Stage)((Node) event.getSource()).getScene().getWindow();
                 stage.setResizable(false);
-                stage.setScene(new Scene(root,400, 386));
+                stage.setScene(new Scene(root));
                 stage.centerOnScreen();
                 stage.show();
             }
@@ -388,6 +449,7 @@ public class MainController implements Initializable {
             default:initUserTab();
         }
     }
+
     public void showInfo() {
 
     }

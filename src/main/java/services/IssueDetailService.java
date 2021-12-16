@@ -4,16 +4,17 @@ import configs.JdbcUtils;
 import pojo.Book;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class IssueDetailService {
 
-    public int notReturnedBooks(String userId) {
+    public int notReturnedBookCount(String userId) {
         try(Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm=conn.prepareStatement("SELECT Count(*) AS not_returned_count FROM issue_details " +
                     "WHERE issue_id IN " +
                         "(SELECT issue_id FROM issue WHERE user_id = ?)"+
-                    "AND return_date < CURDATE()" +
+                    "AND return_date IS NULL" +
                     "GROUP BY issue_id");
             stm.setString(1,userId);
             ResultSet rs = stm.executeQuery();
@@ -24,6 +25,29 @@ public class IssueDetailService {
         }catch (SQLException throwables){
             throwables.printStackTrace();
             return 0;
+        }
+    }
+    public List<Book> notReturnedBooks(String userId) {
+        try(Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm=conn.prepareStatement("SELECT * FROM book WHERE book_id IN " +
+                    "(SELECT book_id FROM issue_details " +
+                    "WHERE issue_id IN " +
+                    "(SELECT issue_id FROM issue WHERE user_id = ?)"+
+                    "AND return_date IS NULL" +
+                    "GROUP BY issue_id)");
+            stm.setString(1,userId);
+            ResultSet rs = stm.executeQuery();
+            List<Book> books = new ArrayList<>();
+            while (rs.next()) {
+                books.add(new Book(rs.getInt("book_id"),rs.getString("title"),
+                        rs.getInt("amount"),rs.getString("author"),
+                        rs.getInt("published_year"),rs.getString("genre"),
+                        rs.getString("publisher"),rs.getString("summary") ));
+            }
+            return books;
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+            return null;
         }
     }
     public int addIssueDetail(List<Integer> bookIDs, Integer issueId){
