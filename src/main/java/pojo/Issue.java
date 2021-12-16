@@ -2,7 +2,8 @@ package pojo;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
-import java.util.Date;
+import java.sql.Date;
+
 
 public class Issue extends RecursiveTreeObject<Issue> {
     private int id,userId;

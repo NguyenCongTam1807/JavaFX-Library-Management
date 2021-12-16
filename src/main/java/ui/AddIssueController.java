@@ -14,6 +14,8 @@ import javafx.scene.layout.HBox;
 import pojo.Book;
 import pojo.User;
 import services.BookService;
+import services.IssueDetailService;
+import services.IssueService;
 import services.UserService;
 import utils.AlertUtils;
 import utils.Bundle;
@@ -21,6 +23,7 @@ import utils.DateUtils;
 
 import java.io.Serializable;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.*;
 
 public class AddIssueController implements Serializable, Initializable {
@@ -34,11 +37,14 @@ public class AddIssueController implements Serializable, Initializable {
     @FXML private JFXButton btnAdd, btnDelete,btnCheckUser,btnDone;
     @FXML private List<JFXTextField> issuedBooks = new ArrayList<>();
     @FXML private List<Label> issuedLabels=new ArrayList<>();
-    private int i=0;
+    private static final int MAX_QUANTITY_PER_ISSUE = 5;
+    private int maxQuantity = 0;      //Number of books user can borrow this time
     private BookService bs=new BookService();
-    private UserService u=new UserService();
+    private UserService us=new UserService();
+    private IssueService is = new IssueService();
+    private IssueDetailService ids = new IssueDetailService();
     private List<Book> books=bs.getBooks();
-    private List<User> users=u.getStudentUsers();
+    private List<User> users=us.getStudentUsers();
     private String txt="";
 
     @Override
@@ -49,7 +55,7 @@ public class AddIssueController implements Serializable, Initializable {
         addTextFieldListeners(txtBook1, label1);
         btnAdd.onMouseClickedProperty().set(mouseEvent -> addItems());
         btnDelete.onMouseClickedProperty().set(mouseEvent -> {
-            i = issuedBooks.size();
+            int i = issuedBooks.size();
             if (i>1) {
                 root.getScene().getWindow().setHeight(Math.round(root.getHeight()-31));
                 vboxBookList.getChildren().remove(issuedBooks.get(i-1));
@@ -75,9 +81,9 @@ public class AddIssueController implements Serializable, Initializable {
                 }
                 else {
                     AlertUtils.showConfirmAlert("addIssue.usersCheck.content","addIssue.usersCheck.title");
-                    lblErrorName.setText("");
                     userIdIsTrue(false);
-                    //check so luong sach con co the muon
+                    maxQuantity = MAX_QUANTITY_PER_ISSUE - ids.notReturnedBooks(user);
+                    lblErrorName.setText(String.format(Bundle.getString("addIssue.usersCheck.numberOfBook"),maxQuantity));
                 }
             }
             else {
@@ -87,16 +93,26 @@ public class AddIssueController implements Serializable, Initializable {
         });
         btnDone.onMouseClickedProperty().set(mouseEvent ->{
             if (validBtnDone()){
+                try {
+                    is.addIssue(Integer.parseInt(userId.getText()),
+                            java.sql.Date.valueOf(DateUtils.changeFormat(txtIssueDate.getText(),"dd/MM/yyyy","yyyy-MM-dd"))
+                    ,java.sql.Date.valueOf(DateUtils.changeFormat(txtReturnDueDate.getText(),"dd/MM/yyyy","yyyy-MM-dd")));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                List<Integer> issuedBookIDs = new ArrayList<>();
+                for (int i = 0; i < issuedBooks.size(); i++)
+                    issuedBookIDs.add(Integer.parseInt(issuedBooks.get(i).getText()));
+                ids.addIssueDetail(issuedBookIDs,Integer.parseInt(userId.getText()));
                 AlertUtils.showConfirmAlert("addIssue.success.title","addIssue.success.content");
-                //do something
             }
             else AlertUtils.showErrorAlert("addIssue.fail.title","addIssue.fail.content");
         });
     }
 
     private void addItems(){
-        i = issuedBooks.size();
-        if (i<5) {
+        int i = issuedBooks.size();
+        if (i<maxQuantity) {
             JFXTextField textField = new JFXTextField();
             Label label=new Label();
             label.setPrefHeight(13);

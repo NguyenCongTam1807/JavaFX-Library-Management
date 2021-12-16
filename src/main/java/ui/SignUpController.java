@@ -49,7 +49,6 @@ public class SignUpController implements Serializable, Initializable {
     @FXML private VBox container;
     @FXML private Label lblErrorBirthday;
 
-    User user;
 
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -173,7 +172,7 @@ public class SignUpController implements Serializable, Initializable {
     public void signup() {
         if(validSignUp())
         {
-            user = new User(Id.getText(),txtPw.getText(),1,name.getText(),java.sql.Date.valueOf(birthday.getValue()),
+            User user = new User(Id.getText(),txtPw.getText(),1,name.getText(),java.sql.Date.valueOf(birthday.getValue()),
                     mobile.getText(),email.getText(),studentId.getText());
             UserService userService = new UserService();
             if(userService.addUser(user)) {

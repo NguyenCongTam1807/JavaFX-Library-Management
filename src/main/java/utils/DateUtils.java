@@ -18,4 +18,8 @@ public class DateUtils {
         SimpleDateFormat formatter = new SimpleDateFormat(newFormat);
         return formatter.format(date);
     }
+
+    public static java.sql.Date stringToDate(String dateString) {
+        return java.sql.Date.valueOf(dateString);
+    }
 }

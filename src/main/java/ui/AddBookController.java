@@ -76,11 +76,6 @@ public class AddBookController implements Initializable {
         disableAllField(false);
     }
 
-/*    @FXML*/
-    /*private void btnClear() {
-
-    }*/
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
