@@ -365,7 +365,7 @@ public class MainController implements Initializable {
             case 0:
                 root = FXMLLoader.load(getClass().getResource("/fxml/add_issue.fxml"));
                 Stage stage = new Stage();
-                stage.setTitle(Bundle.getString("addBook.title"));
+                stage.setTitle(Bundle.getString("addIssue.title"));
                 stage.setScene(new Scene(root));
                 Stage primaryStage = (Stage) lblTotal.getScene().getWindow();
                 stage.initOwner(primaryStage);
@@ -376,7 +376,8 @@ public class MainController implements Initializable {
             case 1:
                 root = FXMLLoader.load(getClass().getResource("/fxml/add_book.fxml"));
                 stage = new Stage();
-                stage.setTitle(Bundle.getString("addIssue.title"));
+                AddBookController.setHandleAddBook(true);
+                stage.setTitle(Bundle.getString("addBook.title"));
                 stage.setScene(new Scene(root));
                 primaryStage = (Stage) lblTotal.getScene().getWindow();
                 stage.initOwner(primaryStage);
@@ -398,12 +399,48 @@ public class MainController implements Initializable {
         }
     }
 
-    public void editHandler() {
+    public void editHandler() throws IOException {
         int tabIndex = tabPane.getSelectionModel().getSelectedIndex();
+        Parent root;
         switch (tabIndex) {
             case 0:
                 break;
             case 1:
+                TreeItem<Book> selectedBook=(TreeItem<Book>) bookTTV.getSelectionModel().getSelectedItem();
+                if(selectedBook!=null){
+                    try {
+                        FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/add_book.fxml"));
+                        loader.setControllerFactory(aClass -> {
+                            if(aClass==AddBookController.class){
+                                AddBookController controller= new AddBookController();
+                                controller.getBookInfo(selectedBook.getValue().getId(),selectedBook.getValue().getTitle(),
+                                        selectedBook.getValue().getAmount(),selectedBook.getValue().getAuthor(),selectedBook.getValue().getPublishedYear(),
+                                        selectedBook.getValue().getGenre(),selectedBook.getValue().getPublisher(),selectedBook.getValue().getSummary());
+                                controller.setStage(new Stage());
+                                return controller ;
+                            }
+                            else {
+                                try {
+                                    return aClass.getDeclaredConstructor().newInstance();
+                                } catch (Exception exc) {
+                                    throw new RuntimeException(exc);
+                                }
+                            }
+                        });
+                        root = loader.load();
+                        Stage stage = new Stage();
+                        stage.setTitle(Bundle.getString("bookReturn.title"));
+                        stage.setScene(new Scene(root));
+                        Stage primaryStage = (Stage) lblTotal.getScene().getWindow();
+                        stage.initOwner(primaryStage);
+                        stage.setResizable(false);
+                        stage.initModality(Modality.WINDOW_MODAL);
+                        stage.show();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
                 break;
             default:;
         }

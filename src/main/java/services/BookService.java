@@ -43,6 +43,26 @@ public class BookService {
         return true;
     }
 
+    public boolean upDateBook(Book book){
+        try(Connection conn=JdbcUtils.getConn()){
+            conn.setAutoCommit(false);
+            PreparedStatement stm=conn.prepareStatement("UPDATE book Set title=?,amount=?,author=?,published_year=?,genre=?,publisher=?,summary=? WHERE book_id=?");
+            stm.setString(1,book.getTitle());
+            stm.setInt(2,book.getAmount());
+            stm.setString(3,book.getAuthor());
+            stm.setInt(4,book.getPublishedYear());
+            stm.setString(5,book.getGenre());
+            stm.setString(6,book.getPublisher());
+            stm.setString(7,book.getSummary());
+            stm.setInt(8,book.getId());
+            stm.executeUpdate();
+            conn.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
     public Book checkBookId(int id){
         try(Connection conn=JdbcUtils.getConn()){
             PreparedStatement stm=conn.prepareStatement("SELECT * FROM book WHERE book_id=?");

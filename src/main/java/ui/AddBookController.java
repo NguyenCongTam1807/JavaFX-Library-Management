@@ -28,12 +28,19 @@ import java.util.regex.Pattern;
 
 
 public class AddBookController implements Initializable {
+
+    private static boolean isHandleAddBook=true;
+    private Book book;
+    private Stage myStage;
+
     @FXML private VBox vbox;
     @FXML private JFXButton btnAddBook, btnClear;
     @FXML private JFXTextField txtAmount,txtTitle,txtSummary,txtGenre,txtPublisher, txtPublishedYear, txtAuthor,txtIdBook;
     @FXML private Label lblErrorAmount,lblErrorSummary,lblErrorIdBook, lblErrorPublisher,lblErrorGenre,lblErrorPublishedYear,lblErrorAuthor, lblErrorTitle;
 
-
+    public static void setHandleAddBook(boolean handleAddBook) {
+        AddBookController.isHandleAddBook = handleAddBook;
+    }
 
     public boolean validYear(String s) {
         if (s.length()==4){
@@ -61,9 +68,9 @@ public class AddBookController implements Initializable {
         valid=true;
         //loi o day nay
         vbox.getChildren().stream().filter(node -> node.getClass()==Label.class).map(Label ->((Label) Label).getText()).forEach(text ->{
-            if (text!="")
-                valid=false;
-            //System.out.println(text.length());
+            if(text!="") {
+                valid = false;
+            }
         });
         if (txtGenre.isDisable()==true) valid=true;
         vbox.getChildren().stream().filter(node -> node.getClass()==JFXTextField.class).map(JFXTextField ->((JFXTextField) JFXTextField)).forEach(text ->{
@@ -86,36 +93,42 @@ public class AddBookController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            Connection conn = JdbcUtils.getConn();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        if(!isHandleAddBook){
+            txtIdBook.setText(String.valueOf(book.getId()));
+            txtTitle.setText(book.getTitle());
+            txtAuthor.setText(book.getAuthor());
+            txtGenre.setText(book.getGenre());
+            txtPublishedYear.setText(String.valueOf(book.getPublishedYear()));
+            txtSummary.setText(book.getSummary());
+            txtPublisher.setText(book.getPublisher());
+            txtAmount.setText(String.valueOf(book.getAmount()));
+            txtIdBook.setDisable(true);
         }
         txtTitle.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                if(!t1){
-                    if(txtTitle.getText()!=""){
-                        String t=SignUpController.styleString(txtTitle.getText());
-                        txtTitle.setText(t);
-                        BookService bs=new BookService();
-                        Book book=bs.checkBookTitle(t);
-                        if(book!=null){
-                            txtIdBook.setText(String.valueOf(book.getId()));
-                            txtAuthor.setText(book.getAuthor());
-                            txtGenre.setText(book.getGenre());
-                            txtSummary.setText(book.getSummary());
-                            txtPublisher.setText(book.getPublisher());
-                            txtPublishedYear.setText(String.valueOf(book.getPublishedYear()));
-                            disableAllField(true);
-                        }
-                        else {
-                            if (txtSummary.isDisable()==true) {
-                                clearField();
-                                txtTitle.setText(t);
+                if(!t1&&isHandleAddBook){
+                        if(txtTitle.getText()!=""){
+                            String t=SignUpController.styleString(txtTitle.getText());
+                            txtTitle.setText(t);
+                            BookService bs=new BookService();
+                            Book book=bs.checkBookTitle(t);
+                            if(book!=null){
+                                txtIdBook.setText(String.valueOf(book.getId()));
+                                txtAuthor.setText(book.getAuthor());
+                                txtGenre.setText(book.getGenre());
+                                txtSummary.setText(book.getSummary());
+                                txtPublisher.setText(book.getPublisher());
+                                txtPublishedYear.setText(String.valueOf(book.getPublishedYear()));
+                                disableAllField(true);
+                            }
+                            else {
+                                if (txtSummary.isDisable()==true) {
+                                    clearField();
+                                    txtTitle.setText(t);
+                                }
                             }
                         }
-                    }
                 }
             }
         });
@@ -243,13 +256,22 @@ public class AddBookController implements Initializable {
         btnAddBook.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                Book book=new Book(Integer.parseInt(txtIdBook.getText()),txtTitle.getText(),Integer.parseInt(txtAmount.getText()),txtAuthor.getText(),Integer.parseInt(txtPublishedYear.getText()),txtGenre.getText(),txtPublisher.getText(),txtSummary.getText());
+                BookService bookService=new BookService();
                 if (validInput()){
-                    Book book=new Book(Integer.parseInt(txtIdBook.getText()),txtTitle.getText(),Integer.parseInt(txtAmount.getText()),txtAuthor.getText(),Integer.parseInt(txtPublishedYear.getText()),txtGenre.getText(),txtPublisher.getText(),txtSummary.getText());
-                    BookService bookService=new BookService();
-                    if (bookService.addBook(book)){
-                        AlertUtils.showConfirmAlert("addBook.success.title","addBook.success.content");
-                        Stage stage = (Stage) btnAddBook.getScene().getWindow();
-                        stage.close();
+                    if(isHandleAddBook){
+                        if (bookService.addBook(book)){
+                            AlertUtils.showConfirmAlert("addBook.success.title","addBook.success.content");
+                            Stage stage = (Stage) btnAddBook.getScene().getWindow();
+                            stage.close();
+                        }
+                    }
+                    else {
+                        if(bookService.upDateBook(book)){
+                            AlertUtils.showConfirmAlert("editBook.success.title","editBook.success.content");
+                            Stage stage = (Stage) btnAddBook.getScene().getWindow();
+                            stage.close();
+                        }
                     }
                 }
                 else {
@@ -266,27 +288,27 @@ public class AddBookController implements Initializable {
         txtIdBook.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                if(!t1){
-                    String t=txtIdBook.getText();
-                    if(t!="" && !validAmount(t)) {
-                        Book book;
-                        BookService bookService = new BookService();
-                        book=bookService.checkBookId(Integer.parseInt(txtIdBook.getText()));
-                        if(book!=null) {
-                            txtTitle.setText(book.getTitle());
-                            txtAuthor.setText(book.getAuthor());
-                            txtGenre.setText(book.getGenre());
-                            txtSummary.setText(book.getSummary());
-                            txtPublisher.setText(book.getPublisher());
-                            txtPublishedYear.setText(String.valueOf(book.getPublishedYear()));
-                            disableAllField(true);
-                        }
-                        else
+                if(!t1&&isHandleAddBook){
+                        String t=txtIdBook.getText();
+                        if(t!="" && !validAmount(t)) {
+                            Book book;
+                            BookService bookService = new BookService();
+                            book=bookService.checkBookId(Integer.parseInt(txtIdBook.getText()));
+                            if(book!=null) {
+                                txtTitle.setText(book.getTitle());
+                                txtAuthor.setText(book.getAuthor());
+                                txtGenre.setText(book.getGenre());
+                                txtSummary.setText(book.getSummary());
+                                txtPublisher.setText(book.getPublisher());
+                                txtPublishedYear.setText(String.valueOf(book.getPublishedYear()));
+                                disableAllField(true);
+                            }
+                            else
                             if (txtGenre.isDisable()==true) {
                                 clearField();
                                 txtIdBook.setText(t);
                             }
-                    }
+                        }
                 }
             }
         });
@@ -297,6 +319,15 @@ public class AddBookController implements Initializable {
             if(!field.getId().equals("txtIdBook")&&!field.getId().equals("txtAmount"))
                 field.setDisable(disable);
         });
+    }
+
+    public void getBookInfo(int id,String title,int amount,String author,int publishedYear,String genre,String publisher,String summary){
+        book=new Book(id,title,amount,author,publishedYear,genre,publisher,summary);
+        isHandleAddBook=false;
+    }
+
+    public void setStage(Stage stage) {
+        myStage = stage;
     }
 
 }

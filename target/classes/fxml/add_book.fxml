@@ -16,7 +16,7 @@
             <Glow level="0.89" />
          </effect>
         </JFXTextField>
-        <Label fx:id="lblErrorIdBook" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
+        <Label fx:id="lblErrorIdBook" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-2.0" />
             </VBox.margin>
@@ -32,7 +32,7 @@
             <Glow level="0.89" />
          </effect>
         </JFXTextField>
-        <Label fx:id="lblErrorTitle" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
+        <Label fx:id="lblErrorTitle" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-2.0" />
             </VBox.margin>
@@ -48,7 +48,7 @@
             <Glow level="0.89" />
          </effect>
         </JFXTextField>
-        <Label fx:id="lblErrorAuthor" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
+        <Label fx:id="lblErrorAuthor" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-2.0" />
             </VBox.margin>
@@ -64,7 +64,7 @@
             <Glow level="0.89" />
          </effect>
         </JFXTextField>
-        <Label fx:id="lblErrorGenre" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
+        <Label fx:id="lblErrorGenre" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-2.0" />
             </VBox.margin>
@@ -96,7 +96,7 @@
             <Glow level="0.89" />
          </effect>
         </JFXTextField>
-        <Label fx:id="lblErrorPublisher" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
+        <Label fx:id="lblErrorPublisher" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-2.0" />
             </VBox.margin>
@@ -112,7 +112,7 @@
             <Glow level="0.89" />
          </effect>
       </JFXTextField>
-        <Label fx:id="lblErrorPublishedYear" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
+        <Label fx:id="lblErrorPublishedYear" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-2.0" />
             </VBox.margin>
@@ -128,7 +128,7 @@
             <Glow level="0.89" />
          </effect>
         </JFXTextField>
-        <Label fx:id="lblErrorAmount" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="&#10;">
+        <Label fx:id="lblErrorAmount" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error" text="">
             <VBox.margin>
                 <Insets left="10.0" right="10.0" top="-2.0" />
             </VBox.margin>
