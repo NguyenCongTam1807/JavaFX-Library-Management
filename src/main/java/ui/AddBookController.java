@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import pojo.Book;
 import services.BookService;
 import utils.Bundle;
@@ -58,14 +59,18 @@ public class AddBookController implements Initializable {
     boolean valid;
     private boolean validInput(){
         valid=true;
+        //loi o day nay
         vbox.getChildren().stream().filter(node -> node.getClass()==Label.class).map(Label ->((Label) Label).getText()).forEach(text ->{
             if (text!="")
                 valid=false;
+            //System.out.println(text.length());
         });
+        if (txtGenre.isDisable()==true) valid=true;
         vbox.getChildren().stream().filter(node -> node.getClass()==JFXTextField.class).map(JFXTextField ->((JFXTextField) JFXTextField)).forEach(text ->{
            if (!text.getId().equals("txtSummary"))
-               if (text.getText()=="")
-                    valid=false;
+               if (text.getText()==""){
+                   valid=false;
+               }
         });
         return valid;
     }
@@ -105,8 +110,10 @@ public class AddBookController implements Initializable {
                             disableAllField(true);
                         }
                         else {
-                            clearField();
-                            txtTitle.setText(t);
+                            if (txtSummary.isDisable()==true) {
+                                clearField();
+                                txtTitle.setText(t);
+                            }
                         }
                     }
                 }
@@ -241,6 +248,8 @@ public class AddBookController implements Initializable {
                     BookService bookService=new BookService();
                     if (bookService.addBook(book)){
                         AlertUtils.showConfirmAlert("addBook.success.title","addBook.success.content");
+                        Stage stage = (Stage) btnAddBook.getScene().getWindow();
+                        stage.close();
                     }
                 }
                 else {
@@ -272,14 +281,11 @@ public class AddBookController implements Initializable {
                             txtPublishedYear.setText(String.valueOf(book.getPublishedYear()));
                             disableAllField(true);
                         }
-                        else {
-                            clearField();
-                            txtIdBook.setText(t);
-                        }
-                    }
-                    else {
-                        clearField();
-                        txtIdBook.setText(t);
+                        else
+                            if (txtGenre.isDisable()==true) {
+                                clearField();
+                                txtIdBook.setText(t);
+                            }
                     }
                 }
             }

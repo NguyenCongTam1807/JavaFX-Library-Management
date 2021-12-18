@@ -382,6 +382,7 @@ public class MainController implements Initializable {
                 stage.initOwner(primaryStage);
                 stage.setResizable(false);
                 stage.initModality(Modality.WINDOW_MODAL);
+                refreshHandler();
                 stage.show();
                 break;
             default:

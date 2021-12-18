@@ -20,9 +20,12 @@ import utils.DateUtils;
 import java.io.Serializable;
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+//import static jdk.internal.logger.DefaultLoggerFinder.SharedLoggers.system;
 
 public class BookReturnController implements Initializable, Serializable {
 
@@ -40,6 +43,8 @@ public class BookReturnController implements Initializable, Serializable {
     private BookService bs = new BookService();
     private int issueID,userID;
     private Date issueDate,returnDueDate;
+    long millis=System.currentTimeMillis();
+    Date date=new java.sql.Date(millis);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -54,8 +59,13 @@ public class BookReturnController implements Initializable, Serializable {
         lbl1.setText(books.get(0).getTitle());
         toggle1.selectedProperty().addListener((observableValue, oldVal, newVal) -> {
             txtBook1.setDisable(!newVal);
-            if (!newVal)
-                lbl1.setText(lbl1.getText()+". Returned in " + DateUtils.changeFormat(returnDueDate, "dd/MM/yyyy"));
+            String s=". Returned in " + DateUtils.changeFormat(date, "dd/MM/yyyy");
+            if (lbl1.getText().indexOf(s)!=-1) {
+                lbl1.setText( lbl1.getText().substring(0, lbl1.getText().indexOf(s)) + s.replace(s,newVal?s:"") );
+            }
+            else{
+                lbl1.setText(lbl1.getText()+s.replace(s,newVal?s:""));
+            }
         });
         for (int i = 1; i < books.size(); i++) {
             Label label = new Label();
@@ -94,8 +104,13 @@ public class BookReturnController implements Initializable, Serializable {
             label.setText(books.get(i).getTitle());
             toggle.selectedProperty().addListener((observableValue, oldVal, newVal) -> {
                 textField.setDisable(!newVal);
-                if (!newVal)
-                    label.setText(label.getText()+". Returned in " + DateUtils.changeFormat(returnDueDate, "dd/MM/yyyy"));
+                String s=". Returned in " + DateUtils.changeFormat(date, "dd/MM/yyyy");
+                if (label.getText().indexOf(s)!=-1) {
+                    label.setText( label.getText().substring(0, label.getText().indexOf(s)) + s.replace(s,newVal?s:"") );
+                }
+                else{
+                    label.setText(label.getText()+s.replace(s,newVal?s:""));
+                }
             });
 
             issuedLabels.add(label);
