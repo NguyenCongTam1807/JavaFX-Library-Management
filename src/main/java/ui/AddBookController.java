@@ -17,6 +17,7 @@ import pojo.Book;
 import services.BookService;
 import utils.Bundle;
 import utils.AlertUtils;
+import utils.Context;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -273,6 +274,8 @@ public class AddBookController implements Initializable {
                             stage.close();
                         }
                     }
+                    MainController controller = Context.getInstance().getMainController();
+                    controller.refreshHandler();
                 }
                 else {
                     AlertUtils.showErrorAlert("alert.addBookFail.title","alert.addBookFail.content");

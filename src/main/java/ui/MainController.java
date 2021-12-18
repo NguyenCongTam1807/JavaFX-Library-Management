@@ -60,6 +60,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        Context.getInstance().setMainController(this);
         initMenu();
         initBookIssueTab();
         initBookTab();
