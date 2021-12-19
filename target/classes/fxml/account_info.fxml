@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="container" focusTraversable="true" prefHeight="153.0" prefWidth="450.0" spacing="10.0" stylesheets="@../css/hacker_theme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.AccountInfoController">
+    <children>
+        <JFXTextField fx:id="txtName" editable="false" focusColor="#12fb08" labelFloat="true" promptText="Full Name" styleClass="label-form" unFocusColor="#065103">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="20.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </JFXTextField>
+        <JFXTextField fx:id="txtUserName" editable="false" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" promptText="Username" styleClass="label-form" unFocusColor="#065103">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="20.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </JFXTextField>
+        <JFXButton fx:id="btnChangePw" prefHeight="34.0" prefWidth="176.0" styleClass="bordered" text="Change Password">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="20.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </JFXButton>
+        <JFXTextField fx:id="txtBirthday" editable="false" layoutX="20" layoutY="  120.0" prefHeight="28.0" prefWidth="403.0" promptText="Your birthday" styleClass="label-form">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="20.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </JFXTextField>
+        <JFXTextField fx:id="txtStdId" editable="false" focusColor="#12fb08" labelFloat="true" layoutX="20" layoutY="30.0" promptText="Enter student ID" styleClass="label-form" unFocusColor="#065103">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="20.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </JFXTextField>
+        <Label fx:id="lblErrorStId" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error-small" text="&#10;">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="-5.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </Label>
+        <HBox layoutX="20.0" layoutY="30.0" prefHeight="100.0" prefWidth="200.0">
+            <children>
+                <Label focusTraversable="false" layoutX="20" layoutY="30" prefHeight="30.0" prefWidth="88.0" styleClass="normal" text="+84" textAlignment="CENTER" textFill="WHITE">
+                    <effect>
+                        <Glow level="0.9" />
+                    </effect>
+                    <HBox.margin>
+                        <Insets top="5.0" />
+                    </HBox.margin>
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font></Label>
+                <JFXTextField fx:id="txtMobile" focusColor="#12fb08" labelFloat="true" layoutX="20.0" layoutY="30.0" prefHeight="30.0" prefWidth="365.0" promptText="Mobile" unFocusColor="#065103">
+                    <effect>
+                        <Glow level="0.9" />
+                    </effect>
+                    <HBox.margin>
+                        <Insets top="5.0" />
+                    </HBox.margin></JFXTextField>
+            </children>
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="5.0" />
+            </VBox.margin>
+        </HBox>
+
+        <Label fx:id="lblErrorMb" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error-small" text="&#10;&#10;">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="-5.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </Label>
+        <JFXTextField fx:id="txtEmail" focusColor="#12fb08" labelFloat="true" layoutX="10.0" layoutY="62.0" promptText="Email" unFocusColor="#065103">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="10.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </JFXTextField>
+        <Label fx:id="lblErrorEmail" prefHeight="10.0" prefWidth="400.0" scaleShape="false" styleClass="error-small" text="&#10;&#10;">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="-5.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </Label>
+        <Label fx:id="lblStatus" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="369.0" text="&#10;&#10;">
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" top="-5.0" />
+            </VBox.margin>
+            <effect>
+                <Glow level="0.9" />
+            </effect>
+        </Label>
+        <HBox alignment="CENTER" prefHeight="47.0" prefWidth="404.0" spacing="30.0">
+            <children>
+                <JFXButton fx:id="btnSave" disable="true" prefHeight="66.0" prefWidth="100.0" styleClass="bordered" text="Save">
+                    <effect>
+                        <Glow level="0.9" />
+                    </effect>
+                </JFXButton>
+                <JFXButton fx:id="btnCancel" layoutX="10.0" layoutY="10.0" prefHeight="66.0" prefWidth="100.0" styleClass="bordered" text="Cancel">
+                    <effect>
+                        <Glow level="0.9" />
+                    </effect>
+                </JFXButton>
+            </children>
+            <VBox.margin>
+                <Insets top="20.0" />
+            </VBox.margin>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="40.0" left="30.0" right="30.0" top="30.0" />
+    </padding>
+</VBox>

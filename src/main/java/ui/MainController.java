@@ -491,7 +491,24 @@ public class MainController implements Initializable {
     }
 
     public void showInfo() {
-
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/fxml/account_info.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle(Bundle.getString("signup.title"));
+            stage.setScene(new Scene(root));
+            Stage primaryStage = (Stage) infoButton.getScene().getWindow();
+            stage.initOwner(primaryStage);
+            stage.setResizable(false);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.show();
+            /**Set new scene in the same window**/
+            /*Stage primaryStage = (Stage) btnSignUp.getScene().getWindow();
+            primaryStage.getScene().setRoot(root);*/
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
