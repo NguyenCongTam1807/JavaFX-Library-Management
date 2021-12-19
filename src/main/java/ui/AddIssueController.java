@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import pojo.Book;
 import pojo.User;
 import services.BookService;
@@ -19,6 +20,7 @@ import services.IssueService;
 import services.UserService;
 import utils.AlertUtils;
 import utils.Bundle;
+import utils.Context;
 import utils.DateUtils;
 
 import java.io.Serializable;
@@ -106,6 +108,10 @@ public class AddIssueController implements Serializable, Initializable {
                     issuedBookIDs.add(Integer.parseInt(issuedBooks.get(i).getText()));
                 ids.addIssueDetail(issuedBookIDs,Integer.parseInt(txtUserID.getText()));
                 AlertUtils.showConfirmAlert("addIssue.success.title","addIssue.success.content");
+                Stage stage = (Stage) btnDone.getScene().getWindow();
+                stage.close();
+                MainController controller = Context.getInstance().getMainController();
+                controller.refreshHandler();
             }
             else AlertUtils.showErrorAlert("addIssue.fail.title","addIssue.fail.content");
         });

@@ -181,6 +181,8 @@ public class SignUpController implements Serializable, Initializable {
                 Stage stage = (Stage) saveButton.getScene().getWindow();
                 // do what you have to do
                 stage.close();
+                MainController controller = Context.getInstance().getMainController();
+                controller.refreshHandler();
             }
             else
                 AlertUtils.showErrorAlert("alert.signUpFail.title","alert.signUpFail.content");
