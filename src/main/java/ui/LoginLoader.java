@@ -39,7 +39,16 @@ public class LoginLoader extends Application implements Serializable, Initializa
     @FXML private JFXTextField txtId;
     @FXML private JFXPasswordField txtPw;
     @FXML private JFXButton btnLogin, btnSignUp;
-    User loggedInUser;
+
+    /** Logged in User for use in Main Controller **/
+    private User loggedInUser;
+    public void setLoggedInUser(User user) {
+        loggedInUser = user;
+    }
+
+    public User getLoggedInUser() {
+        return loggedInUser;
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -85,7 +94,7 @@ public class LoginLoader extends Application implements Serializable, Initializa
         UserService userService=new UserService();
         String id = txtId.getText();
         String pw = txtPw.getText();
-        loggedInUser=userService.getUser(id,pw);
+        setLoggedInUser(userService.getUser(id,pw));
         if (loggedInUser!=null){
             Parent root;
             try{
@@ -133,5 +142,4 @@ public class LoginLoader extends Application implements Serializable, Initializa
             e.printStackTrace();
         }
     }
-
 }

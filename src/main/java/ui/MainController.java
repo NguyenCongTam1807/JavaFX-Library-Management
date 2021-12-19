@@ -51,8 +51,9 @@ public class MainController implements Initializable {
     @FXML private Label lblTotal;
     @FXML private JFXTextField txtSearch;
 
-    BookService bs = new BookService();
+    private User loggedInUser = Context.getInstance().getLoginLoader().getLoggedInUser();
 
+    private BookService bs = new BookService();
     private ObservableList<Issue> issues;
     private ObservableList<Book> books;
     private ObservableList<User> users;
@@ -65,7 +66,7 @@ public class MainController implements Initializable {
         initBookIssueTab();
         initBookTab();
         initUserTab();
-        //lblTotal.setText(loggedInUser.getEmail());
+        lblTotal.setText(loggedInUser.getAccountId());
         tabPane.getSelectionModel().selectedItemProperty().addListener((observableValue, oldTab, newTab) -> {
             int total = 0;
             if (newTab==tabBookIssue)
