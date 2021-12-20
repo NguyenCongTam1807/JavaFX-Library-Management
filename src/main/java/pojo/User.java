@@ -11,6 +11,19 @@ public class User extends RecursiveTreeObject<User> {
 
     public User() { }
 
+    public User(int id,String accountId, String password, int status, String name,
+                Date birthday, String phoneNumber, String email, String studentId) {
+        this.id=id;
+        this.accountId = accountId;
+        this.password = password;
+        this.status = status;
+        this.name = name;
+        this.birthday = birthday;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.studentId = studentId;
+    }
+
     //User's id field is set as auto-incremental in the database so it doesn't need to be included in the constructor
     public User(String accountId, String password, int status, String name,
                 Date birthday, String phoneNumber, String email, String studentId) {

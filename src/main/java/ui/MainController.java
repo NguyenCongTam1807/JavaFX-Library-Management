@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import pojo.Book;
 import pojo.Issue;
@@ -397,6 +399,15 @@ public class MainController implements Initializable {
                 stage.initOwner(primaryStage);
                 stage.setResizable(false);
                 stage.initModality(Modality.WINDOW_MODAL);
+
+//                stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+//                    @Override
+//                    public void handle(WindowEvent windowEvent) {
+//                        System.out.println(windowEvent.isConsumed());
+//                        MainController controller = Context.getInstance().getMainController();
+//                        controller.refreshHandler();
+//                    }
+//                });
                 stage.show();
         }
     }

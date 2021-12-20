@@ -37,7 +37,7 @@ public class UserService {
             stm.setString(2,password);
             ResultSet rs = stm.executeQuery();
             if(rs.next()) {
-                return new User(rs.getString("account_id"), rs.getString("password"),
+                return new User(rs.getInt("user_id"),rs.getString("account_id"), rs.getString("password"),
                         rs.getByte("status"), rs.getString("name"), rs.getDate("birthday"),
                         rs.getString("phone_number"), rs.getString("email"), rs.getString("student_id"));
             }
@@ -54,13 +54,10 @@ public class UserService {
             stm.setString(1,"");
             ResultSet rs = stm.executeQuery();
             List<User> users=new ArrayList<>();
-            int i=0;
             while (rs.next()){
-                users.add(new User(rs.getString("account_id"), rs.getString("password"),rs.getInt("status"),
+                users.add(new User(rs.getInt("user_id"),rs.getString("account_id"), rs.getString("password"),rs.getInt("status"),
                         rs.getString("name"),rs.getDate("birthday"),rs.getString("phone_number"),
                         rs.getString("email"), rs.getString("student_id") ));
-                users.get(i).setId(rs.getInt("user_id"));
-                i++;
             }
             return users;
         } catch (SQLException e) {
@@ -82,4 +79,35 @@ public class UserService {
         }
         return true;
     }
+    public boolean changePass(User user,String newPass ){
+        try(Connection conn=JdbcUtils.getConn()){
+            conn.setAutoCommit(false);
+            PreparedStatement stm=conn.prepareStatement("UPDATE user SET password=? WHERE user_id=?");
+            stm.setString(1,newPass);
+            stm.setInt(2,user.getId());
+            stm.executeUpdate();
+            conn.commit();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean changeInforUser(User user,String mobile,String email){
+        try(Connection conn = JdbcUtils.getConn()){
+            conn.setAutoCommit(false);
+            PreparedStatement stm=conn.prepareStatement("UPDATE user SET phone_number=?,email=? WHERE user_id=?");
+            stm.setString(1,mobile);
+            stm.setString(2,email);
+            stm.setInt(3,user.getId());
+            stm.executeUpdate();
+            conn.commit();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

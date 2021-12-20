@@ -105,11 +105,14 @@ public class AccountInfoController implements Serializable,Initializable {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (lblErrorMb.getText()=="" && lblErrorEmail.getText()==""){
-                    loggedInUser.setEmail(txtEmail.getText());
-                    loggedInUser.setPhoneNumber(txtMobile.getText());
-                    AlertUtils.showInfoAlert("change.success.title", "change.success.content");
-                    Stage stage = (Stage) btnSave.getScene().getWindow();
-                    stage.close();
+                    UserService us=new UserService();
+                    if(us.changeInforUser(loggedInUser,txtMobile.getText(),txtEmail.getText())){
+                        loggedInUser.setEmail(txtEmail.getText());
+                        loggedInUser.setPhoneNumber(txtMobile.getText());
+                        AlertUtils.showInfoAlert("change.success.title", "change.success.content");
+                        Stage stage = (Stage) btnSave.getScene().getWindow();
+                        stage.close();
+                    }
                 }
                 else
                     AlertUtils.showErrorAlert("change.fail.title","change.fail.content");            }

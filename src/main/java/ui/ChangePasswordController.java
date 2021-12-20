@@ -67,10 +67,13 @@ public class ChangePasswordController  implements Serializable,Initializable {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (lblErrorPw.getText()=="" && lblErrorNewPw.getText()=="" && lblErrorRePw.getText()=="" && txtNewPw.getText()!="" && txtPw.getText()!="" && txtReNewPw.getText()!=""){
-                    loggedInUser.setPassword(txtNewPw.getText());
-                    AlertUtils.showInfoAlert("change.success.title", "change.success.content");
-                    Stage stage = (Stage) btnSave.getScene().getWindow();
-                    stage.close();
+                    UserService us=new UserService();
+                    if(us.changePass(loggedInUser,txtNewPw.getText())) {
+                        loggedInUser.setPassword(txtNewPw.getText());
+                        AlertUtils.showInfoAlert("change.success.title", "change.success.content");
+                        Stage stage = (Stage) btnSave.getScene().getWindow();
+                        stage.close();
+                    }
                 }
                 else{
                     AlertUtils.showErrorAlert("change.fail.title","change.fail.content");
