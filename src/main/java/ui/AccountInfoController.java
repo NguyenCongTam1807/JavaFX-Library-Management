@@ -54,7 +54,7 @@ public class AccountInfoController implements Serializable,Initializable {
             txtEmail.setText(loggedInUser.getEmail());
             lblStatus.setText(Bundle.getString("info.user.status."+loggedInUser.getStatus()));
             lblStatus.getStyleClass().add(loggedInUser.getStatus()==0?"error-small":"others-small");
-            btnSave.setDisable(loggedInUser.getStatus()==0?true:false);
+            btnSave.setDisable(loggedInUser.getStatus()==0);
         }catch (Exception e){}
         txtEmail.textProperty().addListener(new ChangeListener<String>() {
             @Override

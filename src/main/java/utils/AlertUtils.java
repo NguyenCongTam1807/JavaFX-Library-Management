@@ -21,6 +21,19 @@ public class AlertUtils {
         return result.get() == ButtonType.OK;
     }
 
+    public static boolean showConfirmAlertWithParam(String titleResource, String content) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(Bundle.getString(titleResource));
+        alert.setHeaderText("WARNING");
+        alert.setContentText(content);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(AlertUtils.class.getResource("/css/hacker_theme.css").toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane");
+        dialogPane.setEffect(new Glow(0.4));
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.get() == ButtonType.OK;
+    }
+
     public static void showErrorAlert(String titleResource, String contentResource) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(Bundle.getString(titleResource));
@@ -40,7 +53,7 @@ public class AlertUtils {
         alert.setContentText(Bundle.getString(contentResource));
         DialogPane dialogPane = alert.getDialogPane();
         dialogPane.getStylesheets().add(AlertUtils.class.getResource("/css/hacker_theme.css").toExternalForm());
-        dialogPane.getStyleClass().add("dialog-pane");
+        dialogPane.getStyleClass().add("dialog-pane2");
         dialogPane.setEffect(new Glow(0.4));
         alert.show();
     }

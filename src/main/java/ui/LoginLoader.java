@@ -100,7 +100,7 @@ public class LoginLoader extends Application implements Serializable, Initializa
             try{
                 String resourcePath;
                 if (loggedInUser.getStudentId()==null||loggedInUser.getStudentId().isEmpty())
-                    resourcePath = "/fxml/main_librarian.fxml";
+                    resourcePath = "/fxml/main.fxml";
                 else
                     resourcePath = "/fxml/main_user.fxml";
                 root=FXMLLoader.load(getClass().getResource(resourcePath));

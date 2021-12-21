@@ -110,4 +110,18 @@ public class UserService {
         }
     }
 
+    public boolean reverseUserStatus(User user){
+        try(Connection conn = JdbcUtils.getConn()){
+            conn.setAutoCommit(false);
+            PreparedStatement stm=conn.prepareStatement("UPDATE user SET status = 1 - status WHERE user_id = ?");
+            stm.setInt(1,user.getId());
+            stm.executeUpdate();
+            conn.commit();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

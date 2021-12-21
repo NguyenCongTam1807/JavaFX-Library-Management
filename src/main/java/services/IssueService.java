@@ -24,6 +24,22 @@ public class IssueService {
             return null;
         }
     }
+    public List<Issue> getIssuesById(int id){
+        try(Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm=conn.prepareStatement("SELECT * from issue WHERE user_id = ?");
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            List<Issue> issues = new ArrayList<>();
+            while(rs.next()) {
+                issues.add(new Issue(rs.getInt("issue_id"),rs.getInt("user_id"),
+                        rs.getDate("issue_date"),rs.getDate("return_due_date")));
+            }
+            return issues;
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+            return null;
+        }
+    }
     public boolean addIssue(Issue issue){
         try(Connection conn = JdbcUtils.getConn()){
             conn.setAutoCommit(false);

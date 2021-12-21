@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
-public class MainController implements Initializable {
+public class MainUserController implements Initializable {
     @FXML private AnchorPane anchorPane;
     @FXML private JFXTabPane tabPane;
     @FXML private JFXNodesList nodesList;
@@ -49,33 +49,29 @@ public class MainController implements Initializable {
     @FXML private JFXNodesList nodesListLanguage;
     @FXML private JFXNodesList nodesListTheme;
     @FXML private JFXButton logoutButton,infoButton;
-    @FXML private Tab tabBookIssue,tabBook;
-    @FXML private JFXTreeTableView bookIssueTTV,bookTTV,userTTV;
+    @FXML private Tab tabBookIssue,tabBook,tabUser;
+    @FXML private JFXTreeTableView bookIssueTTV,bookTTV;
     @FXML private Label lblTotal;
     @FXML private JFXTextField txtSearch;
 
-    private User loggedInUser = Context.getInstance().getLoginLoader().getLoggedInUser();
+    private final User loggedInUser = Context.getInstance().getLoginLoader().getLoggedInUser();
 
-    private final IssueService is = new IssueService();
     private final BookService bs = new BookService();
     private final UserService us = new UserService();
+    private final IssueService is = new IssueService();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        Context.getInstance().setMainController(this);
+        Context.getInstance().setMainUserController(this);
         initMenu();
         initBookIssueTab();
         initBookTab();
-        initUserTab();
         tabPane.getSelectionModel().selectedItemProperty().addListener((observableValue, oldTab, newTab) -> {
             int total = 0;
             if (newTab==tabBookIssue)
                 total = bookIssueTTV.expandedItemCountProperty().getValue();
-            else if (newTab==tabBook)
-                total = bookTTV.expandedItemCountProperty().getValue();
             else
-                total = userTTV.expandedItemCountProperty().getValue();
+                total = bookTTV.expandedItemCountProperty().getValue();
             lblTotal.setText("Total: " + total);
             txtSearch.setText("");
         });
@@ -97,14 +93,6 @@ public class MainController implements Initializable {
                 bookTTV.setPlaceholder(label);
             }
         });
-        userTTV.expandedItemCountProperty().addListener((observableValue, oldNum, newNum) -> {
-            lblTotal.setText("Total: "+ newNum);
-            if ((int)oldNum* (int)newNum==0) {
-                Label label = new Label(Bundle.getString("main.tableview.empty"));
-                label.setStyle("-fx-font-size: 16; -fx-text-fill: -fx-text;");
-                userTTV.setPlaceholder(label);
-            }
-        });
 
         /** Clear row selection if clicked twice **/
         bookIssueTTV.setRowFactory((Callback<TreeTableView, TreeTableRow>) treeTableView -> {
@@ -124,17 +112,6 @@ public class MainController implements Initializable {
                 final int index = row.getIndex();
                 if (index >= 0 && bookTTV.getSelectionModel().isSelected(index) && event.getClickCount()<=1 ) {
                     bookTTV.getSelectionModel().clearSelection();
-                    event.consume();
-                }
-            });
-            return row;
-        });
-        userTTV.setRowFactory((Callback<TreeTableView, TreeTableRow>) treeTableView -> {
-            final TreeTableRow<Book> row = new TreeTableRow<>();
-            row.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-                final int index = row.getIndex();
-                if (index >= 0 && userTTV.getSelectionModel().isSelected(index) && event.getClickCount()<=1 ) {
-                    userTTV.getSelectionModel().clearSelection();
                     event.consume();
                 }
             });
@@ -189,13 +166,6 @@ public class MainController implements Initializable {
             }
         });
 
-        userTTV.setOnMouseClicked(event -> {
-            if(event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2 &&
-                    (event.getTarget() != null || ((AnchorPane) event.getTarget()).getChildren().size() > 0)) {
-
-                //your code here
-            }
-        });
 
         /** Search bar **/
         txtSearch.textProperty().addListener((observableValue, oldVal, newVal) -> {
@@ -211,7 +181,7 @@ public class MainController implements Initializable {
                         return flag;
                     });
                     break;
-                case 1:
+                default:
                     bookTTV.setPredicate((Predicate<TreeItem<Book>>) treeItem -> {
                         Book b = treeItem.getValue();
                         Boolean flag = String.valueOf(b.getId()).contains(newVal)
@@ -221,19 +191,6 @@ public class MainController implements Initializable {
                                 || b.getGenre().contains(newVal)
                                 || b.getPublisher().contains(newVal)
                                 || b.getAuthor().contains(newVal);
-                        return flag;
-                    });
-                    break;
-                default:
-                    userTTV.setPredicate((Predicate<TreeItem<User>>) treeItem -> {
-                        User u = treeItem.getValue();
-                        Boolean flag = String.valueOf(u.getId()).contains(newVal)
-                                || u.getStudentId().contains(newVal)
-                                || u.getAccountId().contains(newVal)
-                                || u.getEmail().contains(newVal)
-                                || u.getPhoneNumber().contains(newVal)
-                                || u.getName().contains(newVal)
-                                || DateUtils.changeFormat(u.getBirthday(),"dd/MM/yyyy").contains(newVal);
                         return flag;
                     });
             }
@@ -271,10 +228,6 @@ public class MainController implements Initializable {
         issueId.setPrefWidth(100);
         issueId.setCellValueFactory(param -> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getId())));
 
-        JFXTreeTableColumn<Issue, String> userId = new JFXTreeTableColumn<>("User ID");
-        userId.setPrefWidth(100);
-        userId.setCellValueFactory(param  -> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getUserId())));
-
         JFXTreeTableColumn<Issue, String> date = new JFXTreeTableColumn<>("Issue Date");
         date.setPrefWidth(200);
         date.setCellValueFactory(param  -> new SimpleStringProperty(DateUtils.changeFormat(param.getValue().getValue().getDate(),"dd/MM/yyyy")));
@@ -283,10 +236,10 @@ public class MainController implements Initializable {
         dueDate.setPrefWidth(200);
         dueDate.setCellValueFactory(param  -> new SimpleStringProperty(DateUtils.changeFormat(param.getValue().getValue().getReturnDueDate(),"dd/MM/yyyy")));
 
-        ObservableList<Issue> issues = FXCollections.observableArrayList(is.getIssues());
+        ObservableList<Issue> issues = FXCollections.observableArrayList(is.getIssuesById(this.loggedInUser.getId()));
         lblTotal.setText("Total: "+ issues.size());
         final TreeItem<Issue> root = new RecursiveTreeItem<>(issues, RecursiveTreeObject::getChildren);
-        bookIssueTTV.getColumns().setAll(issueId, userId, date, dueDate);
+        bookIssueTTV.getColumns().setAll(issueId, date, dueDate);
         bookIssueTTV.setRoot(root);
         bookIssueTTV.setShowRoot(false);
     }
@@ -332,196 +285,12 @@ public class MainController implements Initializable {
         bookTTV.setShowRoot(false);
     }
 
-
-    public void initUserTab() {
-        JFXTreeTableColumn<User,String> userId=new JFXTreeTableColumn<>("User Id");
-        userId.setPrefWidth(100);
-        userId.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getId())));
-
-        JFXTreeTableColumn<User,String> acount=new JFXTreeTableColumn<>("Acount");
-        acount.setPrefWidth(200);
-        acount.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getAccountId())));
-
-        JFXTreeTableColumn<User,String> status=new JFXTreeTableColumn<>("Status");
-        status.setPrefWidth(70);
-        status.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getStatus())));
-
-        JFXTreeTableColumn<User,String> name=new JFXTreeTableColumn<>("Name");
-        name.setPrefWidth(200);
-        name.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getName())));
-
-        JFXTreeTableColumn<User,String> birthday=new JFXTreeTableColumn<>("Birthday");
-        birthday.setPrefWidth(200);
-        birthday.setCellValueFactory(param-> new SimpleStringProperty(DateUtils.changeFormat(param.getValue().getValue().getBirthday(),"dd/MM/yyyy")));
-
-        JFXTreeTableColumn<User,String> phoneNumber=new JFXTreeTableColumn<>("Phone Number");
-        phoneNumber.setPrefWidth(150);
-        phoneNumber.setCellValueFactory(param-> new SimpleStringProperty("0"+ param.getValue().getValue().getPhoneNumber()));
-
-        JFXTreeTableColumn<User,String> email=new JFXTreeTableColumn<>("Email");
-        email.setPrefWidth(250);
-        email.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getEmail())));
-
-        JFXTreeTableColumn<User,String> studentId=new JFXTreeTableColumn<>("Student Id");
-        studentId.setPrefWidth(150);
-        studentId.setCellValueFactory(param-> new SimpleStringProperty(String.valueOf(param.getValue().getValue().getStudentId())));
-
-        ObservableList<User> users = FXCollections.observableArrayList(us.getStudentUsers());
-        final TreeItem<User> root=new RecursiveTreeItem<>(users,RecursiveTreeObject::getChildren);
-        userTTV.getColumns().setAll(userId,acount,status,name,birthday,phoneNumber,email,studentId);
-        userTTV.setRoot(root);
-        userTTV.setShowRoot(false);
-
-    }
-
-    public void addHandler() throws IOException {
-        int tabIndex = tabPane.getSelectionModel().getSelectedIndex();
-        Parent root;
-        switch (tabIndex) {
-            case 0:
-                root = FXMLLoader.load(getClass().getResource("/fxml/add_issue.fxml"));
-                Stage stage = new Stage();
-                stage.setTitle(Bundle.getString("addIssue.title"));
-                stage.setScene(new Scene(root));
-                Stage primaryStage = (Stage) lblTotal.getScene().getWindow();
-                stage.initOwner(primaryStage);
-                stage.setResizable(false);
-                stage.initModality(Modality.WINDOW_MODAL);
-                stage.show();
-                break;
-            case 1:
-                root = FXMLLoader.load(getClass().getResource("/fxml/add_book.fxml"));
-                stage = new Stage();
-                AddBookController.setHandleAddBook(true);
-                stage.setTitle(Bundle.getString("addBook.title"));
-                stage.setScene(new Scene(root));
-                primaryStage = (Stage) lblTotal.getScene().getWindow();
-                stage.initOwner(primaryStage);
-                stage.setResizable(false);
-                stage.initModality(Modality.WINDOW_MODAL);
-                initBookTab();
-                stage.show();
-                break;
-            default:
-                root = FXMLLoader.load(getClass().getResource("/fxml/signup.fxml"));
-                stage = new Stage();
-                stage.setTitle(Bundle.getString("addUser.title"));
-                stage.setScene(new Scene(root));
-                primaryStage = (Stage) lblTotal.getScene().getWindow();
-                stage.initOwner(primaryStage);
-                stage.setResizable(false);
-                stage.initModality(Modality.WINDOW_MODAL);
-
-//                stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-//                    @Override
-//                    public void handle(WindowEvent windowEvent) {
-//                        System.out.println(windowEvent.isConsumed());
-//                        MainController controller = Context.getInstance().getMainController();
-//                        controller.refreshHandler();
-//                    }
-//                });
-                stage.show();
-        }
-    }
-
-    public void editHandler() throws IOException {
-        int tabIndex = tabPane.getSelectionModel().getSelectedIndex();
-        Parent root;
-        switch (tabIndex) {
-            case 0:
-                break;
-            case 1:
-                TreeItem<Book> selectedBook=(TreeItem<Book>) bookTTV.getSelectionModel().getSelectedItem();
-                if(selectedBook!=null){
-                    try {
-                        FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/add_book.fxml"));
-                        loader.setControllerFactory(aClass -> {
-                            if(aClass==AddBookController.class){
-                                AddBookController controller= new AddBookController();
-                                controller.getBookInfo(selectedBook.getValue().getId(),selectedBook.getValue().getTitle(),
-                                        selectedBook.getValue().getAmount(),selectedBook.getValue().getAuthor(),selectedBook.getValue().getPublishedYear(),
-                                        selectedBook.getValue().getGenre(),selectedBook.getValue().getPublisher(),selectedBook.getValue().getSummary());
-                                controller.setStage(new Stage());
-                                return controller ;
-                            }
-                            else {
-                                try {
-                                    return aClass.getDeclaredConstructor().newInstance();
-                                } catch (Exception exc) {
-                                    throw new RuntimeException(exc);
-                                }
-                            }
-                        });
-                        root = loader.load();
-                        Stage stage = new Stage();
-                        stage.setTitle(Bundle.getString("bookReturn.title"));
-                        stage.setScene(new Scene(root));
-                        Stage primaryStage = (Stage) lblTotal.getScene().getWindow();
-                        stage.initOwner(primaryStage);
-                        stage.setResizable(false);
-                        stage.initModality(Modality.WINDOW_MODAL);
-                        stage.show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                break;
-            default:
-                TreeItem<User> selectedUser = (TreeItem<User>) userTTV.getSelectionModel().getSelectedItem();
-                if (selectedUser!=null){
-                    User user = selectedUser.getValue();
-                    if (AlertUtils.showConfirmAlertWithParam("change.userStatus.title",
-                            String.format(
-                                    Bundle.getString( "change.userStatus.content."+user.getStatus()),
-                                    user.getAccountId()
-                            ))) {
-                        us.reverseUserStatus(user);
-                        initUserTab();
-                    }
-                }
-
-        }
-    }
-
-    public void deleteHandler() {
-        int tabIndex = tabPane.getSelectionModel().getSelectedIndex();
-        switch (tabIndex) {
-            case 0:
-                if (bookIssueTTV.expandedItemCountProperty().getValue()>0) {
-                    TreeItem<Issue> selectedIssue = (TreeItem<Issue>) bookIssueTTV.getSelectionModel().getSelectedItem();
-                    if (selectedIssue!=null) {
-                        selectedIssue.getParent().getChildren().remove(selectedIssue);
-                    }
-                }
-                break;
-            case 1:
-                if (bookTTV.expandedItemCountProperty().getValue()>0) {
-                    TreeItem<Book> selectedBook = (TreeItem<Book>) bookTTV.getSelectionModel().getSelectedItem();
-                    if (selectedBook!=null) {
-                        selectedBook.getParent().getChildren().remove(selectedBook);
-                    }
-                }
-                break;
-            default:
-                if (userTTV.expandedItemCountProperty().getValue()>0) {
-                    TreeItem<User> selectedUser = (TreeItem<User>) userTTV.getSelectionModel().getSelectedItem();
-                    if (selectedUser!=null) {
-                        us.deleteUser(selectedUser.getValue().getId());
-                        selectedUser.getParent().getChildren().remove(selectedUser);
-                        initUserTab();
-                    }
-                }
-        }
-    }
-
     public void refreshHandler() {
         int tabIndex = tabPane.getSelectionModel().getSelectedIndex();
         switch (tabIndex) {
             case 0:initBookIssueTab();
                 break;
-            case 1:initBookTab();
-                break;
-            default:initUserTab();
+            default:initBookTab();
         }
     }
 
@@ -537,12 +306,10 @@ public class MainController implements Initializable {
             stage.setResizable(false);
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
-            /**Set new scene in the same window**/
-            /*Stage primaryStage = (Stage) btnSignUp.getScene().getWindow();
-            primaryStage.getScene().setRoot(root);*/
         }
         catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

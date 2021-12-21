@@ -3,6 +3,7 @@ package ui;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -14,7 +15,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import pojo.Book;
+import pojo.User;
 import services.BookService;
+import utils.Context;
 import utils.DateUtils;
 
 import java.io.Serializable;
@@ -43,6 +46,7 @@ public class BookReturnController implements Initializable, Serializable {
     private BookService bs = new BookService();
     private int issueID,userID;
     private Date issueDate,returnDueDate;
+    private User loggedInUser = Context.getInstance().getLoginLoader().getLoggedInUser();
     long millis=System.currentTimeMillis();
     Date date=new java.sql.Date(millis);
 
@@ -112,11 +116,12 @@ public class BookReturnController implements Initializable, Serializable {
                     label.setText(label.getText()+s.replace(s,newVal?s:""));
                 }
             });
-
             issuedLabels.add(label);
             issuedBooks.add(textField);
             toggles.add(toggle);
         }
+        if (loggedInUser.getStudentId()!=null && !loggedInUser.getStudentId().isEmpty())
+            disableToggles();
     }
 
     public void okHandler (){
@@ -138,6 +143,10 @@ public class BookReturnController implements Initializable, Serializable {
         this.userID = userID;
         this.issueDate = issueDate;
         this.returnDueDate = returnDueDate;
+    }
+
+    public void disableToggles(){
+        toggles.forEach(t->t.setDisable(true));
     }
 
     private Stage myStage;

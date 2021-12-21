@@ -1,9 +1,6 @@
 package utils;
 
-import ui.BookReturnController;
-import ui.LoginLoader;
-import ui.MainController;
-import ui.SignUpController;
+import ui.*;
 
 public class Context {
     private final static Context instance = new Context();
@@ -53,5 +50,15 @@ public class Context {
 
     public void setBookReturnController(BookReturnController bookReturnController) {
         this.bookReturnController = bookReturnController;
+    }
+
+    private MainUserController mainUserController;
+
+    public MainUserController getMainUserController() {
+        return mainUserController;
+    }
+
+    public void setMainUserController(MainUserController mainUserController) {
+        this.mainUserController = mainUserController;
     }
 }

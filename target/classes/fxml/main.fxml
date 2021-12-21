@@ -59,7 +59,7 @@
                             <Glow level="0.6" />
                         </effect>
                     </FontIcon>
-                    <JFXTextField fx:id="txtSearch" prefWidth="300" promptText="Search by ID">
+                    <JFXTextField fx:id="txtSearch" prefWidth="300" promptText="Search...">
                         <HBox.margin>
                             <Insets left="3.0" />
                         </HBox.margin>

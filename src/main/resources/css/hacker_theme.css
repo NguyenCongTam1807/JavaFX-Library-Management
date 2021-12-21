@@ -9,11 +9,13 @@
     -fx-green-low: rgba(18,251,8,0.5);
     -fx-green-dark: #10910c;
     -fx-red: #cc0000;
+    -fx-a: orangered;
+    -fx-b: #33ffff;
     -fx-red-low: rgba(51,0,0, 1);
     -fx-start-margin: 0;
     -fx-end-margin: 0;
     -fx-cyan: #00e5ff;
-    -fx-cyan-low: rgba(0,229,255, 0.8);
+    -fx-cyan-low: rgba(0,58,64, 1);
     -fx-cyan-dark: #0088a3;
 }
 * {
@@ -29,6 +31,8 @@
     -fx-unfocus: -fx-green-dark;
     -fx-error: -fx-red;
     -fx-errorbg: -fx-red-low;
+    -fx-confirm: -fx-cyan;
+    -fx-confirmbg: -fx-cyan-low;
     -fx-border: -fx-green;
     -fx-others: -fx-white;
     -fx-untoggle:-fx-cyan-dark;
@@ -404,119 +408,14 @@ JFXDatePicker {
 
 }
 
-/*.table-cell :focused {*/
-/*    -fx-border-color: -fx-text -fx-text -fx-text -fx-text;*/
-/*    -fx-font: 13px "Arial";*/
-/*    -fx-text-fill: green;*/
-/*}*/
+/********************************************************************************
+ *                                                                              *
+ * Alert                                                                        *
+ *                                                                              *
+ *******************************************************************************/
 
-
-/*.table-view {*/
-/*    -fx-table-header-border-color: #959595;*/
-/*    -fx-table-cell-border-color: -fx-box-border;*/
-/*}*/
-
-/*.table-view:focused {*/
-/*    -fx-background-color: -fx-box-border, -fx-box-border, white;*/
-/*}*/
-
-/*.table-row-cell {*/
-/*    -fx-background-color: transparent;*/
-/*}*/
-
-/*.table-row-cell:odd {*/
-/*    -fx-background-color: #F9F9F9;*/
-/*    -fx-background-insets: 0, 0 0 1 0;*/
-/*}*/
-
-/*.table-row-cell:even {*/
-/*    -fx-background-color: white;*/
-/*    -fx-background-insets: 0, 0 0 1 0;*/
-/*}*/
-
-/*.table-view:focused .table-row-cell:focused, .table-view:focused .table-row-cell:focused:odd {*/
-/*    -fx-background-color: -fx-box-border, #F9F9F9;*/
-/*    -fx-background-insets: 0, 1, 2;*/
-/*}*/
-
-/*.table-view:focused .table-row-cell:focused, .table-view:focused .table-row-cell:focused:even {*/
-/*    -fx-background-color: -fx-box-border, white;*/
-/*    -fx-background-insets: 0, 1, 2;*/
-/*}*/
-
-/*.table-view:focused .table-row-cell:filled:focused:selected {*/
-/*    -fx-background-color: -fx-box-border, rgb(205, 205, 205);*/
-/*}*/
-
-/*.table-view:focused .table-row-cell:filled:selected, .table-view:row-selection .table-row-cell:filled:hover:selected {*/
-/*    -fx-background-color: rgb(205, 205, 205);*/
-/*    -fx-background-insets: 0, 1 1 1 1 0;*/
-/*}*/
-
-/*.table-view:focused .table-row-cell:filled:focused:selected:hover {*/
-/*    -fx-background-color: -fx-box-border, rgb(205, 205, 205);*/
-/*    -fx-background-insets: 0, 1 1 1 1 0;*/
-/*}*/
-
-/*.table-row-cell:filled:selected:focused, .table-row-cell:filled:selected {*/
-/*    -fx-background-color: rgb(205, 205, 205);*/
-/*}*/
-
-/*.table-view:row-selection .table-row-cell:filled:hover {*/
-/*    -fx-background-color: rgb(231, 231, 231);*/
-/*}*/
-
-/*.table-view:row-selection .table-row-cell:filled:focused:hover {*/
-/*    -fx-background-color: rgb(205, 205, 205);*/
-/*}*/
-
-/*.table-view:focused .table-row-cell:filled:focused:hover {*/
-/*    -fx-background-color: -fx-box-border, rgb(231, 231, 231);*/
-/*}*/
-
-/*.table-view .column-header-background {*/
-/*    -fx-background-color: transparent;*/
-/*}*/
-
-/*.table-view .column-header .label {*/
-/*    -fx-text-fill: black;*/
-/*    !*-fx-background-color: -fx-box-border, #F7F7F7;*!*/
-/*}*/
-
-/*.table-view .column-header, .table-view .filler {*/
-/*    -fx-background-color: #F7F7F7;*/
-/*    -fx-size: 35px;*/
-/*    -fx-border-color: -fx-box-border;*/
-/*    -fx-border-insets: -1 0 0 -1;*/
-/*    -fx-padding: 0 5 0 0;*/
-/*}*/
-
-/*.table-view .show-hide-columns-button {*/
-/*    -fx-background-color: white;*/
-/*    -fx-border-color: -fx-box-border;*/
-/*    -fx-border-insets: -1 -1 0 0;*/
-/*}*/
-
-/*.table-view .column-drag-header {*/
-/*    -fx-background-color: -fx-def-color;*/
-/*    -fx-opacity: 0.6;*/
-/*}*/
-
-/*.table-view .column-resize-line {*/
-/*    -fx-background-color: -fx-def-color;*/
-/*}*/
-
-/*.table-view .column-overlay {*/
-/*    -fx-background-color: darkgray;*/
-/*    -fx-opacity: 0.2;*/
-/*}*/
-
-/*.table-view .arrow {*/
-/*    -fx-padding: 0.2em;*/
-/*    -fx-shape: "M4,17v-2.889l4.124-3.86l4.125,3.86V17l-4.125-3.375L4,17z";*/
-/*}*/
-
-/********** Alert **********/
+/************************************ Error/Confirm Alert ************************************
+                                            */
 .dialog-pane{
     -fx-border-color:-fx-error;
     -fx-border-width:2;
@@ -529,7 +428,6 @@ JFXDatePicker {
 }
 
 .dialog-pane > .content.label {
-    /*-fx-padding: 2 2 2 2;*/
     -fx-background-color: -fx-errorbg;
     -fx-text-fill:-fx-error;
     -fx-font-size: 16;
@@ -565,7 +463,54 @@ JFXDatePicker {
     -fx-font-weight:bold;
 }
 
+/*************************** Info Alert ******************************
+                                */
+.dialog-pane2{
+    -fx-border-color:-fx-confirm;
+    -fx-border-width:2;
+    -fx-pref-height: 200;
+}
 
+/**Customization of The Bar where the buttons are located**/
+.dialog-pane2 > .button-bar > .container {
+    -fx-background-color:-fx-confirmbg;
+}
+
+.dialog-pane2 > .content.label {
+    -fx-background-color: -fx-confirmbg;
+    -fx-text-fill:-fx-confirm;
+    -fx-font-size: 16;
+}
+
+/**Customization of DialogPane Header**/
+.dialog-pane2 .header-panel {
+    -fx-background-color: -fx-confirmbg;
+
+}
+
+.dialog-pane2 .header-panel .label{
+    -fx-background-color: -fx-bg0;
+    -fx-text-fill:-fx-confirm;
+    -fx-font-size:22;
+    -fx-padding: 10;
+    -fx-effect: dropshadow( three-pass-box, -fx-bg, 10.0, 0.0, 0.0, 0.0);
+}
+
+
+/**Customization of Buttons**/
+.dialog-pane2 .button{
+    -fx-background-color:black;
+    -fx-text-fill:-fx-confirm;
+    -fx-wrap-text: true;
+    -fx-effect: dropshadow( three-pass-box, #33ffff, 10, 0, 0.0, 0.0);
+    -fx-cursor:hand;
+}
+
+.dialog-pane2 .button:hover{
+    -fx-background-color:white;
+    -fx-text-fill:-fx-confirm;
+    -fx-font-weight:bold;
+}
 
 
 
