@@ -135,7 +135,7 @@ public class BookReturnController implements Initializable, Serializable {
             }
         }
         if (loggedInUser.getStudentId()!=null && !loggedInUser.getStudentId().isEmpty())
-            disableToggles();
+            disableInput();
     }
 
     public void okHandler () throws ParseException {
@@ -179,8 +179,9 @@ public class BookReturnController implements Initializable, Serializable {
         this.returnDueDate = returnDueDate;
     }
 
-    public void disableToggles(){
-        toggles.forEach(t->t.setDisable(true));
+    public void disableInput(){
+        toggles.forEach(tog->tog.setDisable(true));
+        issuedBooks.forEach(txt->txt.setDisable(true));
     }
 
     private Stage myStage;
