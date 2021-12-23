@@ -57,16 +57,16 @@ public class SignUpController implements Serializable, Initializable {
         s=unAccent(s);
         Pattern p = Pattern.compile("[^A-Za-z0-9]");
         Matcher m = p.matcher(s);
-        if (s.indexOf(" ")!=-1){
+        if (s.indexOf(" ")!=-1){ //Chuoi co dau cach
             return 1;
         }
-        else if (m.find()){
+        else if (m.find()){ //Chuoi co ki tu dac biet
             return 2;
         }
-        else if (s.length()>20){
+        else if (s.length()>20){ //Chuoi dai qua 20 ki tu
             return 3;
         }
-        return 0;
+        return 0; // Chuoi hop le (khong thuộc 3 đk trên)
     }
     public static boolean checkPassword(String password)
     {
