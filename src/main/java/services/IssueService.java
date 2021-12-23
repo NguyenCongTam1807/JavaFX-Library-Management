@@ -2,6 +2,7 @@ package services;
 
 import configs.JdbcUtils;
 import pojo.Issue;
+import pojo.IssueDetail;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -74,4 +75,32 @@ public class IssueService {
             return false;
         }
     }
+    public int getIssueIdNew(){
+        int id=-1;
+        try(Connection conn=JdbcUtils.getConn()) {
+            PreparedStatement stm=conn.prepareStatement("SELECT MAX(issue_id) FROM issue");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next())
+                id=rs.getInt(1);
+            return id;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return id;
+        }
+    }
+
+    public void deleteIssue(int issueId){
+        IssueDetailService isd=new IssueDetailService();
+        try(Connection conn=JdbcUtils.getConn()) {
+            isd.deleteIssueDetail(issueId);
+            conn.setAutoCommit(false);
+            PreparedStatement stm=conn.prepareStatement("DELETE FROM issue WHERE issue_id=?");
+            stm.setInt(1,issueId);
+            stm.executeUpdate();
+            conn.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

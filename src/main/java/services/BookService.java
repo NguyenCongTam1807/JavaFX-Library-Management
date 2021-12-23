@@ -136,4 +136,17 @@ public class BookService {
             return null;
         }
     }
+
+    public void deleteBook(int bookId){
+        try(Connection conn=JdbcUtils.getConn()) {
+            conn.setAutoCommit(false);
+            PreparedStatement stm=conn.prepareStatement("DELETE FROM book WHERE book_id=?");
+            stm.setInt(1,bookId);
+            stm.executeUpdate();
+            conn.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

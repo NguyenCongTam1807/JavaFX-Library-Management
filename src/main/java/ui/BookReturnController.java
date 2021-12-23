@@ -15,14 +15,18 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import pojo.Book;
+import pojo.IssueDetail;
 import pojo.User;
 import services.BookService;
+import services.IssueDetailService;
 import utils.Context;
 import utils.DateUtils;
 
 import java.io.Serializable;
 import java.net.URL;
+import java.sql.Array;
 import java.sql.Date;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +48,8 @@ public class BookReturnController implements Initializable, Serializable {
     @FXML private VBox vboxBookList;
 
     private BookService bs = new BookService();
+    IssueDetailService ids=new IssueDetailService();
+
     private int issueID,userID;
     private Date issueDate,returnDueDate;
     private User loggedInUser = Context.getInstance().getLoginLoader().getLoggedInUser();
@@ -56,22 +62,24 @@ public class BookReturnController implements Initializable, Serializable {
         txtUserID.setText(String.valueOf(userID));
         txtIssueDate.setText(DateUtils.changeFormat(issueDate, "dd/MM/yyyy"));
         txtReturnDueDate.setText(DateUtils.changeFormat(returnDueDate, "dd/MM/yyyy"));
-        issuedLabels.add(lbl1);
-        issuedBooks.add(txtBook1);
-        toggles.add(toggle1);
+//        issuedLabels.add(lbl1);
+//        issuedBooks.add(txtBook1);
+//        toggles.add(toggle1);
         List<Book> books = bs.getIssuedBooks(issueID);
-        lbl1.setText(books.get(0).getTitle());
-        toggle1.selectedProperty().addListener((observableValue, oldVal, newVal) -> {
-            txtBook1.setDisable(!newVal);
-            String s=". Returned in " + DateUtils.changeFormat(date, "dd/MM/yyyy");
-            if (lbl1.getText().indexOf(s)!=-1) {
-                lbl1.setText( lbl1.getText().substring(0, lbl1.getText().indexOf(s)) + s.replace(s,newVal?s:"") );
-            }
-            else{
-                lbl1.setText(lbl1.getText()+s.replace(s,newVal?s:""));
-            }
-        });
-        for (int i = 1; i < books.size(); i++) {
+        List<IssueDetail> issueDetails=ids.getIssueDetail(issueID);
+//        lbl1.setText(books.get(0).getTitle());
+//        toggle1.selectedProperty().addListener((observableValue, oldVal, newVal) -> {
+//            txtBook1.setDisable(!newVal);
+//            String s=". Returned in " + DateUtils.changeFormat(date, "dd/MM/yyyy");
+//            if (lbl1.getText().indexOf(s)!=-1) {
+//                lbl1.setText( lbl1.getText().substring(0, lbl1.getText().indexOf(s)) + s.replace(s,newVal?s:"") );
+//            }
+//            else{
+//                lbl1.setText(lbl1.getText()+s.replace(s,newVal?s:""));
+//            }
+//        });
+        for (int i = 0; i < books.size(); i++) {
+            //issueDetails la danh sach cac issuedetail
             Label label = new Label();
             label.setPrefHeight(13);
             label.setPrefWidth(400);
@@ -93,6 +101,8 @@ public class BookReturnController implements Initializable, Serializable {
             toggle.setToggleLineColor(Paint.valueOf("#10910c"));
             toggle.setSize(8);
             toggle.setEffect(new Glow(0.6));
+
+
 
             HBox hBox = new HBox();
             hBox.setPrefHeight(48);
@@ -119,18 +129,42 @@ public class BookReturnController implements Initializable, Serializable {
             issuedLabels.add(label);
             issuedBooks.add(textField);
             toggles.add(toggle);
+            if(issueDetails.get(i).getReturnDate()!=null){
+                textField.setText(issueDetails.get(i).getBookState());
+                toggle.setSelected(true);
+            }
         }
         if (loggedInUser.getStudentId()!=null && !loggedInUser.getStudentId().isEmpty())
             disableToggles();
     }
 
-    public void okHandler (){
+    public void okHandler () throws ParseException {
 
         /** Call a method to update table "issue_details" in database here first
 
-         ...
-
          **/
+        List<IssueDetail> issueDetails=new ArrayList<>();
+        List<Book> books = bs.getIssuedBooks(issueID);
+        java.util.Date dateReturn;
+        String lable[];
+        for(int i=0;i<issuedLabels.size();i++){
+            if(toggles.get(i).isSelected()){
+                lable=issuedLabels.get(i).getText().split(" ");
+                //dateReturn= DateUtils.stringToDate("yyyy/MM/dd",lable[lable.length-1]);
+                issueDetails.add(new IssueDetail(books.get(i).getId(),issueID, date,issuedBooks.get(i).getText()));
+                if(ids.updateIssueDetail(issueDetails.get(i))){
+                    //Thong bao cap nhat thanh cong
+                }
+            }
+            else {
+                issueDetails.add(new IssueDetail(books.get(i).getId(),issueID, null,""));
+                if(ids.updateIssueDetail(issueDetails.get(i))){
+                    //Thong bao cap nhat thanh cong
+                }
+            }
+
+        }
+
 
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();

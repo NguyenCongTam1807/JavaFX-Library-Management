@@ -2,6 +2,7 @@ package services;
 
 import configs.JdbcUtils;
 import pojo.Book;
+import pojo.IssueDetail;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -51,6 +52,7 @@ public class IssueDetailService {
         }
     }
     public int addIssueDetail(List<Integer> bookIDs, Integer issueId){
+        System.out.println(issueId);
         try(Connection conn = JdbcUtils.getConn()){
             conn.setAutoCommit(false);
             int rowsToAdd = bookIDs.size();
@@ -73,5 +75,51 @@ public class IssueDetailService {
             return 0;
         }
     }
-    
+
+    public boolean updateIssueDetail(IssueDetail isd){
+        try(Connection conn =JdbcUtils.getConn()){
+            conn.setAutoCommit(false);
+            PreparedStatement stm=conn.prepareStatement("UPDATE issue_details SET return_date=? , book_state=? WHERE book_id=? and issue_id=?");
+            stm.setDate(1,isd.getReturnDate());
+            stm.setString(2,isd.getBookState());
+            stm.setInt(3,isd.getBookId());
+            stm.setInt(4,isd.getIssueId());
+            stm.executeUpdate();
+            conn.commit();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public List<IssueDetail> getIssueDetail(int idIssue){
+        try(Connection conn=JdbcUtils.getConn() ) {
+            PreparedStatement stm=conn.prepareStatement("SELECT * FROM issue_details WHERE issue_id=?");
+            stm.setInt(1,idIssue);
+            ResultSet rs = stm.executeQuery();
+            List<IssueDetail> issueDetails=new ArrayList<>();
+            while(rs.next()){
+                issueDetails.add(new IssueDetail(rs.getInt("book_id"),rs.getInt("issue_id"),rs.getDate("return_date"),rs.getString("book_state")));
+            }
+            return issueDetails;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void deleteIssueDetail(int issueId){
+        try(Connection conn=JdbcUtils.getConn()) {
+            conn.setAutoCommit(false);
+            PreparedStatement stm=conn.prepareStatement("DELETE FROM issue_details WHERE issue_id=?");
+            stm.setInt(1,issueId);
+            stm.executeUpdate();
+            conn.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

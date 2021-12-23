@@ -1,11 +1,19 @@
 package pojo;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 public class IssueDetail {
     private int bookId,issueId;
     private Date returnDate;
     private String bookState;
+
+    public IssueDetail(int bookId,int issueId,Date returnDate,String bookState){
+        this.bookId=bookId;
+        this.issueId=issueId;
+        this.returnDate=returnDate;
+        this.bookState=bookState;
+    }
 
     public int getBookId() {
         return bookId;

@@ -491,6 +491,8 @@ public class MainController implements Initializable {
                     TreeItem<Issue> selectedIssue = (TreeItem<Issue>) bookIssueTTV.getSelectionModel().getSelectedItem();
                     if (selectedIssue!=null) {
                         selectedIssue.getParent().getChildren().remove(selectedIssue);
+                        is.deleteIssue(selectedIssue.getValue().getId());
+                        System.out.println(selectedIssue.getValue().getId());
                     }
                 }
                 break;
@@ -499,6 +501,7 @@ public class MainController implements Initializable {
                     TreeItem<Book> selectedBook = (TreeItem<Book>) bookTTV.getSelectionModel().getSelectedItem();
                     if (selectedBook!=null) {
                         selectedBook.getParent().getChildren().remove(selectedBook);
+                        bs.deleteBook(selectedBook.getValue().getId());
                     }
                 }
                 break;

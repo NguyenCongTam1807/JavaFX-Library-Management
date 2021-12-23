@@ -102,21 +102,21 @@
                     <Font name="Consolas" size="13.5" />
                 </font>
             </Label>
-            <HBox alignment="CENTER_LEFT" prefHeight="60.0">
-                <JFXTextField fx:id="txtBook1" disable="true" labelFloat="true" prefWidth="400.0" promptText="Book state when returned">
-                    <VBox.margin>
-                        <Insets top="20.0" />
-                    </VBox.margin>
-                    <effect>
-                        <Glow level="0.9" />
-                    </effect>
-                </JFXTextField>
-                <JFXToggleButton fx:id="toggle1" contentDisplay="GRAPHIC_ONLY" size="8.0" toggleColor="#12fb08" toggleLineColor="#10910c" unToggleColor="#cccccc">
-                   <effect>
-                      <Glow level="0.6" />
-                   </effect>
-                </JFXToggleButton>
-            </HBox>
+<!--            <HBox alignment="CENTER_LEFT" prefHeight="60.0">-->
+<!--                <JFXTextField fx:id="txtBook1" disable="true" labelFloat="true" prefWidth="400.0" promptText="Book state when returned">-->
+<!--                    <VBox.margin>-->
+<!--                        <Insets top="20.0" />-->
+<!--                    </VBox.margin>-->
+<!--                    <effect>-->
+<!--                        <Glow level="0.9" />-->
+<!--                    </effect>-->
+<!--                </JFXTextField>-->
+<!--                <JFXToggleButton fx:id="toggle1" contentDisplay="GRAPHIC_ONLY" size="8.0" toggleColor="#12fb08" toggleLineColor="#10910c" unToggleColor="#cccccc">-->
+<!--                   <effect>-->
+<!--                      <Glow level="0.6" />-->
+<!--                   </effect>-->
+<!--                </JFXToggleButton>-->
+<!--            </HBox>-->
          <VBox.margin>
             <Insets left="20.0" right="20.0" top="20.0" />
          </VBox.margin>

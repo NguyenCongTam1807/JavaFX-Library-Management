@@ -106,7 +106,7 @@ public class AddIssueController implements Serializable, Initializable {
                 List<Integer> issuedBookIDs = new ArrayList<>();
                 for (int i = 0; i < issuedBooks.size(); i++)
                     issuedBookIDs.add(Integer.parseInt(issuedBooks.get(i).getText()));
-                ids.addIssueDetail(issuedBookIDs,Integer.parseInt(txtUserID.getText()));
+                ids.addIssueDetail(issuedBookIDs,is.getIssueIdNew());
                 AlertUtils.showConfirmAlert("addIssue.success.title","addIssue.success.content");
                 Stage stage = (Stage) btnDone.getScene().getWindow();
                 stage.close();

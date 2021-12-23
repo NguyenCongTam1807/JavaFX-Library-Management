@@ -19,7 +19,8 @@ public class DateUtils {
         return formatter.format(date);
     }
 
-    public static java.sql.Date stringToDate(String dateString) {
-        return java.sql.Date.valueOf(dateString);
+    public static Date stringToDate(String format, String dateString) throws ParseException {
+        Date date =new SimpleDateFormat(format).parse(dateString);
+        return date;
     }
 }
