@@ -72,7 +72,7 @@ public class SignUpController implements Serializable, Initializable {
     {
         if(password.length()>=8)
         {
-            return password.matches("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}");
+            return password.matches("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$!~/?,<>%^&+=])(?=\\S+$).{8,}");
 
         }
         else
@@ -80,14 +80,14 @@ public class SignUpController implements Serializable, Initializable {
 
     }
 
-    private boolean validBirthday(LocalDate birthday){
+    public boolean validBirthday(LocalDate birthday){
         int age=LocalDate.now().getYear()-birthday.getYear();
         if(age>=18&&age<=130)
             return true;
         return false;
     }
 
-    private boolean validStudentId(String stdid){
+    public boolean validStudentId(String stdid){
         if (stdid.length()==10){
             return stdid.matches("-?\\d+?");
         }
