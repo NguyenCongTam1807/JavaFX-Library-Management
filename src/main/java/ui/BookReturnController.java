@@ -4,6 +4,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -48,7 +50,8 @@ public class BookReturnController implements Initializable, Serializable {
     @FXML private VBox vboxBookList;
 
     private BookService bs = new BookService();
-    IssueDetailService ids=new IssueDetailService();
+    private IssueDetailService ids=new IssueDetailService();
+    private List<IssueDetail> issueDetails;
 
     private int issueID,userID;
     private Date issueDate,returnDueDate;
@@ -62,24 +65,10 @@ public class BookReturnController implements Initializable, Serializable {
         txtUserID.setText(String.valueOf(userID));
         txtIssueDate.setText(DateUtils.changeFormat(issueDate, "dd/MM/yyyy"));
         txtReturnDueDate.setText(DateUtils.changeFormat(returnDueDate, "dd/MM/yyyy"));
-//        issuedLabels.add(lbl1);
-//        issuedBooks.add(txtBook1);
-//        toggles.add(toggle1);
         List<Book> books = bs.getIssuedBooks(issueID);
-        List<IssueDetail> issueDetails=ids.getIssueDetail(issueID);
-//        lbl1.setText(books.get(0).getTitle());
-//        toggle1.selectedProperty().addListener((observableValue, oldVal, newVal) -> {
-//            txtBook1.setDisable(!newVal);
-//            String s=". Returned in " + DateUtils.changeFormat(date, "dd/MM/yyyy");
-//            if (lbl1.getText().indexOf(s)!=-1) {
-//                lbl1.setText( lbl1.getText().substring(0, lbl1.getText().indexOf(s)) + s.replace(s,newVal?s:"") );
-//            }
-//            else{
-//                lbl1.setText(lbl1.getText()+s.replace(s,newVal?s:""));
-//            }
-//        });
+        issueDetails=ids.getIssueDetail(issueID);
         for (int i = 0; i < books.size(); i++) {
-            //issueDetails la danh sach cac issuedetail
+            date=new java.sql.Date(millis);
             Label label = new Label();
             label.setPrefHeight(13);
             label.setPrefWidth(400);
@@ -115,21 +104,27 @@ public class BookReturnController implements Initializable, Serializable {
             vboxBookList.getChildren().add(label);
             vboxBookList.getChildren().add(hBox);
 
-            label.setText(books.get(i).getTitle());
-            toggle.selectedProperty().addListener((observableValue, oldVal, newVal) -> {
-                textField.setDisable(!newVal);
-                String s=". Returned in " + DateUtils.changeFormat(date, "dd/MM/yyyy");
-                if (label.getText().indexOf(s)!=-1) {
-                    label.setText( label.getText().substring(0, label.getText().indexOf(s)) + s.replace(s,newVal?s:"") );
-                }
-                else{
-                    label.setText(label.getText()+s.replace(s,newVal?s:""));
+
+            int issueDetail=i;
+            toggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                    textField.setDisable(!t1);
+                    if(t1){
+                        String s=". Returned in " + DateUtils.changeFormat(date, "dd/MM/yyyy");
+                        label.setText(books.get(issueDetail).getTitle()+s);
+                    }
+                    else {
+                        label.setText(books.get(issueDetail).getTitle());
+                    }
+                    issueDetails.get(issueDetail).setReturnDate(t1?date:null);
                 }
             });
             issuedLabels.add(label);
             issuedBooks.add(textField);
             toggles.add(toggle);
             if(issueDetails.get(i).getReturnDate()!=null){
+                date=issueDetails.get(i).getReturnDate();
                 textField.setText(issueDetails.get(i).getBookState());
                 toggle.setSelected(true);
             }
@@ -143,26 +138,9 @@ public class BookReturnController implements Initializable, Serializable {
         /** Call a method to update table "issue_details" in database here first
 
          **/
-        List<IssueDetail> issueDetails=new ArrayList<>();
-        List<Book> books = bs.getIssuedBooks(issueID);
-        java.util.Date dateReturn;
-        String lable[];
-        for(int i=0;i<issuedLabels.size();i++){
-            if(toggles.get(i).isSelected()){
-                lable=issuedLabels.get(i).getText().split(" ");
-                //dateReturn= DateUtils.stringToDate("yyyy/MM/dd",lable[lable.length-1]);
-                issueDetails.add(new IssueDetail(books.get(i).getId(),issueID, date,issuedBooks.get(i).getText()));
-                if(ids.updateIssueDetail(issueDetails.get(i))){
-                    //Thong bao cap nhat thanh cong
-                }
-            }
-            else {
-                issueDetails.add(new IssueDetail(books.get(i).getId(),issueID, null,""));
-                if(ids.updateIssueDetail(issueDetails.get(i))){
-                    //Thong bao cap nhat thanh cong
-                }
-            }
-
+        for(int i=0;i<issueDetails.size();i++){
+            issueDetails.get(i).setBookState(issueDetails.get(i).getReturnDate()!=null?issuedBooks.get(i).getText():"");
+            ids.updateIssueDetail(issueDetails.get(i));
         }
 
 
