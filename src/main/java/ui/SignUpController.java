@@ -124,7 +124,7 @@ public class SignUpController implements Serializable, Initializable {
     public static String removeCharAt(String s, int pos,int i) {
         return s.substring(0, pos) + s.substring(pos + i);
     }
-    //   le dang   thanh dat
+
     public static String styleString(String s){
         s=s.trim();
         while (s.indexOf("  ")!=-1){

@@ -37,7 +37,7 @@ public class AccountInfoController implements Serializable,Initializable {
     @FXML JFXTextField txtEmail,txtMobile,txtName,txtUserName,txtBirthday,txtStdId;
     @FXML JFXButton btnChangePw,btnSave,btnCancel;
     @FXML Label lblStatus,lblErrorEmail,lblErrorStId,lblErrorMb;
-    SignUpController check;
+    SignUpController check=new SignUpController();
 
     private User loggedInUser = Context.getInstance().getLoginLoader().getLoggedInUser();
 
