@@ -182,8 +182,6 @@ public class SignUpController implements Serializable, Initializable {
                 // do what you have to do
                 stage.close();
             }
-            else
-                AlertUtils.showErrorAlert("alert.signUpFail.title","alert.signUpFail.content");
         } else {
             AlertUtils.showErrorAlert("signup.fail.title","signup.fail.content");
         }

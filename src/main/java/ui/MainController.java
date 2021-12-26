@@ -414,14 +414,13 @@ public class MainController implements Initializable {
                 stage.setResizable(false);
                 stage.initModality(Modality.WINDOW_MODAL);
 
-//                stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-//                    @Override
-//                    public void handle(WindowEvent windowEvent) {
-//                        System.out.println(windowEvent.isConsumed());
-//                        MainController controller = Context.getInstance().getMainController();
-//                        controller.refreshHandler();
-//                    }
-//                });
+                stage.setOnHidden(new EventHandler<WindowEvent>() {
+                    @Override
+                    public void handle(WindowEvent windowEvent) {
+                        MainController controller = Context.getInstance().getMainController();
+                        controller.refreshHandler();
+                    }
+                });
                 stage.show();
         }
     }

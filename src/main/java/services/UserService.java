@@ -2,6 +2,7 @@ package services;
 
 import configs.JdbcUtils;
 import pojo.User;
+import utils.AlertUtils;
 
 import java.sql.*;
 import java.util.*;
@@ -24,7 +25,20 @@ public class UserService {
             stm.executeUpdate();
             conn.commit();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            String errorContent="Error";
+            if(throwables.getMessage().indexOf("user.phone_number_UNIQUE")!=-1){
+                errorContent="alert.signUpFail.phoneNumber.content";
+            }
+            else if(throwables.getMessage().indexOf("user.student_id_UNIQUE")!=-1){
+                errorContent="alert.signUpFail.studentId.content";
+            }
+            else if(throwables.getMessage().indexOf("user.email_UNIQUE")!=-1){
+                errorContent="alert.signUpFail.email.content";
+            }
+            else if(throwables.getMessage().indexOf("user.account_id_UNIQUE")!=-1){
+                errorContent="alert.signUpFail.account.content";
+            }
+            AlertUtils.showErrorAlert("alert.signUpFail.title",errorContent);
             return false;
         }
         return true;
