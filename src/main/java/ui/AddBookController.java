@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 
 public class AddBookController implements Initializable {
 
-    private static boolean isHandleAddBook=true;
+    private boolean isHandleAddBook=true;
     private Book book;
     private Stage myStage;
 
@@ -39,8 +39,8 @@ public class AddBookController implements Initializable {
     @FXML private JFXTextField txtAmount,txtTitle,txtSummary,txtGenre,txtPublisher, txtPublishedYear, txtAuthor,txtIdBook;
     @FXML private Label lblErrorAmount,lblErrorSummary,lblErrorIdBook, lblErrorPublisher,lblErrorGenre,lblErrorPublishedYear,lblErrorAuthor, lblErrorTitle;
 
-    public static void setHandleAddBook(boolean handleAddBook) {
-        AddBookController.isHandleAddBook = handleAddBook;
+    public  void setHandleAddBook(boolean handleAddBook) {
+        this.isHandleAddBook = handleAddBook;
     }
 
     public boolean validYear(String s) {

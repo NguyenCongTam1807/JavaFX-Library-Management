@@ -55,6 +55,8 @@ public class MainController implements Initializable {
     @FXML private JFXTextField txtSearch;
 
     private User loggedInUser = Context.getInstance().getLoginLoader().getLoggedInUser();
+    private AddBookController addBookController= new AddBookController();
+
 
     private final IssueService is = new IssueService();
     private final BookService bs = new BookService();
@@ -392,7 +394,7 @@ public class MainController implements Initializable {
             case 1:
                 root = FXMLLoader.load(getClass().getResource("/fxml/add_book.fxml"));
                 stage = new Stage();
-                AddBookController.setHandleAddBook(true);
+                addBookController.setHandleAddBook(true);
                 stage.setTitle(Bundle.getString("addBook.title"));
                 stage.setScene(new Scene(root));
                 primaryStage = (Stage) lblTotal.getScene().getWindow();
@@ -437,12 +439,11 @@ public class MainController implements Initializable {
                         FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/add_book.fxml"));
                         loader.setControllerFactory(aClass -> {
                             if(aClass==AddBookController.class){
-                                AddBookController controller= new AddBookController();
-                                controller.getBookInfo(selectedBook.getValue().getId(),selectedBook.getValue().getTitle(),
+                                addBookController.getBookInfo(selectedBook.getValue().getId(),selectedBook.getValue().getTitle(),
                                         selectedBook.getValue().getAmount(),selectedBook.getValue().getAuthor(),selectedBook.getValue().getPublishedYear(),
                                         selectedBook.getValue().getGenre(),selectedBook.getValue().getPublisher(),selectedBook.getValue().getSummary());
-                                controller.setStage(new Stage());
-                                return controller ;
+                                addBookController.setStage(new Stage());
+                                return addBookController ;
                             }
                             else {
                                 try {
@@ -454,7 +455,7 @@ public class MainController implements Initializable {
                         });
                         root = loader.load();
                         Stage stage = new Stage();
-                        stage.setTitle(Bundle.getString("bookReturn.title"));
+                        stage.setTitle(Bundle.getString("editBook.title"));
                         stage.setScene(new Scene(root));
                         Stage primaryStage = (Stage) lblTotal.getScene().getWindow();
                         stage.initOwner(primaryStage);
