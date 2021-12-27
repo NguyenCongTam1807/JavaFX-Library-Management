@@ -103,4 +103,18 @@ public class IssueService {
         }
     }
 
+    public int getNumberOfIssue(){
+        int quantity=0;
+        try(Connection conn=JdbcUtils.getConn()){
+            PreparedStatement stm=conn.prepareStatement("SELECT COUNT(issue_id) FROM issue");
+            ResultSet rs=stm.executeQuery();
+            while(rs.next()) {
+                quantity=rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return quantity;
+    }
+
 }

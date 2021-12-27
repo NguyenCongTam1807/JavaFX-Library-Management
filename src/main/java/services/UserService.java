@@ -138,6 +138,18 @@ public class UserService {
         }
     }
 
-
+    public int getNumberOfUser(){
+        int quantity=0;
+        try(Connection conn=JdbcUtils.getConn()){
+            PreparedStatement stm=conn.prepareStatement("SELECT COUNT(user_id) FROM user");
+            ResultSet rs=stm.executeQuery();
+            while(rs.next()) {
+                quantity=rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return quantity;
+    }
 
 }
