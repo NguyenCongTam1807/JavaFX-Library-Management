@@ -141,7 +141,7 @@ public class SignUpController implements Serializable, Initializable {
         String temp = Normalizer.normalize(s, Normalizer.Form.NFD);
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         // return pattern.matcher(temp).replaceAll("");
-        return pattern.matcher(temp).replaceAll("").replaceAll("Đ", "D").replace("đ", "");
+        return pattern.matcher(temp).replaceAll("").replaceAll("Đ", "D").replace("đ", "d");
     }
 
     public static boolean validName(String Name){

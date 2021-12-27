@@ -38,6 +38,7 @@ import utils.DateUtils;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -56,6 +57,7 @@ public class MainController implements Initializable {
 
     private User loggedInUser = Context.getInstance().getLoginLoader().getLoggedInUser();
     private AddBookController addBookController= new AddBookController();
+    ui.SignUpController str=new ui.SignUpController();
 
 
     private final IssueService is = new IssueService();
@@ -216,25 +218,27 @@ public class MainController implements Initializable {
                 case 1:
                     bookTTV.setPredicate((Predicate<TreeItem<Book>>) treeItem -> {
                         Book b = treeItem.getValue();
+                        String t=newVal!=""?str.unAccent(newVal.toLowerCase()):"";
                         Boolean flag = String.valueOf(b.getId()).contains(newVal)
                                 || String.valueOf(b.getId()).contains(newVal)
                                 || String.valueOf(b.getPublishedYear()).contains(newVal)
-                                || b.getTitle().contains(newVal)
-                                || b.getGenre().contains(newVal)
-                                || b.getPublisher().contains(newVal)
-                                || b.getAuthor().contains(newVal);
+                                || str.unAccent(b.getTitle().toLowerCase()).contains(t)
+                                || str.unAccent(b.getGenre().toLowerCase()).contains(t)
+                                || str.unAccent(b.getPublisher().toLowerCase()).contains(t)
+                                || str.unAccent(b.getAuthor().toLowerCase()).contains(t);
                         return flag;
                     });
                     break;
                 default:
                     userTTV.setPredicate((Predicate<TreeItem<User>>) treeItem -> {
                         User u = treeItem.getValue();
+                        String t=newVal!=""?str.styleString(str.unAccent(newVal)):"";
                         Boolean flag = String.valueOf(u.getId()).contains(newVal)
                                 || u.getStudentId().contains(newVal)
                                 || u.getAccountId().contains(newVal)
                                 || u.getEmail().contains(newVal)
                                 || u.getPhoneNumber().contains(newVal)
-                                || u.getName().contains(newVal)
+                                || str.unAccent(u.getName()).contains(newVal)
                                 || DateUtils.changeFormat(u.getBirthday(),"dd/MM/yyyy").contains(newVal);
                         return flag;
                     });
@@ -526,6 +530,7 @@ public class MainController implements Initializable {
                 break;
             default:initUserTab();
         }
+        txtSearch.setText("");
     }
 
     public void showInfo() {
