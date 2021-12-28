@@ -56,8 +56,6 @@ public class MainUserController implements Initializable {
 
     private final User loggedInUser = Context.getInstance().getLoginLoader().getLoggedInUser();
 
-    private final BookService bs = new BookService();
-    private final UserService us = new UserService();
     private final IssueService is = new IssueService();
 
     @Override

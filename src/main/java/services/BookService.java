@@ -149,7 +149,7 @@ public class BookService {
         }
     }
 
-    public int getNumberOfBook(){
+    public int getNumberOfBooks(){
         int quantity=0;
         try(Connection conn=JdbcUtils.getConn()){
             PreparedStatement stm=conn.prepareStatement("SELECT COUNT(book_id) FROM book");

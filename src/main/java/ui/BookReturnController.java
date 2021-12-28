@@ -91,8 +91,6 @@ public class BookReturnController implements Initializable, Serializable {
             toggle.setSize(8);
             toggle.setEffect(new Glow(0.6));
 
-
-
             HBox hBox = new HBox();
             hBox.setPrefHeight(48);
             hBox.getChildren().add(textField);
@@ -103,7 +101,6 @@ public class BookReturnController implements Initializable, Serializable {
 
             vboxBookList.getChildren().add(label);
             vboxBookList.getChildren().add(hBox);
-
 
             int issueDetail=i;
             toggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
@@ -133,7 +130,7 @@ public class BookReturnController implements Initializable, Serializable {
             disableInput();
     }
 
-    public void okHandler () throws ParseException {
+    public void okHandler () {
 
         /** Call a method to update table "issue_details" in database here first
 

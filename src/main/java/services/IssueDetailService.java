@@ -15,12 +15,12 @@ public class IssueDetailService {
             PreparedStatement stm=conn.prepareStatement("SELECT Count(*) AS not_returned_count FROM issue_details " +
                     "WHERE issue_id IN " +
                         "(SELECT issue_id FROM issue WHERE user_id = ?)"+
-                    "AND return_date IS NULL" +
+                    "AND return_date IS NULL " +
                     "GROUP BY issue_id");
             stm.setString(1,userId);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
-                return rs.getInt(0);
+                return rs.getInt(1);
             }
             return 0;
         }catch (SQLException throwables){

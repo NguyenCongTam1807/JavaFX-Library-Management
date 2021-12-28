@@ -262,14 +262,14 @@ public class AddBookController implements Initializable {
                 if (validInput()){
                     if(isHandleAddBook){
                         if (bookService.addBook(book)){
-                            AlertUtils.showConfirmAlert("addBook.success.title","addBook.success.content");
+                            AlertUtils.showInfoAlert("addBook.success.title","addBook.success.content");
                             Stage stage = (Stage) btnAddBook.getScene().getWindow();
                             stage.close();
                         }
                     }
                     else {
                         if(bookService.upDateBook(book)){
-                            AlertUtils.showConfirmAlert("editBook.success.title","editBook.success.content");
+                            AlertUtils.showInfoAlert("editBook.success.title","editBook.success.content");
                             Stage stage = (Stage) btnAddBook.getScene().getWindow();
                             stage.close();
                         }

@@ -55,7 +55,8 @@ public class MainController implements Initializable {
     @FXML private Label lblTotal;
     @FXML private JFXTextField txtSearch;
 
-    private User loggedInUser = Context.getInstance().getLoginLoader().getLoggedInUser();
+    private LoginLoader loginLoader = new LoginLoader();
+    private User loggedInUser = loginLoader.getLoggedInUser();
     private AddBookController addBookController= new AddBookController();
     ui.SignUpController str=new ui.SignUpController();
 
@@ -405,7 +406,6 @@ public class MainController implements Initializable {
                 stage.initOwner(primaryStage);
                 stage.setResizable(false);
                 stage.initModality(Modality.WINDOW_MODAL);
-                initBookTab();
                 stage.show();
                 break;
             default:
@@ -417,14 +417,6 @@ public class MainController implements Initializable {
                 stage.initOwner(primaryStage);
                 stage.setResizable(false);
                 stage.initModality(Modality.WINDOW_MODAL);
-
-                stage.setOnHidden(new EventHandler<WindowEvent>() {
-                    @Override
-                    public void handle(WindowEvent windowEvent) {
-                        MainController controller = Context.getInstance().getMainController();
-                        controller.refreshHandler();
-                    }
-                });
                 stage.show();
         }
     }

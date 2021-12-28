@@ -138,10 +138,11 @@ public class UserService {
         }
     }
 
-    public int getNumberOfUser(){
+    public int getNumberOfStudents(){
         int quantity=0;
         try(Connection conn=JdbcUtils.getConn()){
-            PreparedStatement stm=conn.prepareStatement("SELECT COUNT(user_id) FROM user");
+            PreparedStatement stm=conn.prepareStatement("SELECT COUNT(user_id) FROM user WHERE student_id IS NOT NULL " +
+                                                            "OR student_id != ''");
             ResultSet rs=stm.executeQuery();
             while(rs.next()) {
                 quantity=rs.getInt(1);

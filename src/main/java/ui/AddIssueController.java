@@ -28,7 +28,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.util.*;
 
-public class AddIssueController implements Serializable, Initializable {
+public class AddIssueController implements Initializable {
 
     @FXML private VBox root,vboxBookList;
     @FXML private HBox btn;
@@ -83,7 +83,7 @@ public class AddIssueController implements Serializable, Initializable {
                     userIdIsTrue(true);
                 }
                 else {
-                    AlertUtils.showConfirmAlert("addIssue.usersCheck.content","addIssue.usersCheck.title");
+                    AlertUtils.showInfoAlert("addIssue.usersCheck.content","addIssue.usersCheck.title");
                     userIdIsTrue(false);
                     maxQuantity = MAX_QUANTITY_PER_ISSUE - ids.notReturnedBookCount(user);
                     lblErrorName.setText(String.format(Bundle.getString("addIssue.usersCheck.numberOfBook"),maxQuantity));
@@ -107,7 +107,7 @@ public class AddIssueController implements Serializable, Initializable {
                 for (int i = 0; i < issuedBooks.size(); i++)
                     issuedBookIDs.add(Integer.parseInt(issuedBooks.get(i).getText()));
                 ids.addIssueDetail(issuedBookIDs,is.getIssueIdNew());
-                AlertUtils.showConfirmAlert("addIssue.success.title","addIssue.success.content");
+                AlertUtils.showInfoAlert("addIssue.success.title","addIssue.success.content");
                 Stage stage = (Stage) btnDone.getScene().getWindow();
                 stage.close();
                 MainController controller = Context.getInstance().getMainController();
@@ -199,7 +199,7 @@ public class AddIssueController implements Serializable, Initializable {
         return valid;
     }
 
-    private int checkBook(String s){
+    public int checkBook(String s){
         int id=Integer.parseInt(s);
         for (int j = 0; j < books.size(); j++) {
             if (books.get(j).getId()==id)
@@ -208,7 +208,7 @@ public class AddIssueController implements Serializable, Initializable {
         return -1;
     }
 
-    private int checkUsername(String s){
+    public int checkUsername(String s){
         int id=Integer.parseInt(s);
         for (int j = 0; j < users.size(); j++) {
             if (users.get(j).getId()==id){
@@ -218,7 +218,7 @@ public class AddIssueController implements Serializable, Initializable {
         return -1;
     }
 
-    private void userIdIsTrue(boolean isTrue){
+    public void userIdIsTrue(boolean isTrue){
        btn.setDisable(isTrue);
        vboxBookList.setDisable(isTrue);
        txtReturnDueDate.setDisable(isTrue);

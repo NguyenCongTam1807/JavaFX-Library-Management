@@ -30,6 +30,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import utils.Context;
 import ui.SignUpController;
+import utils.DateUtils;
 
 import java.io.Serializable;
 
@@ -48,7 +49,7 @@ public class AccountInfoController implements Serializable,Initializable {
             txtName.setText(loggedInUser.getName());
             txtUserName.setText(loggedInUser.getAccountId());
             txtMobile.setText(loggedInUser.getPhoneNumber());
-            txtBirthday.setText(loggedInUser.getBirthday().toString());
+            txtBirthday.setText(DateUtils.changeFormat(loggedInUser.getBirthday(),"dd/MM/yyyy"));
             txtStdId.setText(loggedInUser.getStudentId());
             txtStdId.setVisible(loggedInUser.getStudentId()==""?true:false);
             txtEmail.setText(loggedInUser.getEmail());

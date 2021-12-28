@@ -103,7 +103,7 @@ public class IssueService {
         }
     }
 
-    public int getNumberOfIssue(){
+    public int getNumberOfIssues(){
         int quantity=0;
         try(Connection conn=JdbcUtils.getConn()){
             PreparedStatement stm=conn.prepareStatement("SELECT COUNT(issue_id) FROM issue");
@@ -117,4 +117,17 @@ public class IssueService {
         return quantity;
     }
 
+    public int getNumberOfIssues(int userId){
+        try(Connection conn=JdbcUtils.getConn() ) {
+            PreparedStatement stm=conn.prepareStatement("SELECT Count(issue_id) FROM issue WHERE user_id=?");
+            stm.setInt(1,userId);
+            ResultSet rs = stm.executeQuery();
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

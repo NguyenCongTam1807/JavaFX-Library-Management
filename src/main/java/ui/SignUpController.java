@@ -277,6 +277,8 @@ public class SignUpController implements Serializable, Initializable {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 signup();
+                MainController controller = Context.getInstance().getMainController();
+                controller.refreshHandler();
             }
         });
         cancelButton.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
