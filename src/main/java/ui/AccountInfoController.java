@@ -51,7 +51,7 @@ public class AccountInfoController implements Serializable,Initializable {
             txtMobile.setText(loggedInUser.getPhoneNumber());
             txtBirthday.setText(DateUtils.changeFormat(loggedInUser.getBirthday(),"dd/MM/yyyy"));
             txtStdId.setText(loggedInUser.getStudentId());
-            txtStdId.setVisible(loggedInUser.getStudentId()==""?true:false);
+            txtStdId.setVisible(loggedInUser.getStudentId()==null?false:true);
             txtEmail.setText(loggedInUser.getEmail());
             lblStatus.setText(Bundle.getString("info.user.status."+loggedInUser.getStatus()));
             lblStatus.getStyleClass().add(loggedInUser.getStatus()==0?"error-small":"others-small");
