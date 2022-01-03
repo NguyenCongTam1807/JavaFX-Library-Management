@@ -23,7 +23,6 @@ import utils.Bundle;
 import utils.Context;
 import utils.DateUtils;
 
-import java.io.Serializable;
 import java.net.URL;
 import java.text.ParseException;
 import java.util.*;
@@ -85,7 +84,7 @@ public class AddIssueController implements Initializable {
                 else {
                     AlertUtils.showInfoAlert("addIssue.usersCheck.content","addIssue.usersCheck.title");
                     userIdIsTrue(false);
-                    maxQuantity = MAX_QUANTITY_PER_ISSUE - ids.notReturnedBookCount(user);
+                    maxQuantity = MAX_QUANTITY_PER_ISSUE - ids.notReturnedBookCountByUser(Integer.parseInt(user));
                     lblErrorName.setText(String.format(Bundle.getString("addIssue.usersCheck.numberOfBook"),maxQuantity));
                 }
             }

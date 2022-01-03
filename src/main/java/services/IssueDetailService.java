@@ -10,14 +10,14 @@ import java.util.List;
 
 public class IssueDetailService {
 
-    public int notReturnedBookCount(String userId) {
+    public int notReturnedBookCountByUser(int userId) {
         try(Connection conn = JdbcUtils.getConn()){
-            PreparedStatement stm=conn.prepareStatement("SELECT Count(*) AS not_returned_count FROM issue_details " +
-                    "WHERE issue_id IN " +
-                        "(SELECT issue_id FROM issue WHERE user_id = ?)"+
-                    "AND return_date IS NULL " +
-                    "GROUP BY issue_id");
-            stm.setString(1,userId);
+            PreparedStatement stm=conn.prepareStatement("SELECT Count(*) AS not_returned_count " +
+                    "FROM issue_details WHERE issue_id IN " +
+                    "(SELECT issue_id FROM issue WHERE user_id = ?) " +
+                    "AND return_date IS NULL");
+
+            stm.setInt(1,userId);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 return rs.getInt(1);

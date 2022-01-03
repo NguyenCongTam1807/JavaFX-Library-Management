@@ -163,4 +163,25 @@ public class BookService {
         return quantity;
     }
 
+    public int bookQuantityInStock(int bookId) {
+        int quantity = -1;
+        try(Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm=conn.prepareStatement("SELECT total.val - not_returned.val FROM" +
+                    "(SELECT amount AS val FROM book WHERE book_id = ?) AS total," +
+                    "(SELECT Count(*) AS val FROM librarydb.issue_details" +
+                    "WHERE book_id = ?" +
+                    "AND return_date IS NULL) AS not_returned");
+            stm.setInt(1, bookId);
+            stm.setInt(2, bookId);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+        finally {
+            return quantity;
+        }
+    }
 }
