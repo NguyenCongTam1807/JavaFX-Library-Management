@@ -178,6 +178,8 @@ public class AddIssueController implements Initializable {
             if (t1== ""){
                 label.setText(Bundle.getString("invalid.input.null"));
             }
+            else if (bs.bookQuantityInStock(Integer.parseInt(t1))<1)
+                label.setText(Bundle.getString("invalid.book.stock"));
             else label.setText("");
         }));
     }
@@ -191,7 +193,8 @@ public class AddIssueController implements Initializable {
         });
         issuedLabels.forEach(label->{
            String s=label.getText();
-           if (s.equals("") || s.equals(Bundle.getString("invalid.book.selected")) || s.equals(Bundle.getString("invalid.book.null")) || s.equals(Bundle.getString("invalid.idbook.number"))){
+           if (s.equals("") || s.equals(Bundle.getString("invalid.book.selected")) || s.equals(Bundle.getString("invalid.book.null"))
+                   || s.equals(Bundle.getString("invalid.idbook.number")) || s.equals(Bundle.getString("invalid.book.stock"))){
                valid=false;
            }
         });

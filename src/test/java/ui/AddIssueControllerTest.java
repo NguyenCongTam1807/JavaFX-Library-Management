@@ -30,10 +30,11 @@ class AddIssueControllerTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"1,0","3,1","9,4", "2,-1"})
+    @CsvSource({"1,0","3,1","9,4", "2,-1", ",-1"})
     public void checkUsernameTest(String id, int expectedIndex){
         Assertions.assertEquals(addIssueController.checkUsername(id),expectedIndex);
     }
+
 
 
 }
